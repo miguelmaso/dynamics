@@ -1,0 +1,36 @@
+# Global gitignore for the article repository
+# This settings are the same for all the users
+# For additional cusomization the local gitignore
+# (.git/info/exclude) could be modified
+
+# main output. Note that the pdf in folders are included
+/*.pdf
+
+# recovery files
+*~
+
+# pdflatex auxiliary files:
+*.aux
+*.toc
+*.ilg
+*.fls
+*.ind
+*.log
+*.out
+*.spl
+*.idx
+*.lof
+*.lot
+
+# bibliography auxiliary files:
+*.bbl
+*.bcf
+*.blg
+*-blx.bib
+
+# build auxiliary files:
+*.fdb_latexmk
+*.synctex
+*.synctex*
+*.run.xml
+*.DS_Store
