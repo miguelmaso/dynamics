@@ -1,5 +1,6 @@
 \documentclass{problems}
 
+\input{img/pictures.tex}
 
 \title{Problems of dynamics of structures}
 \author{J. Bonet, M. Masó, R. Chacón}
@@ -9,45 +10,55 @@
 
 \maketitle
 
+(For steel take $E=200GPa$ and for concrete $E=14GPa$)
+
 \section{Free vibration of SDOF structures}
 
-\problem{1}
+\example{1}
 For the structures shown, determine the natural frequency of vibration using simple structural concepts.
 
 \begin{center}
-\begin{tikzpicture}
-    \draw[fill=gray] (0,2) rectangle (3,2.3);
-    \draw (0.2,0) -- (0.2,2);
-    \draw (1.5,0) -- (1.5,2);
-    \draw (2.8,0) -- (2.8,2);
-\end{tikzpicture}
-\hfill
-\begin{tikzpicture}
-    \draw[fill=gray] (0,2) rectangle (3,2.3);
-    \draw (0.2,0) -- (0.2,2);
-    \draw (2.8,0) -- (2.8,2);
-\end{tikzpicture}
-\hfill
-\begin{tikzpicture}
-    \draw[fill=gray] (0,2) rectangle (3,2.3);
-    \draw (0.2,0) -- (0.2,2);
-    \draw (2.8,0) -- (2.8,2);
-    \draw (0.2,0) -- (2.8,2);
-    \draw (0.2,2) -- (2.8,0);
-\end{tikzpicture}
+    \pictures{portic3pinned}
+    \hspace{2em}
+    \pictures{portic}
+    \hspace{2em}
+    \pictures{porticbracing}
 \end{center}
 
 
-
-\problem{2}
+\example{2}
 For the structures shown, determine the natural frequency of vibration using Rayleigh's method.
 
+\begin{center}
+    \pictures{simplebeam}
+    \pictures{nspanbeam}
+\end{center}
+
+\begin{center}
+    \pictures{cantilever}
+    \pictures{fixedpinnedbeam}
+\end{center}
+
+
+\example{3}
+The portal frame structure shown has a weight of $100KN$. If the natural period of vibration is 0.9 seconds:
+\begin{enumerate}[(a)]
+    \item determine the lateral stiffness of the structure;
+    \item determine the diameter of the steel cross-braces required to strenghten the structure by reducing the period to 0.3 seconds;
+    \item determine the period if a further load of $50KN$ is added to the strenghtened structure.
+\end{enumerate}
 
 
 \section{Forced vibration of SDOF structures}
 
 
-\problem{5}
+\example{5}
+
+\example{6} A building has a height
+
+\begin{center}
+\pictures{buildinghelicopter}
+\end{center}
 
 \section{Vibration of MDOF structures}
 

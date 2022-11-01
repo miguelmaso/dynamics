@@ -5,6 +5,7 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage[utf8]{inputenc}
+\RequirePackage[shortlabels]{enumitem}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
@@ -46,13 +47,15 @@
 \makeatother
 
 
-% Definition of nse sectioning for problems and solutions
-\titleclass{\problem}{straight}[\subsection]
-\newcounter{problem}
+% Definition of the sectioning for examples and solutions
+\titleclass{\example}{straight}[\subsection]
+\newcounter{example}
 \setcounter{secnumdepth}{2}
-\titleformat{\problem}[runin]{\rmfamily\normalsize\bfseries}{}{0em}{Problem~}
-\titlespacing*{\problem}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-\newcommand{\problemautorefname}{problem}
+\titleformat{\example}[runin]{\rmfamily\normalsize\bfseries}{}{0em}{Example~}
+\titlespacing*{\example}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\newcommand{\exampleautorefname}{example}
 \makeatletter
-  \def\toclevel@problem{2}
+  \def\toclevel@example{2}
 \makeatother
+
+

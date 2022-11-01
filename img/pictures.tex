@@ -1,0 +1,127 @@
+\input{img/helicopter.tex}
+
+% Marco for inserting pictures
+\newcommand{\pictures}[1]{
+    \begin{tikzpicture}
+        \pic {#1};
+    \end{tikzpicture}
+}
+
+% Predefined shapes
+\tikzset{
+    %
+    % Supports
+    %
+    fixed/.pic = {
+        \draw (-0.1,-.2) rectangle (.1,0);
+    },
+    pinned/.pic = {
+        \draw (-.1,-.2) -- (.1,-.2) -- (0,0) -- cycle;
+        \draw[fill=white] (0,0) circle (.05);
+    },
+    %
+    % Example 1
+    %
+    portic/.pic = {
+        \coordinate (A) at (0.2,0);
+        \coordinate (B) at (2.8,0);
+        \draw[fill=lightgray] (0,2) rectangle (3,2.3);
+        \draw [ultra thick] (A) -- +(0,2);
+        \draw [ultra thick] (B) -- +(0,2);
+        \pic at (A) {fixed};
+        \pic at (B) {fixed};
+        \path (1.5,2.3) node[above] {m};
+        \path (A) -- +(0,2) node[midway,right] {$EI,h$};
+    },
+    portic3pinned/.pic = {
+        \coordinate (A) at (0.2,0);
+        \coordinate (B) at (1.5,0);
+        \coordinate (C) at (2.8,0);
+        \draw[fill=lightgray] (0,2) rectangle (3,2.3);
+        \draw [ultra thick] (A) -- +(0,2);
+        \draw [ultra thick] (B) -- +(0,2);
+        \draw [ultra thick] (C) -- +(0,2);
+        \pic at (A) {pinned};
+        \pic at (B) {pinned};
+        \pic at (C) {pinned};
+        \path (1.5,2.3) node[above] {m};
+        \path (A) -- +(0,2) node[midway,right] {$EI,h$};
+    },
+    porticbracing/.pic = {
+        \coordinate (A) at (0.2,0);
+        \coordinate (B) at (2.8,0);
+        \draw[fill=lightgray] (0,2) rectangle (3,2.3);
+        \draw [ultra thick] (A) -- +(0,2);
+        \draw [ultra thick] (B) -- +(0,2);
+        \draw (0.2,0) -- (2.8,2);
+        \draw (0.2,2) -- (2.8,0);
+        \pic at (A) {fixed};
+        \pic at (B) {fixed};
+        \path (1.5,2.3) node[above] {m};
+        \path (A) -- +(0,2) node[midway,right] {$EI,h$};
+        \path (A) -- +(1.2,1) node[midway,below,rotate=35] {$EA$};
+        \path (B) node[left=5] {$\theta$};
+    },
+    %
+    % Example 2
+    %
+    simplebeam/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \draw [ultra thick] (A) -- (B);
+        \pic at (A) {pinned};
+        \pic at (B) {pinned};
+        \path (A) -- (B) node[midway,above] {$EI,\rho,l,A$};
+        \path (A) -- (B) node[midway,below] {\vphantom{E,}};
+    },
+    nspanbeam/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (2,0);
+        \coordinate (C) at (3,0);
+        \draw [ultra thick] (A) -- (B) -- (C);
+        \pic at (A) {pinned};
+        \pic at (B) {pinned};
+        \pic at (C) {pinned};
+        \path (A) -- (C) node[midway,above] {$EI,\rho,A$};
+        \path (A) -- (B) node[midway,below] {$l$};
+        \path (B) -- (C) node[midway,below] {$\alpha,l$};
+    },
+    cantilever/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \draw [ultra thick] (A) -- (B);
+        \pic[rotate=270] at (A) {fixed};
+        \path (A) -- (B) node[midway,above] {$EI,\rho,l,A$};
+    },
+    fixedpinnedbeam/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \draw [ultra thick] (A) -- (B);
+        \pic[rotate=270] at (A) {fixed};
+        \pic at (B) {pinned};
+        \path (A) -- (B) node[midway,above] {$EI,\rho,l,A$};
+    },
+    %
+    % Example 3
+    %
+    porticdimesnions/.pic = {
+        \coordinate (A) at (0.2,0);
+        \coordinate (B) at (2.8,0);
+        \draw[fill=lightgray] (0,2) rectangle (3,2.3);
+        \draw [ultra thick] (A) -- +(0,2);
+        \draw [ultra thick] (B) -- +(0,2);
+        \pic at (A) {fixed};
+        \pic at (B) {fixed};
+        \path (1.5,2.3) node[above] {m};
+        \path (A) -- +(0,2) node[midway,right] {$EI,h$};
+    },
+    %
+    % Example 6
+    %
+    buildinghelicopter/.pic = {
+        \node [helicopter,fill=gray,minimum width=.5cm] at (0,0) {};
+    }
+}
+
+
+
