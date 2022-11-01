@@ -6,6 +6,7 @@
 \RequirePackage[english]{babel}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[shortlabels]{enumitem}
+\RequirePackage{amsmath}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
@@ -18,7 +19,7 @@
 \definecolor{titlebackground}{cmyk}{.16, .0, .42, .0} % pale light lime green
 \definecolor{titlebackground}{cmyk}{.24, .03, .07, .02} % duva (blue)
 \definecolor{titlebackground}{cmyk}{.09, .55, 1, .39} % moderate gamboe (brown)
-\definecolor{titlecolor}{gray}{.90}
+\definecolor{titlecolor}{gray}{.95}
 
 
 % Definition of the sutom title format

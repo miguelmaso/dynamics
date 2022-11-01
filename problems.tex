@@ -48,21 +48,69 @@ The portal frame structure shown has a weight of $100KN$. If the natural period 
     \item determine the period if a further load of $50KN$ is added to the strenghtened structure.
 \end{enumerate}
 
+\begin{center}
+    \pictures{porticdimensions}
+    \pictures{porticdimensions2}
+    \pictures{porticdimensions3}
+\end{center}
+
+
+\example{4}
+In order to determine the dynamic properties of a simply supported bridge witha mass of $10^6Kg$, the midpoint is displaced $5mm$ by a jack and then suddenly released. At the end of 20 complete cycles, the time is 3 seconds and the peack displacement measured is $1mm$. Determine the natural period and damping ratio of the bridge.
+
+\begin{center}
+\pictures{bridge}
+\end{center}
+
+
 
 \section{Forced vibration of SDOF structures}
 
 
-\example{5}
+\example{5} The portal frame of example 3 (a) is subject to a sinusoidal ground vibration with horizontal acceleration amplitude of $2m/s^2$. Assuming a damping ratio of $5\%$, determine the maximum displacement and maximum total acceleration of the frame when the period of floor vibration is: 0.1 seconds; 0.9 seconds and 5 seconds.
 
-\example{6} A building has a height
+\begin{center}
+\pictures{porticforced}
+\end{center}
+
+\example{6} A building has a height of $100m$, a square base measuring $20\times20m^2$, an average specific weight of $1\,500N/m^3$ and a natural period of vibration of 5 seconds. The top floor is hit by an helicopter with a mass of $10\,000Kg$ and travelling at $30m/s$. Determine the maximum deflection at the top assuming conservation of linear momentum and a vibration shape function that increases linearly with the height.
 
 \begin{center}
 \pictures{buildinghelicopter}
 \end{center}
 
+
+\example{7} The building of exercise 6 is hit by a sudden wind gust which results in the sudden application of horizontal forces distributed along the height of the building as shown in the picture. Assuming a vibration shape fuction that increases linearly with the height and neglecting damping, determine the maximum displacement at the top of the building.
+
+
+
 \section{Vibration of MDOF structures}
 
 
 \section{Solutions}
+
+
+\example{1}
+
+
+\example{2}
+
+
+\example{3}
+
+\example{4}
+The damping ratio $\xi$ is directly related to the decay coefficient
+$\zeta=2\pi\xi$ and $\zeta$ is determined by the ratio among two consecutive oscillations
+$$
+\frac{u_n}{u_{n+1}} = e^\zeta \quad \rightarrow \quad
+\frac{u_0}{u_1} \frac{u_1}{u_2} \dots \frac{u_{n-1}}{u_n} = \frac{u_0}{u_n} = e^{n\zeta}
+$$
+According to this relation, the damping ratio can be found as
+\begin{align*}
+n\zeta = \log\left(\frac{u_0}{u_n}\right) \quad \rightarrow \quad
+\xi = \frac{1}{2n\pi} \log\left(\frac{u_0}{u_n}\right) = \frac{1}{2\cdot20\pi} \log\left(\frac{5}{1}\right) = 0.0128 \\
+\xi = 1.28\%
+\end{align*}
+
 
 \end{document}
