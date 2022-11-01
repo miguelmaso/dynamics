@@ -20,26 +20,41 @@
         \draw [fill=white] (0,0) circle (.05);
     },
     %
-    % Example 1
+    % Structures
     %
-    portic/.pic = {
+    basicportic/.pic = {
         \coordinate (A) at (0.2,0);
         \coordinate (B) at (2.8,0);
         \draw [fill=lightgray] (0,2) rectangle (3,2.3);
         \draw [ultra thick] (A) -- +(0,2);
         \draw [ultra thick] (B) -- +(0,2);
+    },
+    basicbeam/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \draw [ultra thick] (A) -- (B);
+    },
+    fixedportic/.pic = {
+        \pic {basicportic};
         \pic at (A) {fixed};
         \pic at (B) {fixed};
+    },
+    bracedportic/.pic = {
+        \pic {fixedportic};
+        \draw (A) -- (2.8,2);
+        \draw (0.2,2) -- (B);
+    },
+    %
+    % Example 1
+    %
+    portic/.pic = {
+        \pic {fixedportic};
         \path (1.5,2.3) node [above] {m};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
     },
     portic3pinned/.pic = {
-        \coordinate (A) at (0.2,0);
-        \coordinate (B) at (1.5,0);
-        \coordinate (C) at (2.8,0);
-        \draw [fill=lightgray] (0,2) rectangle (3,2.3);
-        \draw [ultra thick] (A) -- +(0,2);
-        \draw [ultra thick] (B) -- +(0,2);
+        \pic {basicportic};
+        \coordinate (C) at (1.5,0);
         \draw [ultra thick] (C) -- +(0,2);
         \pic at (A) {pinned};
         \pic at (B) {pinned};
@@ -48,15 +63,7 @@
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
     },
     porticbracing/.pic = {
-        \coordinate (A) at (0.2,0);
-        \coordinate (B) at (2.8,0);
-        \draw [fill=lightgray] (0,2) rectangle (3,2.3);
-        \draw [ultra thick] (A) -- +(0,2);
-        \draw [ultra thick] (B) -- +(0,2);
-        \draw (A) -- (2.8,2);
-        \draw (0.2,2) -- (B);
-        \pic at (A) {fixed};
-        \pic at (B) {fixed};
+        \pic {bracedportic};
         \path (1.5,2.3) node [above] {m};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
         \path (A) -- +(1.2,1) node [midway,below,rotate=35] {$EA$};
@@ -66,37 +73,29 @@
     % Example 2
     %
     simplebeam/.pic = {
-        \coordinate (A) at (0,0);
-        \coordinate (B) at (3,0);
-        \draw [ultra thick] (A) -- (B);
+        \pic {basicbeam};
         \pic at (A) {pinned};
         \pic at (B) {pinned};
         \path (A) -- (B) node [midway,above] {$EI,\rho,l,A$};
-        \path (A) -- (B) node [midway,below] {\vphantom{E,}};
+        \path (A) -- (B) node [midway,below] {\vphantom{l}};
     },
     nspanbeam/.pic = {
-        \coordinate (A) at (0,0);
-        \coordinate (B) at (2,0);
-        \coordinate (C) at (3,0);
-        \draw [ultra thick] (A) -- (B) -- (C);
+        \pic {basicbeam};
+        \coordinate (C) at (2,0);
         \pic at (A) {pinned};
         \pic at (B) {pinned};
         \pic at (C) {pinned};
-        \path (A) -- (C) node [midway,above] {$EI,\rho,A$};
-        \path (A) -- (B) node [midway,below] {$l$};
-        \path (B) -- (C) node [midway,below] {$\alpha,l$};
+        \path (A) -- (B) node [midway,above] {$EI,\rho,A$};
+        \path (A) -- (C) node [midway,below] {$l$};
+        \path (C) -- (B) node [midway,below] {$\alpha l$};
     },
     cantilever/.pic = {
-        \coordinate (A) at (0,0);
-        \coordinate (B) at (3,0);
-        \draw [ultra thick] (A) -- (B);
+        \pic {basicbeam};
         \pic [rotate=270] at (A) {fixed};
         \path (A) -- (B) node [midway,above] {$EI,\rho,l,A$};
     },
     fixedpinnedbeam/.pic = {
-        \coordinate (A) at (0,0);
-        \coordinate (B) at (3,0);
-        \draw [ultra thick] (A) -- (B);
+        \pic {basicbeam};
         \pic [rotate=270] at (A) {fixed};
         \pic at (B) {pinned};
         \path (A) -- (B) node [midway,above] {$EI,\rho,l,A$};
@@ -105,40 +104,28 @@
     % Example 3
     %
     porticdimensions/.pic = {
-        \coordinate (A) at (0.2,0);
-        \coordinate (B) at (2.8,0);
-        \draw [fill=lightgray] (0,2) rectangle (3,2.3);
-        \draw [ultra thick] (A) -- +(0,2);
-        \draw [ultra thick] (B) -- +(0,2);
-        \pic at (A) {fixed};
-        \pic at (B) {fixed};
+        \pic {fixedportic};
         \draw [<->] ([xshift=-10]A) -- +(0,2);
         \draw [<->] ([yshift=8]A) -- ([yshift=8]B);
         \path (A) -- +(0,2) node [midway,left=2,fill=white] {$4m$};
         \path (A) -- (B) node [midway,above,fill=white] {$5m$};
-        \path (1.5,2.3) node [above,fill=white] {$100KN$};
+        \path (1.5,2.3) node [above] {$100KN$};
     },
     porticdimensions2/.pic = {
-        \coordinate (A) at (0.2,0);
-        \coordinate (B) at (2.8,0);
-        \draw [fill=lightgray] (0,2) rectangle (3,2.3);
-        \draw [ultra thick] (A) -- +(0,2);
-        \draw [ultra thick] (B) -- +(0,2);
+        \pic {bracedportic};
         \draw (A) -- (2.8,2);
         \draw (0.2,2) -- (B);
         \pic at (A) {fixed};
         \pic at (B) {fixed};
     },
     porticdimensions3/.pic = {
-        \coordinate (A) at (0.2,0);
-        \coordinate (B) at (2.8,0);
-        \draw [fill=lightgray] (0,2) rectangle (3,2.3);
+        \pic {bracedportic};
+        \draw (A) -- (2.8,2);
+        \draw (0.2,2) -- (B);
         \draw [fill=lightgray] (0,2.3) rectangle (3,2.5);
-        \draw [ultra thick] (A) -- +(0,2);
-        \draw [ultra thick] (B) -- +(0,2);
         \pic at (A) {fixed};
         \pic at (B) {fixed};
-        \path (1.5,2.5) node [above,fill=white] {$150KN$};
+        \path (1.5,2.5) node [above] {$150KN$};
     },
     %
     % Example 4
@@ -162,14 +149,39 @@
     porticforced/.pic = {
         \pic {porticdimensions};
         \node [right] (C) at (B) {};
-        \draw [<<->>] (C) -- +(2,0);
+        \draw [<<->>] (C) -- +(1.5,0);
         \node [above right] at (C) {$a_g(t) = 2\sin(\Omega t)$};
     },
     %
     % Example 6
     %
+    building/.pic = {
+        \draw [thick,gray,fill=lightgray] (0,0) rectangle (2,4);
+        \draw (-1,0) -- (3,0);
+        \foreach \x in {1,...,3} {
+            \foreach \y in {1,...,5} {
+                \draw [thick,gray,fill=white] (\x/2-.1, \y/1.5-.1) rectangle +(0.2,0.3);
+            }
+        }
+    },
     buildinghelicopter/.pic = {
-        \node [helicopter,fill=gray,minimum width=.5cm] at (0,0) {};
+        \node [helicopter,fill=gray,minimum width=.5cm] at (0,4) {};
+        \pic at (2,0) {building};
+        \draw [dashed] (4,0) -- (5,4);
+        \draw [dashed] (4,4) -- (5,4);
+        },
+    buildingwind/.pic = {
+        \pic {building};
+        \foreach \y in {0,...,8} {
+            \draw [->] (-.5-\y/8, \y/2) -- (0, \y/2);
+        }
+        \coordinate (W0) at (-.5,0);
+        \coordinate (W1) at (-1.5,4);
+        \draw (W0) -- (W1);
+        \node [above left] at (W0) {$0.3KN/m$};
+        \node [left] at (W1) {$1KN/m$};
+        \draw [dashed] (2,0) -- (3,4);
+        \draw [dashed] (2,4) -- (3,4);
     }
 }
 
