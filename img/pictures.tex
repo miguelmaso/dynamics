@@ -19,6 +19,10 @@
         \draw (-.1,-.2) -- (.1,-.2) -- (0,0) -- cycle;
         \draw [fill=white] (0,0) circle (.05);
     },
+    pinned0/.pic = {
+        \draw (-.1,-.2) -- (.1,-.2) -- (0,0) -- cycle;
+        \draw [fill=white] (0,-.05) circle (.05);
+    },
     %
     % Structures
     %
@@ -66,8 +70,68 @@
         \pic {bracedportic};
         \path (1.5,2.3) node [above] {m};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
-        \path (A) -- +(1.2,1) node [midway,below,rotate=35] {$EA$};
+        \path (A) -- +(1.2,1) node [midway,below,rotate=35] {$EA,l$};
         \path (B) node [left=5] {$\theta$};
+    },
+    portic3pinned_sol/.pic = {
+        \pic {portic3pinned};
+        \draw [dashed] (1,2) rectangle +(3,0.3);
+        \draw [dashed] (A) to[out=40,in=270] +(1,2);
+        \draw [dashed] (B) to[out=40,in=270] +(1,2);
+        \draw [dashed] (C) to[out=40,in=270] +(1,2);
+        \draw [<->] (3,2.6) -- +(1,0) node [midway,fill=white] {$u_0$};
+        \draw [->] (4,2.15) -- +(1,0) node [above] {$F_0$};
+    },
+    portic_sol/.pic = {
+        \pic {portic};
+        \draw [dashed] (1,2) rectangle +(3,0.3);
+        \draw [dashed] (A) to[out=90,in=270] +(1,2);
+        \draw [dashed] (B) to[out=90,in=270] +(1,2);
+        \draw [<->] (3,2.6) -- +(1,0) node [midway,fill=white] {$u_0$};
+        \draw [->] (4,2.15) -- +(1,0) node [above] {$F_0$};
+    },
+    porticbracing_sol/.pic = {
+        \pic {porticbracing};
+        \draw [dashed] (1,2) rectangle +(3,0.3);
+        \draw [dashed] (A) to[out=90,in=270] +(1,2);
+        \draw [dashed] (B) to[out=90,in=270] +(1,2);
+        \draw [dashed] (A) -- +(3.6,2);
+        \draw [dashed] (B) to[out=100,in=350] +(-1.6,2);
+        \draw [<->] (3,2.6) -- +(1,0) node [midway,fill=white] {$u_0$};
+        \draw [->] (4,2.15) -- +(1,0) node [above] {$F_0$};
+    },
+    columnpinned/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (1,2);
+        \draw [ultra thick] (A) to[out=40,in=270] (B);
+        \draw [<->] (0,1.95) -- +(.95,0) node [midway,fill=white] {$u_0$};
+        \draw [->] (A) -- +(-1,0) node [above] {$F_0$};
+        \pic [rotate=180] at (B) {fixed};
+    },
+    columnfixed/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (1,2);
+        \draw [ultra thick] (A) to[out=90,in=270] (B);
+        \draw [<->] (0,2) -- (.95,2) node [midway,fill=white] {$u_0$};
+        \draw [->] (A) -- +(-1,0) node [above] {$F_0$};
+        \draw [->] (B) -- +(1,0) node [above] {$F_0$};
+        \draw [->] ([shift=(210:.5)]A) arc (210:330:.5) node [right] {$M_0$};
+        \draw [->] ([shift=(30:.5)]B) arc (30:150:.5) node [midway,above] {$M_0$};
+        \draw (A) -- (60:1);
+        \draw ([shift=(50:.5)]A) node [right] {$\varphi_0$} arc (50:100:.5);
+    },
+    bracing/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,2);
+        \draw (A) -- (B);
+        \pic at (A) {pinned};
+        \draw [fill=black] (B) circle (.04);
+        \draw [dashed] (A) -- (3.7,2) node (u0) {};
+        \draw [->] ([shift=(0:.2)]B) -- (u0) node [midway,above] {$u_0$};
+        \draw [->] ([shift=(0:.02)]u0) -- +(0:.7) node [right] {$F_0$};
+        \draw [->] ([shift=(34:.02)]u0) -- +(34:.9) node [right] {$P$};
+        \draw [<->] (25:3.8) -- +(25:.3) node [midway,below right] {$\delta$};
+        \draw [->] ([shift=(0:.8)]A) node [right] {$\theta$} arc (0:34:.8);
     },
     %
     % Example 2
@@ -84,7 +148,7 @@
         \coordinate (C) at (2,0);
         \pic at (A) {pinned};
         \pic at (B) {pinned};
-        \pic at (C) {pinned};
+        \pic at (C) {pinned0};
         \path (A) -- (B) node [midway,above] {$EI,\rho,A$};
         \path (A) -- (C) node [midway,below] {$l$};
         \path (C) -- (B) node [midway,below] {$\alpha l$};
