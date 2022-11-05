@@ -103,6 +103,8 @@ Solution: $u_0 = 12cm$
 \pictures{buildingwind}
 \end{center}
 
+Solution: $u_0 = 2.5cm$
+
 
 
 \example{8} A mass $m$ is released from a given height attached to a massless calbe of length $l$, area $A$ and Young's modulus $E$. If the cable is fixed at the point from which the mass is released, describe the motion/vibration of the mass. Determine the maximum stress in the cable and the lowest point reached by the mass.
@@ -288,9 +290,11 @@ Since $\xi$ is small, the damping ratio can be found as
 
 \example{5}
 The maximum displacements and accelerations of a vibrating structure under sinusoidal excitation are obtained from the stationary or homogeneous solution to the differential equation,
-$$
+\begin{align*}
+m\ddot{u} + ku = F_0\sin(\Omega t + \varphi) \\
 u(t) = \frac{F_0}{k}H\sin(\Omega t + \varphi - \Delta\varphi)
-$$
+\end{align*}
+
 where $H$ is known as the magnification factor and is equal to
 $$
 H = \frac{1}{\sqrt{(1-\gamma^2)^2 + 4\xi^2\gamma^2}} \quad ; \quad
@@ -357,6 +361,30 @@ which is transferred to the building. Then, the maximum deflection at the top of
 &u_0 = \frac{3\cdot 10^5}{2\cdot 10^6\cdot 1.25} = 0.12m = 12cm
 \end{align*}
 
+
+
+\example{7}
+Now, the building from example 6 is exposed to sudden wind gust. In that case dynamics of the  structure are defined by a \emph{mass spring damper} system under a constant force suddenly applied.The maximum amplitude is governed by the stationary or homogeneous solution to the differential equation
+\begin{align*}
+m\ddot{u} + c + ku = F_0 \\
+u(t) = \frac{F_0}{k}(1 -e^{\xi\omega t}\cos(\omega t))
+\end{align*}
+
+First of all, we need to determine the equivalent lateral force using the Rayleigh's method from the wind pressure $p_W$, using the same shape function $\psi$ from example 6,
+\begin{align*}
+F_0 = \int_0^h p_W\psi dz = \int_0^h \left(0.3 + (1-0.3)\frac{z}{h}\right)\frac{z}{h}dz = \left(\frac{0.3}{2} + \frac{0.7}{3}\right)h = \\
+= \left(\frac{0.3}{2} + \frac{0.7}{3}\right)100 = 38.3KN
+\end{align*}
+
+The stiffness of the building can be estimated from the equivalent mass and the given period of the building
+$$
+k = \omega^2m = \left(\frac{2\pi}{T}\right)^2m = \left(\frac{2\pi}{5}\right)^2 2\cdot 10^6 = 3.125\cdot 10^6 N/m = 3125KN/m
+$$
+
+Finally, the maximum displacement is obtained from the equatio of motion
+$$
+u_0 = \frac{F_0}{k}(1+1) = \frac{38.3}{3125}2 = 0.025m = 2.5cm
+$$
 
 
 
