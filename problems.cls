@@ -14,11 +14,16 @@
 \RequirePackage{titlesec}
 \RequirePackage{hyperref}
 
+\makeatletter
+\newcommand{\entity}[1]{\gdef\@entity{#1}}%
+\newcommand{\@entity}{\@latex@warning@no@line{No \noexpand\entity given}}
+\makeatother
 
 % Definition of some colors
 \definecolor{titlebackground}{cmyk}{.16, .0, .42, .0} % pale light lime green
 \definecolor{titlebackground}{cmyk}{.24, .03, .07, .02} % duva (blue)
 \definecolor{titlebackground}{cmyk}{.09, .55, 1, .39} % moderate gamboe (brown)
+\definecolor{entitybackground}{cmyk}{.04, .27, .5, .25} %
 \definecolor{titlecolor}{gray}{.95}
 
 
@@ -26,7 +31,7 @@
 \makeatletter
 \renewcommand{\maketitle}{
     \noindent
-    \colorbox{titlebackground}{\parbox[t][][c]{\textwidth}{
+    \colorbox{titlebackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
             \medskip\par\noindent
             \raggedright{\Huge\sffamily\bfseries\@title}
@@ -37,7 +42,15 @@
             \smallskip
         }
     }}
-    \medskip\par
+    {\setlength{\parskip}{-1pt}\par\noindent
+    \colorbox{entitybackground}{\parbox{.984\textwidth}{
+        \color{titlecolor}{
+            \smallskip\par\noindent
+            {\sffamily\@entity}
+        }
+    }}
+    }
+    \bigskip\par
 }
 \makeatother
 
