@@ -6,6 +6,14 @@
         \pic {#1};
     \end{tikzpicture}
 }
+\newcommand{\pictureslabel}[2]{
+    \begin{tabular}[b]{c}
+        \begin{tikzpicture}
+            \pic {#1};
+        \end{tikzpicture} \\
+        (#2)
+    \end{tabular}
+}
 
 % Predefined shapes
 \tikzset{
@@ -141,7 +149,6 @@
         \pic at (A) {pinned};
         \pic at (B) {pinned};
         \path (A) -- (B) node [midway,above] {$EI,\rho,l,A$};
-        \path (A) -- (B) node [midway,below] {\vphantom{l}};
     },
     nspanbeam/.pic = {
         \pic {basicbeam};
@@ -150,8 +157,8 @@
         \pic at (B) {pinned};
         \pic at (C) {pinned0};
         \path (A) -- (B) node [midway,above] {$EI,\rho,A$};
-        \path (A) -- (C) node [midway,below] {$l$};
-        \path (C) -- (B) node [midway,below] {$\alpha l$};
+        \path (A) -- (C) node [midway,below,inner sep=1pt] {$l$};
+        \path (C) -- (B) node [midway,below,inner sep=1pt] {$\alpha l$};
     },
     cantilever/.pic = {
         \pic {basicbeam};

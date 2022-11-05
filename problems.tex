@@ -3,7 +3,7 @@
 \input{img/pictures.tex}
 
 \title{Problems of dynamics of structures}
-\author{J. Bonet, M. Masó, R. Chacón}
+\author{J. Bonet, M. Masó, R. Chacón\\Universitat Politècnica de Catalunya}
 
 
 \begin{document}
@@ -18,11 +18,11 @@
 For the structures shown, determine the natural frequency of vibration using simple structural concepts.
 
 \begin{center}
-    \pictures{portic3pinned}
+    \pictureslabel{portic3pinned}{a}
     \hspace{2em}
-    \pictures{portic}
+    \pictureslabel{portic}{b}
     \hspace{2em}
-    \pictures{porticbracing}
+    \pictureslabel{porticbracing}{c}
 \end{center}
 
 Solutions: (a) $\omega = \sqrt{\frac{9EI}{mh^3}}$, (b) $\omega = \sqrt{\frac{24EI}{mh^3}}$ and (c) $\omega = \sqrt{\frac{24EI}{mh^3}+\frac{EA}{ml}\cos^2\theta}$.
@@ -31,13 +31,13 @@ Solutions: (a) $\omega = \sqrt{\frac{9EI}{mh^3}}$, (b) $\omega = \sqrt{\frac{24E
 For the structures shown, determine the natural frequency of vibration using Rayleigh's method.
 
 \begin{center}
-    \pictures{simplebeam}
-    \pictures{nspanbeam}
+    \pictureslabel{simplebeam}{a}
+    \pictureslabel{nspanbeam}{b}
 \end{center}
 
 \begin{center}
-    \pictures{cantilever}
-    \pictures{fixedpinnedbeam}
+    \pictureslabel{cantilever}{c}
+    \pictureslabel{fixedpinnedbeam}{d}
 \end{center}
 
 Solutions: (a) $\omega \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$, (c) $\omega \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$
@@ -52,9 +52,9 @@ The portal frame structure shown has a weight of $100KN$. If the natural period 
 \end{enumerate}
 
 \begin{center}
-    \pictures{porticdimensions}
-    \pictures{porticdimensions2}
-    \pictures{porticdimensions3}
+    \pictureslabel{porticdimensions}{a}
+    \pictureslabel{porticdimensions2}{b}
+    \pictureslabel{porticdimensions3}{c}
 \end{center}
 
 
@@ -198,8 +198,54 @@ Again, the term $1/l^2$ is a scaling term providing consistency and does not mod
 \end{align*}
 And the exact frquency of the first mode of vibration is $\omega\approx3.52\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}rad/s$.
 
+The last two strutures can be analyzed using a cubic polynomial, since the shape function must fullfill three kynematic boundary conditions.
+
+For the application of Rayleigh's method with periodic shape functions, see the solution to example 9.
+
 
 \example{3}
+Given that the natural period of vibration of the portic is $T=0.9$ seconds, the frequency is computed as
+$$
+\omega = \frac{2\pi}{T} = \frac{2\pi}{0.9} = 6.98rad/s
+$$
+Then, the lateral stiffness is computed from the frequency and the mass of the structure,
+$$
+\omega^2 = \frac{k}{m} \quad \rightarrow \quad
+k = \omega^2m = \omega^2\frac{P}{g} = 6.98^2\frac{100}{10} = 487KN/m
+$$
+
+The goal of the second step is to determine the diameter of the steel cross-braces required to strenghten the structure by reducing the period to 0.3 seconds. First of all, the new stiffness is obtained following the same procedure,
+\begin{align*}
+\omega = \frac{2\pi}{T} = \frac{2\pi}{0.3} = 20.94rad/s \\
+k = \omega^2\frac{P}{g} = 20.94^2\frac{100}{10} = 4384KN/m
+\end{align*}
+The bracing system should provide the additional stiffness,
+$$
+k = k_{portic} + k_{bracing} \quad \rightarrow \quad k_{bracing} = 4384 - 487 = 3897KN/m
+$$
+
+We will consider the stiffness of one brace because the one under compression can buckle. 
+Following the solution of example 1 (c), the area can be obtained from
+\begin{align*}
+k_{brace} &= \frac{EA}{l}\cos^2\theta \quad \rightarrow \quad A = \frac{k_{brace}l}{E\cos^2\theta} \\
+l &= \sqrt{4^2 + 5^2} = 6.4m \\
+\cos\theta &= \frac{5}{6.4} = 0.78 \\
+A &= \frac{3897\cdot 6.4}{2\cdot 10^8\cdot 0.78} = 1.6\cdot 10^{-4} m^2 = 1.6cm^2
+\end{align*}
+and the diameter is obtained from the area,
+$$
+D = 2\sqrt{\frac{A}{\pi}} = 2\sqrt{\frac{1.6}{\pi}} = 1.4cm
+$$
+
+The last part of the example consits on computing the new period of vibration if a further load of $50KN$ is added to the strenghtened structure. Using the new lateral stiffness, the frequency is
+$$
+\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4384}{15}} = 17.1 rad/s
+$$
+and the new period is
+$$
+T = \frac{2\pi}{\omega} = \frac{2\pi}{17.1} = 0.37s
+$$
+
 
 \example{4}
 The damping ratio $\xi$ is directly related to the decay coefficient
