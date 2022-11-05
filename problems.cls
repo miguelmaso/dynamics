@@ -14,10 +14,6 @@
 \RequirePackage{titlesec}
 \RequirePackage{hyperref}
 
-\makeatletter
-\newcommand{\entity}[1]{\gdef\@entity{#1}}%
-\newcommand{\@entity}{\@latex@warning@no@line{No \noexpand\entity given}}
-\makeatother
 
 % Definition of some colors
 \definecolor{titlebackground}{cmyk}{.16, .0, .42, .0} % pale light lime green
@@ -27,7 +23,14 @@
 \definecolor{titlecolor}{gray}{.95}
 
 
-% Definition of the sutom title format
+% Definition of the entity field
+\makeatletter
+\newcommand{\entity}[1]{\gdef\@entity{#1}}%
+\newcommand{\@entity}{\@latex@warning@no@line{No \noexpand\entity given}}
+\makeatother
+
+
+% Definition of the custom title format
 \makeatletter
 \renewcommand{\maketitle}{
     \noindent
@@ -72,4 +75,10 @@
   \def\toclevel@example{2}
 \makeatother
 
+
+
+\makeatletter
+\newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
+\newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
+\makeatother
 

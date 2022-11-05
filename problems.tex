@@ -77,11 +77,13 @@ Solution: $T=0.15s$, $\xi=1.28\%$
 \section{Forced vibration of SDOF structures}
 
 
-\example{5} The portal frame of example 3 (a) is subject to a sinusoidal ground vibration with horizontal acceleration amplitude of $2m/s^2$. Assuming a damping ratio of $5\%$, determine the maximum displacement and maximum total acceleration of the frame when the period of floor vibration is: 0.1 seconds; 0.9 seconds and 5 seconds.
+\example{5} The portal frame of example 3 (a) is subject to a sinusoidal ground vibration with horizontal acceleration amplitude of $2m/s^2$. Assuming a damping ratio of $5\%$, determine the maximum displacement and maximum total acceleration of the frame when the period of floor vibration is: (a) 0.1 seconds; (b) 0.9 seconds and (c) 5 seconds.
 
 \begin{center}
 \pictures{porticforced}
 \end{center}
+
+Solutions: (a) $u_0 = 0.00064cm$, $\ddot{u}_0 = 0.011m\,s^{-1}$; (b) $u_0 = 41cm$, $\ddot{u}_0 = 20m\,s^{-1}$ and (c) $u_0 = 4.2cm$, $\ddot{u}_0 = 0.066m\,s^{-1}$
 
 
 
@@ -90,6 +92,8 @@ Solution: $T=0.15s$, $\xi=1.28\%$
 \begin{center}
 \pictures{buildinghelicopter}
 \end{center}
+
+Solution: $u_0 = 12cm$
 
 
 
@@ -333,6 +337,25 @@ H = \frac{1}{\sqrt{(1-0.18^2)^2 + 4\cdot 0.05^2\cdot 0.18^2}} = 1.033 \\
 &\ddot{u}_0 = \left(\frac{2\pi}{5}\right)^2 \cdot 4.2 = 6.6cm\,s^{-2} = 0.066m\,s^{-2}
 \end{align*}
 Which is a practically \emph{static} situation or \emph{stiffness dominated}.
+
+\example{6}
+When the building is hit by the helicopter, the impulse or linear momentum is preserved. To compute the linear momentum of the building, we need to know the equivalent mass and we can use the Rayleigh's method for that purpose. As it is suggested, we will use a linear shape function
+\begin{align*}
+&u = u_0\psi \quad ; \quad \psi = \frac{z}{h} \\
+&m = \int_0^h \rho A\psi^2dz = \rho A\int_0^h\frac{z^2}{h^2}dz = \frac{1}{3}\rho Ah = \frac{1}{3} 1500 \cdot 400 \cdot 100 = \\
+& \pushright{= 2\cdot 10^7N = 2\cdot 10^6Kg}
+\end{align*}
+
+The impulse of the helicopter is
+$$
+I = (mv)_{helicopter} = 10^4 \cdot 30 = 3\cdot 10^5 Kg\,m\,s^-1
+$$
+which is transferred to the building. Then, the maximum deflection at the top of the building is inferred
+\begin{align*}
+&\dot{u}_0 = \frac{I}{m} \quad \rightarrow \quad u_0 = \frac{I}{m\omega} \\
+&\omega = \frac{2\pi}{T} = \frac{2\pi}{5} = 1.25rad\,s^{-1} \\
+&u_0 = \frac{3\cdot 10^5}{2\cdot 10^6\cdot 1.25} = 0.12m = 12cm
+\end{align*}
 
 
 
