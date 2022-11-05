@@ -224,7 +224,7 @@
         \node [above right] at (C) {$a_g(t) = 2\sin(\Omega t)$};
     },
     %
-    % Example 6
+    % Examples 6 and 7
     %
     building/.pic = {
         \draw [thick,gray,fill=lightgray] (0,0) rectangle (2,4);
@@ -253,6 +253,15 @@
         \node [left] at (W1) {$1KN/m$};
         \draw [dashed] (2,0) -- (3,4);
         \draw [dashed] (2,4) -- (3,4);
+    },
+    %
+    % Example 8
+    %
+    masslesscable/.pic = {
+        \draw (-.8,0) to[out=270, in=180] (-.5,-2);
+        \draw (-.5,-2) to[out=0, in=270] (0,0) node [below right=3] {$l,EA$};
+        \pic [rotate=180] {pinned};
+        \draw [fill=lightgray] (-.8,0) circle (.2) node [left=5] {$m$};
     }
 }
 
