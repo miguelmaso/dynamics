@@ -113,11 +113,13 @@ Solution: $u_0 = 2.5cm$
 \pictures{masslesscable}
 \end{center}
 
-Solution: $2u_{maax} = \frac{mg}{EA}$, $\sigma_{max} = 2\frac{mg}{Al}$
+Solution: $u_{max} = 2\frac{mg}{EA}$, $\sigma_{max} = 2\frac{mg}{Al}$
 
 
 
-\example{9} A point load $F=1KN$ moves along with constant speed $v=10m/s$ on a simply supported beam of length $l=1p\pi m$ as shown in the figure. The beam is made of concrete, has a rectangular section of $1m$ and an average density of $2\,800Kg/m^3$. Determine the deflection of the beam as function of time, the dynamic magnification factor and the maximum bending moment at the centre section.
+\example{9} A point load $F=1KN$ moves along with constant speed $v=10m/s$ on a simply supported beam of length $l=1p\pi m$ as shown in the figure. The beam is made of concrete, has a rectangular section of $1m$ width and $0.5m$ height and an average density of $2\,800Kg/m^3$. Determine the deflection of the beam as a function of time, the dynamic magnification factor and the maximum bending moment at the centre section.
+
+Solution: $H=1.11$, $u=0.5\sin(t)\,cm$, $M_{max} = 8.7\,KNm$
 
 
 %\section{Vibration of MDOF structures}
@@ -414,7 +416,50 @@ And the maximum displacement $u$ and stress $\sigma$ are
 
 
 \example{9}
-In this case, the magnitude of the external force is not varying with time, but moving with constant speed. The Rayleigh's method allow us to compute the equivalent force applied as a function of time. For that purpose, we choose a periodic shape function $\psi$ satisfying the kinematic boundary conditions
+In that case, the magnitude of the external force $P=1KN$ is not varying with time, but moving with constant speed $v=10m/s$. The Rayleigh's method allow us to compute the equivalent force applied as a function of time. For that purpose, we choose a periodic shape function $\psi$ satisfying the kinematic boundary conditions
+\begin{align*}
+&\psi = \sin\left(\frac{\pi x}{l}\right) \\
+&F = P\psi(x) = P\psi(vt) = P\sin\left(\frac{\pi vt}{l}\right)
+\end{align*}
+thus, the equivalent period of the external excitation is $\Omega = \pi v/l = 1\,rad\cdot s^{-1}$.
+
+The mechanical properties of the section are
+\begin{align*}
+&A = 0.5m^2 \\
+&I = \frac{1}{12}0.5^3 = \frac{0.125}{12} \approx 0.01 m^4\\
+&E = 14GPa
+\end{align*}
+
+Now, the equivalent mass and stiffness can be computed with the Rayleigh's method,
+\begin{align*}
+&m = \int_0^l \rho A\psi^2dx = \int_0^l \rho A\sin^2\left(\frac{\pi x}{l}\right)dx = \frac{\rho Al}{2} = \\
+& \pushright{= \frac{2800 \cdot 0.5 \cdot 10\pi}{2} = 7000\pi Kg = 7\pi Tn} \\
+&k = \int_0^l EI\psi''^2dx = \int_0^l EI\left(-\left(\frac{\pi}{l}\right)^2\sin\left(\frac{\pi x}{l}\right)\right)^2dx = \frac{EI\pi^4}{2l^3} = \qquad \\
+& \pushright{= \frac{14\cdot 10^6 \cdot 0.01 \cdot \pi^4}{2 \cdot (10\pi)^3} =
+70\pi KN/m}
+\end{align*}
+and the frequency is
+$$
+\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{70\pi}{7\pi}} = \sqrt{10} = 3.16\,rad\cdot s^{-1}
+$$
+
+Finally, the structural response is obtained following the same steps from example 5, a structure under periodic loading. The deflection depends on the dynamic magnification factor $H$ and assuming a small damping ratio,
+\begin{align*}
+&\gamma = \frac{\Omega}{\omega} = \frac{\pi v}{l\omega} \\
+&H = \frac{1}{\sqrt{\left(1-\frac{\pi^2v^2}{l^2\omega^2}\right)^2 + 4\xi^2\frac{\pi^2v^2}{l^2\omega^2}}} \approx \frac{1}{1-\frac{\pi^2v^2}{l^2\omega^2}} = \frac{l^2\omega^2}{l^2\omega^2-\pi^2v^2} = \qquad \\
+&\pushright{= \frac{10^2\cdot\pi^2\cdot 3.16^2}{10^2\cdot\pi^2\cdot 3.16^2 - 10^2\cdot\pi^2}
+= \frac{10}{10-1} = 1.11}
+\end{align*}
+
+Then, the deflection of the beam as a function of time is
+$$
+u = \frac{P}{k}H\sin(\Omega t) = \frac{1}{70\pi}1.11\sin(t) = 0.005\sin(t)\,m = 0.5\sin(t)\,cm
+$$
+
+And the maximum bending moment at the centre section is
+$$
+M_{max} = \frac{Pl}{4}H = \frac{1 \cdot 10\pi}{4}1.11 = 8.7\,KNm
+$$
 
 
 
