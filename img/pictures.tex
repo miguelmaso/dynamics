@@ -262,6 +262,16 @@
         \draw (-.5,-2) to[out=0, in=270] (0,0) node [below right=3] {$l,EA$};
         \pic [rotate=180] {pinned};
         \draw [fill=lightgray] (-.8,0) circle (.2) node [left=5] {$m$};
+    },
+    %
+    % Example 9
+    %
+    beampointload/.pic = {
+        \pic {basicbeam};
+        \pic at (A) {pinned};
+        \pic at (B) {pinned};
+        \draw [->,very thick] (1,1) node [left] {$P$} -- (1,.1);
+        \draw [->] (1.1,.5) -- +(.6,0) node [above] {$v$};
     }
 }
 
