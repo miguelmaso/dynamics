@@ -49,8 +49,8 @@ Solutions: (a) $\omega \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$
 The portal frame structure shown has a weight of $100KN$. If the natural period of vibration is 0.9 seconds:
 \begin{enumerate}[(a)]
     \item determine the lateral stiffness of the structure;
-    \item determine the diameter of the steel cross-braces required to strenghten the structure by reducing the period to 0.3 seconds;
-    \item determine the period if a further load of $50KN$ is added to the strenghtened structure.
+    \item determine the diameter of the steel cross-braces required to strengthen the structure by reducing the period to 0.3 seconds;
+    \item determine the period if a further load of $50KN$ is added to the strengthened structure.
 \end{enumerate}
 
 \begin{center}
@@ -64,7 +64,7 @@ Solutions: (a) $k = 487KN/m$, (b) $D = 1.4cm$, (c) $T = 0.37s$
 
 
 \example{4}
-In order to determine the dynamic properties of a simply supported bridge with a mass of $10^6Kg$, the midpoint is displaced $5mm$ by a jack and then suddenly released. At the end of 20 complete cycles, the time is 3 seconds and the peack displacement measured is $1mm$. Determine the natural period and damping ratio of the bridge.
+In order to determine the dynamic properties of a simply supported bridge with a mass of $10^6Kg$, the midpoint is displaced $5mm$ by a jack and then suddenly released. At the end of 20 complete cycles, the time is 3 seconds and the peak displacement measured is $1mm$. Determine the natural period and damping ratio of the bridge.
 
 \begin{center}
 \pictures{bridge}
@@ -87,7 +87,7 @@ Solutions: (a) $u_0 = 0.00064cm$, $\ddot{u}_0 = 0.011m\,s^{-1}$; (b) $u_0 = 41cm
 
 
 
-\example{6} A building has a height of $100m$, a square base measuring $20\times20m^2$, an average specific weight of $1\,500N/m^3$ and a natural period of vibration of 5 seconds. The top floor is hit by an helicopter with a mass of $10\,000Kg$ and travelling at $30m/s$. Determine the maximum deflection at the top assuming conservation of linear momentum and a vibration shape function that increases linearly with the height.
+\example{6} A building has a height of $100m$, a square base measuring $20\times20m^2$, an average specific weight of $1\,500N/m^3$ and a natural period of vibration of 5 seconds. The top floor is hit by an helicopter with a mass of $10\,000Kg$ and traveling at $30m/s$. Determine the maximum deflection at the top assuming conservation of linear momentum and a vibration shape function that increases linearly with the height.
 
 \begin{center}
 \pictures{buildinghelicopter}
@@ -97,7 +97,7 @@ Solution: $u_0 = 12cm$
 
 
 
-\example{7} The building of example 6 is hit by a sudden wind gust which results in the sudden application of horizontal forces distributed along the height of the building as shown in the picture. Assuming a vibration shape fuction that increases linearly with the height and neglecting damping, determine the maximum displacement at the top of the building.
+\example{7} The building of example 6 is hit by a sudden wind gust which results in the sudden application of horizontal forces distributed along the height of the building as shown in the picture. Assuming a vibration shape function that increases linearly with the height and neglecting damping, determine the maximum displacement at the top of the building.
 
 \begin{center}
 \pictures{buildingwind}
@@ -107,7 +107,7 @@ Solution: $u_0 = 2.5cm$
 
 
 
-\example{8} A mass $m$ is released from a given height attached to a massless calbe of length $l$, area $A$ and Young's modulus $E$. If the cable is fixed at the point from which the mass is released, describe the motion/vibration of the mass. Determine the maximum stress in the cable and the lowest point reached by the mass.
+\example{8} A mass $m$ is released from a given height attached to a massless cable of length $l$, area $A$ and Young's modulus $E$. If the cable is fixed at the point from which the mass is released, describe the motion/vibration of the mass. Determine the maximum stress in the cable and the lowest point reached by the mass.
 
 \begin{center}
 \pictures{masslesscable}
@@ -117,7 +117,7 @@ Solution: $2u_{maax} = \frac{mg}{EA}$, $\sigma_{max} = 2\frac{mg}{Al}$
 
 
 
-\example{9} A point load $F=1KN$ moves along with constant speed $v=10m/s$ on a simply supported beam of length $l=1p\pi m$ as shown in the figure. The beam is made of concrete, has a rectanular section of $1m$ and an average density of $2\,800Kg/m^3$. Determine the deflection of the beam as function of time, the dynamic magnification factor and the maximum bending moment at the centre section.
+\example{9} A point load $F=1KN$ moves along with constant speed $v=10m/s$ on a simply supported beam of length $l=1p\pi m$ as shown in the figure. The beam is made of concrete, has a rectangular section of $1m$ and an average density of $2\,800Kg/m^3$. Determine the deflection of the beam as function of time, the dynamic magnification factor and the maximum bending moment at the centre section.
 
 
 %\section{Vibration of MDOF structures}
@@ -141,11 +141,11 @@ Every single structure can be decomposed in its elements and each element, analy
     \pictures{columnpinned}
 \end{center}
 
-The displacement of the columns can be analyized as a cantilever using static analysis concepts:
+The displacement of the columns can be analyzed as a cantilever using static analysis concepts:
 $$
 u_0 = \frac{F_0h^3}{3EI} \quad \rightarrow \quad k_{column} = \frac{3EI}{h^3}
 $$
-Finally, the stiffness and the frqeuncy of the structure are
+Finally, the stiffness and the frequency of the structure are
 $$
 k = 3k_{column} = \frac{9EI}{h^3} \quad , \quad \omega = \sqrt{\frac{9EI}{mh^3}}
 $$
@@ -155,7 +155,7 @@ $$
     \pictures{columnfixed}
 \end{center}
 
-Analogously, the second structure can be analyzed combining the stiffness of the colunms. In that case, rotation $\varphi_0 = u_0/h$ generated by the moment reaction $M_0$ has been imposed to the quivalent beams. The moment reaction must satisfy global equilibrium:
+Analogously, the second structure can be analyzed combining the stiffness of the columns. In that case, rotation $\varphi_0 = u_0/h$ generated by the moment reaction $M_0$ has been imposed to the equivalent beams. The moment reaction must satisfy global equilibrium:
 $$
 \sum M = 2M_0 -F_0h = 0
 $$
@@ -177,7 +177,7 @@ $$
     \pictures{bracing}
 \end{center}
 
-The last structure adds two braces and its stiffness shall be added, but only one of them is contributing, since the bracing under compression buckles. The stifness of a brace is
+The last structure adds two braces and its stiffness shall be added, but only one of them is contributing, since the bracing under compression buckles. The stiffness of a brace is
 $$
 \delta = \frac{Pl}{EA} \quad \rightarrow \quad k_{brace} = \frac{EA}{l}\cos^2\theta
 $$
@@ -204,9 +204,9 @@ where the term $4/l^2$ is a scaling parameter and does not modify the solution. 
 &k = \int_0^l EI \psi''^2 dx = \int_0^l EI \left(\frac{8}{l^2}\right)^2dx = \frac{64EI}{l^3} \\
 &\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{64EI}{l^3}\frac{15}{8\rho Al}} = \frac{1}{l^2}\sqrt{120\frac{EI}{\rho A}} \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s
 \end{align*}
-The obtained result can be compared against the exact frequency, obtained by the same procedure applied to a fourth order polynomial satisfying both kynematic and dynamic boundary conditions. The analytical result is $\omega = \frac{1}{l^2}\sqrt{\frac{3024EI}{31\rho A}} \approx 9.86\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$.
+The obtained result can be compared against the exact frequency, obtained by the same procedure applied to a fourth order polynomial satisfying both kinematic and dynamic boundary conditions. The analytical result is $\omega = \frac{1}{l^2}\sqrt{\frac{3024EI}{31\rho A}} \approx 9.86\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$.
 
-\parbox{.7\textwidth}{The cantilever can be analyzed using a second order polynomial. In that case, the kynematic boundary conditions are $\psi(0) = \psi'(0) = 0$.} \hspace{1em}
+\parbox{.7\textwidth}{The cantilever can be analyzed using a second order polynomial. In that case, the kinematic boundary conditions are $\psi(0) = \psi'(0) = 0$.} \hspace{1em}
 \parbox{.25\textwidth}{\pictures{cantilever}}
 \begin{align*}
 &\psi(x) = \frac{1}{l^2} x^2 \\
@@ -218,16 +218,16 @@ Again, the term $1/l^2$ is a scaling term providing consistency and does not mod
 &k = \int_0^l EI \psi''^2 dx = \int_0^l EI \left(\frac{2}{l^2}\right)^2dx = \frac{4EI}{l^3} \\
 &\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4EI}{l^3}\frac{5}{\rho Al}} = \frac{1}{l^2}\sqrt{20\frac{EI}{\rho A}} \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s
 \end{align*}
-And the exact frquency of the first mode of vibration is $\omega\approx3.52\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}rad/s$.
+On the other hand, the exact frequency of the first mode of vibration of a cantilever is $\omega\approx3.52\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}rad/s$.
 
-The last two strutures can be analyzed using a cubic polynomial, since the shape function must fullfill three kynematic boundary conditions.
+The last two structures can be analyzed using a cubic polynomial, since the shape function must fulfill three kinematic boundary conditions.
 
 For the application of Rayleigh's method with periodic shape functions, see the solution to example 9.
 
 
 
 \example{3}
-Given that the natural period of vibration of the portic is $T=0.9$ seconds, the frequency is computed as
+Given that the natural period of vibration of the frame is $T=0.9$ seconds, the frequency is computed as
 $$
 \omega = \frac{2\pi}{T} = \frac{2\pi}{0.9} = 6.98rad/s
 $$
@@ -237,14 +237,14 @@ $$
 k = \omega^2m = \omega^2\frac{P}{g} = 6.98^2\frac{100}{10} = 487KN/m
 $$
 
-The goal of the second step is to determine the diameter of the steel cross-braces required to strenghten the structure by reducing the period to 0.3 seconds. First of all, the new stiffness is obtained following the same procedure,
+The goal of the second step is to determine the diameter of the steel cross-braces required to strengthen the structure by reducing the period to 0.3 seconds. First of all, the new stiffness is obtained following the same procedure,
 \begin{align*}
 \omega = \frac{2\pi}{T} = \frac{2\pi}{0.3} = 20.94rad/s \\
 k = \omega^2\frac{P}{g} = 20.94^2\frac{100}{10} = 4384KN/m
 \end{align*}
 The bracing system should provide the additional stiffness,
 $$
-k = k_{portic} + k_{bracing} \quad \rightarrow \quad k_{bracing} = 4384 - 487 = 3897KN/m
+k = k_{frame} + k_{bracing} \quad \rightarrow \quad k_{bracing} = 4384 - 487 = 3897KN/m
 $$
 
 We will consider the stiffness of one brace because the one under compression can buckle. 
@@ -260,7 +260,7 @@ $$
 D = 2\sqrt{\frac{A}{\pi}} = 2\sqrt{\frac{1.6}{\pi}} = 1.4cm
 $$
 
-The last part of the example consits on computing the new period of vibration if a further load of $50KN$ is added to the strenghtened structure. Using the new lateral stiffness, the frequency is
+The last part of the example consists on computing the new period of vibration if a further load of $50KN$ is added to the strengthened structure. Using the new lateral stiffness, the frequency is
 $$
 \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4384}{15}} = 17.1 rad/s
 $$
@@ -337,7 +337,7 @@ H = \frac{1}{\sqrt{(1-1^2)^2 + 4\cdot 0.05^2\cdot 1^2}} = \frac{1}{\sqrt{0 + 4\c
 &u_0 = 4.1\cdot 10 = 41 cm \\
 &\ddot{u}_0 = \left(\frac{2\pi}{0.9}\right)^2 \cdot 41 = 2000cm\,s^{-2} = 20m\,s^{-2}
 \end{align*}
-The \emph{ressonance} situation is \emph{damping dominated}.
+The \emph{resonance} situation is \emph{damping dominated}.
 
 And for a period $T_g=5s$, the maximum values are
 \begin{align*}
@@ -387,7 +387,7 @@ $$
 k = \omega^2m = \left(\frac{2\pi}{T}\right)^2m = \left(\frac{2\pi}{5}\right)^2 2\cdot 10^6 = 3.125\cdot 10^6 N/m = 3125KN/m
 $$
 
-Finally, the maximum displacement is obtained from the equatio of motion
+Finally, the maximum displacement is obtained from the equation of motion
 $$
 u_{max} = \frac{F_0}{k}(1+1) = \frac{38.3}{3125}2 = 0.025m = 2.5cm
 $$
@@ -395,12 +395,12 @@ $$
 
 
 \example{8}
-The motion of the mass released from a given height and attached to a cable has two parts. Firstly, a freefall. Secondly, a vibration. The velocity at the end of the freefall is
+The motion of the mass released from a given height and attached to a cable has two parts. Firstly, a free fall. Secondly, a vibration. The velocity at the end of the free fall is
 $$
 \frac{1}{2}m\dot{u}_0^2 = mgl \quad \rightarrow \quad \dot{u}_0 = \sqrt{gl}
 $$
 
-And the vibration is decribed by a sudden force suddenly applied; the external force $F_0$ is generated by the gravity weight $mg$ and the stresses in the cable are obtained from elastic analysis. The same equations of example 7 can be applied here. Neglecting damping,
+And the vibration is described by a sudden force suddenly applied; the external force $F_0$ is generated by the gravity weight $mg$ and the stresses in the cable are obtained from elastic analysis. The same equations of example 7 can be applied here. Neglecting damping,
 $$
 u(t) = \frac{F_0}{k}(1 -\cos(\omega t))
 $$
@@ -411,6 +411,10 @@ And the maximum displacement $u$ and stress $\sigma$ are
 &\sigma_{max} = E\varepsilon_{max} = E\frac{u_{max}}{l} = 2\frac{mg}{Al}
 \end{align*}
 
+
+
+\example{9}
+In this case, the magnitude of the external force is not varying with time, but moving with constant speed. The Rayleigh's method allow us to compute the equivalent force applied as a function of time. For that purpose, we choose a periodic shape function $\psi$ satisfying the kinematic boundary conditions
 
 
 
