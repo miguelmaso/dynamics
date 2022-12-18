@@ -1,5 +1,22 @@
 \input{img/helicopter.tex}
 
+% Loading shapes
+% from https://openclipart.org/artist/dominiquechappard
+% and https://openclipart.org/artist/mkhuda
+\pgfdeclareimage[height=1.5cm]{calling}   {img/shapes/calling}
+\pgfdeclareimage[height=1.5cm]{ballet}    {img/shapes/ballet}
+\pgfdeclareimage[height=1.5cm]{dancing}   {img/shapes/dancing}
+\pgfdeclareimage[height=1.5cm]{handwalk}  {img/shapes/handwalk}
+\pgfdeclareimage[height=1.5cm]{happy}     {img/shapes/happy}
+\pgfdeclareimage[height=1.5cm]{helicopter}{img/shapes/helicopter}
+\pgfdeclareimage[height=1.5cm]{hip-hop}   {img/shapes/hip-hop}
+\pgfdeclareimage[height=1.5cm]{hip-hop-2} {img/shapes/hip-hop-2}
+\pgfdeclareimage[height=1.5cm]{jumping}   {img/shapes/jumping}
+\pgfdeclareimage[height=1.5cm]{music-hall}{img/shapes/music-hall}
+\pgfdeclareimage[height=1.5cm]{saxo}      {img/shapes/saxo}
+\pgfdeclareimage[height=1.5cm]{stone}     {img/shapes/stone}
+\pgfdeclareimage[height=1.5cm]{walking}   {img/shapes/walking}
+
 % Marco for inserting pictures
 \newcommand{\pictures}[1]{
     \begin{tikzpicture}
@@ -236,7 +253,7 @@
         }
     },
     buildinghelicopter/.pic = {
-        \node [helicopter,fill=gray,minimum width=.5cm] at (0,4) {};
+        \node at (0,4) {\pgfuseimage{helicopter}};
         \pic at (2,0) {building};
         \draw [dashed] (4,0) -- (5,4);
         \draw [dashed] (4,4) -- (5,4);
@@ -266,12 +283,43 @@
     %
     % Example 9
     %
-    beampointload/.pic = {
-        \pic {basicbeam};
+    longbeam/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (5,0);
+        \draw [ultra thick] (A) -- (B);
         \pic at (A) {pinned};
         \pic at (B) {pinned};
-        \draw [->,very thick] (1,1) node [left] {$P$} -- (1,.1);
-        \draw [->] (1.1,.5) -- +(.6,0) node [above] {$v$};
+    },
+    beampointload/.pic = {
+        \pic {longbeam};
+        \draw [->,very thick] (1.5,1) node [left] {$P$} -- +(0,-.9);
+        \draw [->] (1.6,.5) -- +(.6,0) node [above] {$v$};
+    },
+    %
+    % Example 10
+    %
+    beampeople/.pic = {
+        \pic {longbeam};
+        \node [above=-7] at (0.5,0) {\pgfuseimage{happy}};
+        \node [above=-6] at (1.5,0) {\pgfuseimage{hip-hop}};
+        \node [above=-5] at (2.5,0) {\pgfuseimage{handwalk}};
+        \node [above=-5] at (3.5,0) {\pgfuseimage{dancing}};
+        \node [above=-5] at (4.5,0) {\pgfuseimage{ballet}};
+        \node [below] at (0,0) {\phantom{$T_f$}};
+    },
+    contactratio/.pic = {
+        \coordinate (O) at (0,0);
+        \coordinate (X) at (5,0);
+        \coordinate (Y) at (0,1.5);
+        \coordinate (a) at (1.6,0);
+        \coordinate (T) at (2.8,0);
+        \coordinate (F) at (0,.4);
+        \coordinate (sin) at (0.8,1.5);
+        \draw [->] (O) -- (X) node [below right] {$t$};
+        \draw [->] (O) -- (Y) node [left] {$F(t)$};
+        \draw [thick] (O) .. controls +(sin) .. +(a) node [below] {$\alpha T_f$};
+        \draw [thick] (T) node [below] {$T_f$} .. controls +(sin) .. +(a);
+        \draw [dotted] (F) node [left] {$F_{avg}$} -- +(X);
     }
 }
 
