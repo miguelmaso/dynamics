@@ -338,7 +338,21 @@
         \pic at (A) {fixed};
         \pic at (B) {fixed};
         \pic at (C) {fixed};
-        \draw (A) ++(.2,0) [<->] ++(0,2) node [midway] {$3m$};
+        \draw [<->] (A) ++(.4,2.4) -- ++(0,1) node [midway, right] {$3m$};
+        \draw [<->] (A) ++(.4,1.2) -- ++(0,1) node [midway, right] {$3m$};
+        \draw [<->] (A) ++(.4,0.0) -- ++(0,1) node [midway, right] {$3m$};
+        \draw [-latex] (B) ++(.2,3.5) -- ++(.5,0) node [right] {$u_3$};
+        \draw [-latex] (B) ++(.2,2.3) -- ++(.5,0) node [right] {$u_2$};
+        \draw [-latex] (B) ++(.2,1.1) -- ++(.5,0) node [right] {$u_1$};
+    },
+    threeStoreyKM/.pic = {
+        \pic {threeStorey};
+        \draw (A) ++(-.5,3.6) node [left] {$m_3=10^5kg$};
+        \draw (A) ++(-.5,2.4) node [left] {$m_2=1.5\cdot10^5kg$};
+        \draw (A) ++(-.5,1.2) node [left] {$m_1=2\cdot10^5kg$};
+        \draw (B) ++(.5,3.0) node [right] {$k_3=10^7N/m$};
+        \draw (B) ++(.5,1.8) node [right] {$k_2=2\cdot10^7N/m$};
+        \draw (B) ++(.5,0.6) node [right] {$k_1=3\cdot10^7N/m$};
     }
 }
 
