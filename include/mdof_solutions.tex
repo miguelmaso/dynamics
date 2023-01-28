@@ -1,0 +1,27 @@
+
+\example{17}
+The first step before using the Ritz-Rayleigh method to approximate the periods of vibration is to construct the mass and stiffness matrices:
+$$
+\mathbf{M} = \begin{bmatrix}
+    m_1 & 0 & 0 \\
+    0 & m_2 & 0 \\
+    0 & 0 & m_3
+\end{bmatrix}
+= \begin{bmatrix}
+    2 & 0 & 0 \\
+    0 & 1.5 & 0 \\
+    0 & 0 & 1
+\end{bmatrix} 10^5 kg
+$$
+$$
+\mathbf{K} = \begin{bmatrix}
+    k_1+k_2 & -k_2 & 0 \\
+    -k_2 & k_2+k_3 & -k_3 \\
+    0 & -k_3 & k_3
+\end{bmatrix}
+= \begin{bmatrix*}[r]
+    5 & -2 & 0 \\
+    -2 & 3 & -1 \\
+    0 & -1 & 1
+\end{bmatrix*} 10^7 N/m
+$$
