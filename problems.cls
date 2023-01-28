@@ -7,6 +7,7 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage{amsmath}
+\RequirePackage{mathtools}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
@@ -76,7 +77,7 @@
 \makeatother
 
 
-
+% Custom command to align parts of equations
 \makeatletter
 \newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
 \newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
