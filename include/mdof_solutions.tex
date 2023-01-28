@@ -25,3 +25,156 @@ $$
     0 & -1 & 1
 \end{bmatrix*} 10^7 N/m
 $$
+
+\paragraph{1 mode} We start applying the Ritz-Rayleigh method with a mode linearly increasing with height. The matrix of deformation modes will contain only one vector:
+$$
+\mathbf{R} = [\mathbf{r}_1] =
+\begin{bmatrix}
+    1 & 2 & 3
+\end{bmatrix}^T
+$$
+
+And the reduced system is obtained by the following arithmetics:
+$$
+\hat{\mathbf{M}} = \mathbf{R}^T \mathbf{M} \mathbf{R} =
+\begin{bmatrix}
+    1 & 2 & 3
+\end{bmatrix}
+\begin{bmatrix}
+    2 & 0 & 0 \\
+    0 & 1.5 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 \\ 2 \\ 3
+\end{bmatrix} =
+\begin{bmatrix}
+    2 & 3 & 3
+\end{bmatrix}
+\begin{bmatrix}
+    1 \\ 2 \\ 3
+\end{bmatrix} = 17 \cdot 10^5 kg
+$$
+$$
+\hat{\mathbf{K}} = \mathbf{R}^T \mathbf{K} \mathbf{R} =
+\begin{bmatrix}
+    1 & 2 & 3
+\end{bmatrix}
+\begin{bmatrix}
+    5 & -2 & 0 \\
+    -2 & 3 & -1 \\
+    0 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 \\ 2 \\ 3
+\end{bmatrix} =
+\begin{bmatrix}
+    1 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 \\ 2 \\ 3
+\end{bmatrix} = 6 \cdot 10^7 N/m
+$$
+
+Thus, the eigenvalue problem is reduced to a scalar equation:
+$$
+\vert \hat{\mathbf{K}} - \omega^2\hat{\mathbf{M}} \vert = 0 \quad \rightarrow \quad
+\omega^2_1 = \frac{6\cdot10^7}{17\cdot10^5} = 35.3 \quad \rightarrow \quad
+\omega_1 = 5.9\ rad\ s^{-1}
+$$
+
+
+\paragraph{2 modes} The Ritz-Rayleigh method can be enriched with more modes of vibration, in this case, with a mode varying quadratically with height,
+$$
+\mathbf{R} =
+\begin{bmatrix}
+    r_1 & r_2
+\end{bmatrix} =
+\begin{bmatrix}
+    1 & 2 & 3 \\
+    1 & 4 & 9
+\end{bmatrix}^T
+$$
+
+The reduced system is then obtained by the algebraic multiplications
+\begin{multline*}
+\hat{\mathbf{M}} = \mathbf{R}^T \mathbf{M} \mathbf{R} =
+\begin{bmatrix}
+    1 & 2 & 3 \\
+    1 & 4 & 9
+\end{bmatrix}
+\begin{bmatrix}
+    2 & 0 & 0 \\
+    0 & 1.5 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 1 \\
+    2 & 4 \\
+    3 & 9
+\end{bmatrix} =
+\begin{bmatrix}
+    2 & 3 & 3 \\
+    2 & 6 & 9
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 1 \\
+    2 & 4 \\
+    3 & 9
+\end{bmatrix} = \\
+= \begin{bmatrix}
+    17 & 41 \\
+    41 & 107
+\end{bmatrix} \cdot 10^5 kg
+\end{multline*}
+\begin{multline*}
+\hat{\mathbf{K}} = \mathbf{R}^T \mathbf{K} \mathbf{R} =
+\begin{bmatrix}
+    1 & 2 & 3 \\
+    1 & 4 & 9
+\end{bmatrix}
+\begin{bmatrix}
+    5 & -2 & 0 \\
+    -2 & 3 & -1 \\
+    0 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 1 \\
+    2 & 4 \\
+    3 & 9
+\end{bmatrix} =
+\begin{bmatrix}
+    1 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 1 \\
+    2 & 4 \\
+    3 & 9
+\end{bmatrix} = \\
+= \begin{bmatrix}
+    6 & 14 \\
+    14 & 46
+\end{bmatrix} \cdot 10^7 N/m
+\end{multline*}
+
+and the eigenvalue problem involves the calculation of the determinant of a $2\times2$ matrix,
+$$
+\vert \hat{\mathbf{K}} - \omega^2 \hat{\mathbf{M}} \vert =
+\left\vert \begin{matrix}
+    600 -\omega^2 17 & 1400 -\omega^2 41 \\
+    1400 -\omega^2 41 & 4600 -\omega^2 107
+\end{matrix}
+\right\vert \cdot 10^5 = 0
+$$
+
+The result is the second order polynomial
+$
+138 \omega^4 - 27600 \omega^2 + 800000 = 0
+$ with the following roots:
+\begin{align*}
+\omega_1^2& = 35.1 \quad \rightarrow \quad \omega_1 = 5.9\ rad\ s^{-1} \\
+\omega_2^2& = 164.8 \quad \rightarrow \quad \omega_2 = 12.8\ rad\ s^{-1} \\
+\end{align*}
+
+
+\paragraph{Modes of vibration} The Ritz-Rayleigh method can also be used to find accurate eigenvectors.
