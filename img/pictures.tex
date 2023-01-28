@@ -321,15 +321,36 @@
     },
     storey2col/.pic = {
         \coordinate (A) at (0.2,0);
-        \coordinate (B) at (3.8,0);
-        \draw [fill=lightgray] (0,1) rectangle (4,1.2);
+        \coordinate (B) at (2.8,0);
+        \draw [fill=lightgray] (0,1) rectangle (3,1.2);
         \draw [ultra thick] (A) -- +(0,1);
         \draw [ultra thick] (B) -- +(0,1);
     },
     storey3col/.pic = {
-        \pic {storey2col};
+        \coordinate (A) at (0.2,0);
+        \coordinate (B) at (3.8,0);
         \coordinate (C) at (2,0);
+        \draw [fill=lightgray] (0,1) rectangle (4,1.2);
+        \draw [ultra thick] (A) -- +(0,1);
+        \draw [ultra thick] (B) -- +(0,1);
         \draw [ultra thick] (C) -- +(0,1);
+    },
+    storeyPlanView/.pic = {
+        \draw [fill=lightgray!30] (0,0) rectangle (2,2);
+        \node[rectangle,draw,fill=black!80,inner sep=2pt] at (0.2,0.2) {};
+        \node[rectangle,draw,fill=black!80,inner sep=2pt] at (1.8,0.2) {};
+        \node[rectangle,draw,fill=black!80,inner sep=2pt] at (0.2,1.8) {};
+        \node[rectangle,draw,fill=black!80,inner sep=2pt] at (1.8,1.8) {};
+    },
+    twoStorey/.pic = {
+        \pic at (0,1.2) {storey2col};
+        \pic at (0,0.0) {storey2col};
+        \pic at (A) {fixed};
+        \pic at (B) {fixed};
+        \draw [<->] (A) ++(.4,1.2) -- ++(0,1) node [midway, right] {$3m$};
+        \draw [<->] (A) ++(.4,0.0) -- ++(0,1) node [midway, right] {$3m$};
+        \draw [-latex] (B) ++(.2,2.3) -- ++(.5,0) node [right] {$u_2$};
+        \draw [-latex] (B) ++(.2,1.1) -- ++(.5,0) node [right] {$u_1$};
     },
     threeStorey/.pic = {
         \pic at (0,2.4) {storey3col};
