@@ -30,5 +30,11 @@ jobs:
       - name: Store pdf
         uses: actions/upload-artifact@v3
         with:
-          name: problems.pdf
+          name: pdf
           path: problems.pdf
+          
+      - name: Download pdf
+        uses: actions/download-artifact@v3
+        with: 
+          name: pdf
+          path: probles.pdf
