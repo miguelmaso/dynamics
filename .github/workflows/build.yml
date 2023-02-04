@@ -22,19 +22,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      # Converts the source tex file to pdf
       - name: Convert to pdf
         id: convert-to-pdf
         uses: closoco/pdflatex-action@v1.0.0
         with:
-          texFile: ./problems.tex
+          texFile: problems.tex
+      
+      # Stores the generated pdf
       - name: Store pdf
         uses: actions/upload-artifact@v3
         with:
-          name: pdf
+          name: problems
           path: problems.pdf
-          
-      - name: Download pdf
-        uses: actions/download-artifact@v3
-        with: 
-          name: pdf
-          path: probles.pdf
