@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: Build pdf
 
 # Controls when the workflow will run
 on:
@@ -25,16 +23,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - name: Convert to pdf
-        #id: convert-to-pdf
+        id: convert-to-pdf
         uses: closoco/pdflatex-action@v1.0.0
         with:
           texFile: ./problems.tex
       - name: Store pdf
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: problems.pdf
           path: problems.pdf
-
-      # Runs a single command using the runners shell
-      # - name: Run a one-line script
-      #   run: pdflatex problems.tex
