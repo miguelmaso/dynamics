@@ -35,4 +35,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: problems
+          job_alias: latest
           path: problems.pdf
