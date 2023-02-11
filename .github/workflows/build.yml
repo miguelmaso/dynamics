@@ -4,11 +4,13 @@ on:
   push:
     branches: [ "main" ]
     paths-ignore:
-      - '*.ipynb'
+      - '**.ipynb'
+      - '**.md'
   pull_request:
     branches: [ "main" ]
     paths-ignore:
-      - '*.ipynb'
+      - '**.ipynb'
+      - '**.md'
   workflow_dispatch:
 
 jobs:
@@ -21,18 +23,13 @@ jobs:
         uses: closoco/pdflatex-action@v1.0.0
         with:
           texFile: problems.tex
-      - name: Store pdf
-        uses: actions/upload-artifact@v3
-        with:
-          name: problems
-          path: problems.pdf
       - name: Gather build artifacts
         run: |
           mkdir build
           mv problems.pdf build/
       - name: Publish to GitHub pages
         if: success() && github.ref == 'refs/heads/main'
-        uses: crazy-max/ghaction-github-pages@v1
+        uses: crazy-max/ghaction-github-pages@latest
         with:
           target_branch: gh-pages
           build_dir: build/
