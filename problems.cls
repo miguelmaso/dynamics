@@ -15,7 +15,7 @@
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{csquotes}
-\RequirePackage[backend=bibtex,style=authoryear]{biblatex}
+\RequirePackage[backend=bibtex,style=authortitle]{biblatex}
 
 
 % Definition of some colors
