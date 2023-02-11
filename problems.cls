@@ -14,6 +14,8 @@
 \RequirePackage{hyphenat}
 \RequirePackage{titlesec}
 \RequirePackage{hyperref}
+\RequirePackage{csquotes}
+\RequirePackage[backend=bibtex,style=authoryear]{biblatex}
 
 
 % Definition of some colors
@@ -83,3 +85,11 @@
 \newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
 \makeatother
 
+
+% Add link to url in citations
+\DeclareFieldFormat{bibhyperref}{\usebibmacro{citelink}{#1}}
+\newbibmacro*{citelink}[1]{%
+    \iffieldundef{url}
+       {\bibhyperref{#1}}
+       {\href{\thefield{url}}{#1}}
+}
