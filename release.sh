@@ -1,3 +1,0 @@
-#!bin/sh
-
-pdflatex problems
