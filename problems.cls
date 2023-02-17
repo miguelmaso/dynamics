@@ -5,16 +5,17 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[shortlabels]{enumitem}
-\RequirePackage{amsmath}
+\RequirePackage[OT1]{fontenc}
 \RequirePackage{mathtools}
+\RequirePackage{amsmath}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
 \RequirePackage{hyphenat}
+\RequirePackage{csquotes}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
-\RequirePackage{csquotes}
+\RequirePackage[shortlabels]{enumitem}
 \RequirePackage[backend=bibtex,style=authortitle]{biblatex}
 
 
@@ -61,10 +62,9 @@
 \makeatother
 
 
-% Removing numbering of sections
-\makeatletter
-\renewcommand{\@seccntformat}[1]{}
-\makeatother
+% Removing numbering of sections and setting custom format
+\titleformat{\section}{\sffamily\Large\bfseries}{}{0em}{#1}
+\titleformat{\subsection}{\sffamily\large\bfseries}{}{0em}{#1}
 
 
 % Definition of the sectioning of examples and solutions
@@ -84,14 +84,14 @@
 %Solution counterpart
 \titleclass{\solution}{straight}[\subsection]
 \newcounter{solution}
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 \titleformat{\solution}[runin]{\sffamily\normalsize\bfseries}{}{0em}
     {\hyperref[ex:#1]{\colorbox{titlebackground}{\color{titlecolor}{Solution~#1}}}}
     [\label{sol:#1}]
 \titlespacing*{\solution}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \newcommand{\solutionautorefname}{solution}
 \makeatletter
-  \def\toclevel@solution{2}
+  \def\toclevel@solution{3}
 \makeatother
 
 
