@@ -27,13 +27,12 @@ jobs:
           bash release.sh
       - name: Gather build artifacts
         run: |
-          mkdir build
-          mv problems.pdf build/
+          mv problems.pdf docs/
       - name: Publish to GitHub pages
         if: success() && github.ref == 'refs/heads/main'
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: build/
+          build_dir: docs/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
