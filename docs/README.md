@@ -12,18 +12,20 @@ Following this double scope, the examples are classified in two parts, a static 
 ### Free vibrations
 ![](banner/free.png)
 
-- Problem 4: [Free vibrations](../ipython/1_free_vibrations.ipynb)
-- Problem 4: [Frequency and damping identification](../ipython/2_Fourier_transform.ipynb)
+The first laboratory activity consists on the identification of dynamic properties of a single degree of freedom structure.
+Extending the solution of Example 4, two notebooks help identifying the dynamic properties.
+The first notebook uses simple theoretical concepts. The second one, makes the identification through signal analysis.
 
 ### Forced vibrations
 ![](banner/forced.png)
 
-- Problem 5: Frequency sweep
-- Problem 10: Fourier series
-- Forced vibrations problems: [Integration](../ipython/5_integration.ipynb)
+In this section, three notebooks inteoduce the third laboratory.
+Following Example 5, a frequency sweep is presented to generate the dynamic response factor of a single degree of freedom structure.
+The response of a structure is analyzed in more detail in another notebook using a Fourier series' to decompose the forcing signal.
+Finally, another notebook shows how to integrate the response of a structure using the Duhamel or Newmark methods.
 
 ### Multiple degree of freedom
 ![](banner/mdof.png)
 
-- Earthquake problems: [Response spectra](../ipython/6_response_spectra.ipynb)
-- Problem 19: [Modal decomposition](../ipython/7_eigenvalues.ipynb)
+The course ends with a laboratory devoted to a multiple degree of freedom structure and seismic actions.
+Two notebooks provide useful tools for the laboratory, a modal decomposition and the generation of the response spectrum of a seismic signal.
