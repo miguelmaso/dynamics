@@ -1,2 +1,15 @@
 markdown: kramdown
 theme: minima
+
+name: Structural dynamics
+
+author:
+  name: Miguel Masó Sotomayor
+
+navigation:
+- text: Introduction
+  internal: true
+  url: ./
+- text: Problems
+  internal: true
+  url: problems
