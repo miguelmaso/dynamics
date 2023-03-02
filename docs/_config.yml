@@ -1,18 +1,20 @@
 markdown: kramdown
 theme: minima
 
-name: Structural dynamics
+topnav_title: Structural dynamics
+# this appears on the top navigation bar next to the home button
 
-author:
-  name: Miguel Masó Sotomayor
+site_title: Structural dynamics
+# this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-navigation:
-- text: Introduction
-  internal: true
-  url: ./
-- text: Problems
-  internal: true
-  url: problems
-- text: See the Repo
-  internal: false
-  url: https://github.com/miguelmaso/dynamics
+github_editme_path: KratosMultiphysics/Kratos/tree/master/docs/
+# if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
+
+feedback_email: miguel.maso@upc.edu
+# used as a contact email for the Feedback link in the top navigation bar
+
+collections:
+  tooltips:
+    output: true
+# collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
+
