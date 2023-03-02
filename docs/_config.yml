@@ -13,3 +13,6 @@ navigation:
 - text: Problems
   internal: true
   url: problems
+- text: See the Repo
+  internal: false
+  url: https://github.com/miguelmaso/dynamics
