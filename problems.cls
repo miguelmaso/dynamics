@@ -16,6 +16,7 @@
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
+\RequirePackage[answerdelayed]{exercise}
 \RequirePackage[backend=bibtex,style=authortitle]{biblatex}
 
 
@@ -65,6 +66,27 @@
 % Removing numbering of sections and setting custom format
 \titleformat{\section}{\sffamily\Large\bfseries}{}{0em}{#1}
 \titleformat{\subsection}{\sffamily\large\bfseries}{}{0em}{#1}
+
+
+% Definition of the section level of examples and solutions
+\ListOfExerciseInToc
+\ExerciseLevelInToc{subsection}
+
+
+% Definition of the examples and solutions style
+\renewcommand{\ExerciseHeader}{\sffamily\normalsize\bfseries
+\colorbox{titlebackground}{\color{titlecolor}{
+\ExerciseName\ \ExerciseHeaderNB\ }}
+\medskip}
+ 
+\renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
+\colorbox{titlebackground}{\color{titlecolor}{
+\hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
+\medskip}
+
+\newcommand{\shortAnswer}{
+\hyperref[\ExerciseLabel-Answer]{\AnswerListName}:
+}
 
 
 % Definition of the sectioning of examples and solutions
