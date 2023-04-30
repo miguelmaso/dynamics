@@ -22,8 +22,6 @@
 
 
 % Definition of some colors
-\definecolor{titlebackground}{cmyk}{.16, .0, .42, .0} % pale light lime green
-\definecolor{titlebackground}{cmyk}{.24, .03, .07, .02} % duva (blue)
 \definecolor{titlebackground}{cmyk}{.09, .55, 1, .39} % moderate gamboe (brown)
 \definecolor{entitybackground}{cmyk}{.04, .27, .5, .25} %
 \definecolor{titlecolor}{gray}{.95}
