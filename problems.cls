@@ -16,6 +16,7 @@
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
+\RequirePackage[answerdelayed]{exercise}
 \RequirePackage[backend=bibtex,style=authortitle]{biblatex}
 
 
@@ -67,32 +68,25 @@
 \titleformat{\subsection}{\sffamily\large\bfseries}{}{0em}{#1}
 
 
-% Definition of the sectioning of examples and solutions
-\titleclass{\example}{straight}[\subsection]
-\newcounter{example}
-\setcounter{secnumdepth}{2}
-\titleformat{\example}[runin]{\sffamily\normalsize\bfseries}{}{0em}
-    {\hyperref[sol:#1]{\colorbox{titlebackground}{\color{titlecolor}{Example~#1}}}}
-    [\label{ex:#1}]
-\titlespacing*{\example}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-\newcommand{\exampleautorefname}{example}
-\makeatletter
-  \def\toclevel@example{2}
-\makeatother
+% Definition of the section level of examples and solutions
+\ListOfExerciseInToc
+\ExerciseLevelInToc{subsection}
 
 
-%Solution counterpart
-\titleclass{\solution}{straight}[\subsection]
-\newcounter{solution}
-\setcounter{secnumdepth}{3}
-\titleformat{\solution}[runin]{\sffamily\normalsize\bfseries}{}{0em}
-    {\hyperref[ex:#1]{\colorbox{titlebackground}{\color{titlecolor}{Solution~#1}}}}
-    [\label{sol:#1}]
-\titlespacing*{\solution}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-\newcommand{\solutionautorefname}{solution}
-\makeatletter
-  \def\toclevel@solution{3}
-\makeatother
+% Definition of the examples and solutions style
+\renewcommand{\ExerciseHeader}{\sffamily\normalsize\bfseries
+\colorbox{titlebackground}{\color{titlecolor}{
+\ExerciseName\ \ExerciseHeaderNB\ }}
+\medskip}
+ 
+\renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
+\colorbox{titlebackground}{\color{titlecolor}{
+\hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
+\medskip}
+
+\newcommand{\shortAnswer}{
+\hyperref[\ExerciseLabel-Answer]{\AnswerListName}:
+}
 
 
 % Add link to url in citations

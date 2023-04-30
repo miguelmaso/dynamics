@@ -14,16 +14,28 @@
 
 For steel take $E=200GPa$ and for concrete $E=14GPa$.
 
-\input{include/free_sdof}
-\input{include/forced_sdof}
-\input{include/mdof}
+\section{Free vibration of SDOF structures}
+\input{include/frames_frequency}
+\input{include/frames_modification}
+\input{include/rayleigh_sdof}
+\input{include/free_vibration.tex}
+
+\section{Forced vibration of SDOF structures}
+\input{include/frame_ground_acceleration}
+\input{include/helicopter_impulse}
+\input{include/wind_gust_impulse}
+\input{include/mass_released}
+\input{include/moving_load}
+\input{include/footfall_analysis}
+
+\section{Vibration of MDOF structures}
+\input{include/two_storey}
+\input{include/two_storey_helicopter}
+\input{include/three_storey}
 
 \newpage
 \section{Solutions}
-
-\input{include/free_sdof_solutions}
-\input{include/forced_sdof_solutions}
-\input{include/mdof_solutions}
+\shipoutAnswer
 
 \addcontentsline{toc}{section}{References}
 \printbibliography

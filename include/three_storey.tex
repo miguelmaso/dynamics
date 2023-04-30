@@ -1,15 +1,21 @@
-\subsection{Vibration of MDOF structures}
+
+\begin{Exercise}[label={three_storey_helicopter}]
+A three storey building has the mass and stiffness distribution shown.
+
+\begin{enumerate}[(a)]
+    \item Approximate the first period of vibration using a linearly increasing mode.
+    \item Using a linearly increasing mode together with a second Ritz vector increasing quadratically with height, approximate the first two modes and frequencies of vibration.
+\end{enumerate}    
+
+\begin{center}
+\pictures{threeStoreyKM}
+\end{center}
+\shortAnswer
+\end{Exercise}
 
 
-\solution{15}
 
-
-
-\solution{16}
-
-
-
-\solution{17}
+\begin{Answer}[ref={three_storey_helicopter}]
 The first step before using the Ritz-Rayleigh method to approximate the periods of vibration is to construct the mass and stiffness matrices:
 $$
 \mathbf{M} = \begin{bmatrix}
@@ -188,3 +194,5 @@ $ with the following roots:
 
 
 \paragraph{Modes of vibration} The Ritz-Rayleigh method can also be used to find accurate eigenvectors.
+    
+\end{Answer}
