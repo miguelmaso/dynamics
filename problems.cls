@@ -13,6 +13,7 @@
 \RequirePackage{parskip}
 \RequirePackage{hyphenat}
 \RequirePackage{csquotes}
+\RequirePackage{fancyhdr}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
@@ -21,8 +22,6 @@
 
 
 % Definition of some colors
-\definecolor{titlebackground}{cmyk}{.16, .0, .42, .0} % pale light lime green
-\definecolor{titlebackground}{cmyk}{.24, .03, .07, .02} % duva (blue)
 \definecolor{titlebackground}{cmyk}{.09, .55, 1, .39} % moderate gamboe (brown)
 \definecolor{entitybackground}{cmyk}{.04, .27, .5, .25} %
 \definecolor{titlecolor}{gray}{.95}
@@ -32,6 +31,12 @@
 \makeatletter
 \newcommand{\entity}[1]{\gdef\@entity{#1}}%
 \newcommand{\@entity}{\@latex@warning@no@line{No \noexpand\entity given}}
+\makeatother
+
+
+% Definition of the short title field
+\makeatletter
+\renewcommand{\title}[2][]{\gdef\shorttitle{#1}\gdef\@title{#2}}
 \makeatother
 
 
@@ -59,8 +64,21 @@
     }}
     }
     \bigskip\par
+    \thispagestyle{empty}
 }
 \makeatother
+
+
+% Definition of the custom pagestyle
+\fancypagestyle{problems}{
+    \setlength{\headheight}{35pt}
+    \addtolength{\topmargin}{-20pt}
+    \renewcommand{\headrulewidth}{0pt} % remove lines as well
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[L]{\scshape\shorttitle}
+    \fancyhead[R]{\raisebox{-0.2\height}{\includegraphics[height=35pt]{img/camins.jpeg}}}
+}
+\pagestyle{problems}
 
 
 % Removing numbering of sections and setting custom format
