@@ -11,6 +11,7 @@
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
+\RequirePackage{siunitx}
 \RequirePackage{hyphenat}
 \RequirePackage{csquotes}
 \RequirePackage{fancyhdr}

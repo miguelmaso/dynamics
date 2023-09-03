@@ -9,7 +9,7 @@ For the structures shown, determine the natural frequency of vibration using Ray
     \pictureslabel{fixedPinnedBeam}{d}
 \end{center}
 
-\shortAnswer (a) $\omega \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$, (c) $\omega \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$
+\shortAnswer (a) $\omega \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$, (c) $\omega \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$
 \end{Exercise}
 
 
@@ -26,9 +26,9 @@ where the term $4/l^2$ is a scaling parameter and does not modify the solution. 
 \begin{align*}
 &m = \int_0^l \rho A\psi^2dx = \int_0^l \rho A \left(\frac{4}{l^2} x (l-x)\right)^2dx = \frac{8\rho Al}{15} \\
 &k = \int_0^l EI \psi''^2 dx = \int_0^l EI \left(\frac{8}{l^2}\right)^2dx = \frac{64EI}{l^3} \\
-&\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{64EI}{l^3}\frac{15}{8\rho Al}} = \frac{1}{l^2}\sqrt{120\frac{EI}{\rho A}} \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s
+&\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{64EI}{l^3}\frac{15}{8\rho Al}} = \frac{1}{l^2}\sqrt{120\frac{EI}{\rho A}} \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}
 \end{align*}
-The obtained result can be compared against the exact frequency, obtained by the same procedure applied to a fourth order polynomial satisfying both kinematic and dynamic boundary conditions. The analytical result is $\omega = \frac{1}{l^2}\sqrt{\frac{3024EI}{31\rho A}} \approx 9.86\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s$.
+The obtained result can be compared against the exact frequency, obtained by the same procedure applied to a fourth order polynomial satisfying both kinematic and dynamic boundary conditions. The analytical result is $\omega = \frac{1}{l^2}\sqrt{\frac{3024EI}{31\rho A}} \approx 9.86\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$.
 
 \parbox{.7\textwidth}{The cantilever can be analyzed using a second order polynomial. In that case, the kinematic boundary conditions are $\psi(0) = \psi'(0) = 0$.} \hspace{1em}
 \parbox{.25\textwidth}{\pictures{cantilever}}
@@ -40,9 +40,9 @@ Again, the term $1/l^2$ is a scaling term providing consistency and does not mod
 \begin{align*}
 &m = \int_0^l \rho A\psi^2dx = \int_0^l \rho A \left(\frac{1}{l^2} x^2\right)^2dx = \frac{\rho Al}{5} \\
 &k = \int_0^l EI \psi''^2 dx = \int_0^l EI \left(\frac{2}{l^2}\right)^2dx = \frac{4EI}{l^3} \\
-&\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4EI}{l^3}\frac{5}{\rho Al}} = \frac{1}{l^2}\sqrt{20\frac{EI}{\rho A}} \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}} rad/s
+&\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4EI}{l^3}\frac{5}{\rho Al}} = \frac{1}{l^2}\sqrt{20\frac{EI}{\rho A}} \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}
 \end{align*}
-On the other hand, the exact frequency of the first mode of vibration of a cantilever is $\omega\approx3.52\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}rad/s$.
+On the other hand, the exact frequency of the first mode of vibration of a cantilever is $\omega\approx3.52\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$.
 
 The last two structures can be analyzed using a cubic polynomial, since the shape function must fulfill three kinematic boundary conditions.
 
