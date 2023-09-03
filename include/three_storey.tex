@@ -27,7 +27,7 @@ $$
     2 & 0 & 0 \\
     0 & 1.5 & 0 \\
     0 & 0 & 1
-\end{bmatrix} 10^5 kg
+\end{bmatrix} \times \SI{e5}{kg}
 $$
 $$
 \mathbf{K} = \begin{bmatrix}
@@ -39,7 +39,7 @@ $$
     5 & -2 & 0 \\
     -2 & 3 & -1 \\
     0 & -1 & 1
-\end{bmatrix*} 10^7 N/m
+\end{bmatrix*} \times \SI{e7}{N/m}
 $$
 
 \paragraph{1 mode} We start applying the Ritz-Rayleigh method with a mode linearly increasing with height. The matrix of deformation modes will contain only one vector:
@@ -69,7 +69,7 @@ $$
 \end{bmatrix}
 \begin{bmatrix}
     1 \\ 2 \\ 3
-\end{bmatrix} = 17 \cdot 10^5 kg
+\end{bmatrix} = \SI{17e5}{kg}
 $$
 $$
 \hat{\mathbf{K}} = \mathbf{R}^T \mathbf{K} \mathbf{R} =
@@ -89,14 +89,14 @@ $$
 \end{bmatrix}
 \begin{bmatrix}
     1 \\ 2 \\ 3
-\end{bmatrix} = 6 \cdot 10^7 N/m
+\end{bmatrix} = \SI{6e7}{N/m}
 $$
 
 Thus, the eigenvalue problem is reduced to a scalar equation:
 $$
 \vert \hat{\mathbf{K}} - \omega^2\hat{\mathbf{M}} \vert = 0 \quad \rightarrow \quad
-\omega^2_1 = \frac{6\cdot10^7}{17\cdot10^5} = 35.3 \quad \rightarrow \quad
-\omega_1 = 5.9\ rad\ s^{-1}
+\omega^2_1 = \frac{6\times 10^7}{17\times 10^5} = 35.3 \quad \rightarrow \quad
+\omega_1 = \SI{5.9}{rad/s}
 $$
 
 
@@ -141,7 +141,7 @@ The reduced system is then obtained by the algebraic multiplications
 = \begin{bmatrix}
     17 & 41 \\
     41 & 107
-\end{bmatrix} \cdot 10^5 kg
+\end{bmatrix} \times \SI{e5}{kg}
 \end{multline*}
 \begin{multline*}
 \hat{\mathbf{K}} = \mathbf{R}^T \mathbf{K} \mathbf{R} =
@@ -170,7 +170,7 @@ The reduced system is then obtained by the algebraic multiplications
 = \begin{bmatrix}
     6 & 14 \\
     14 & 46
-\end{bmatrix} \cdot 10^7 N/m
+\end{bmatrix} \times \SI{e7}{N/m}
 \end{multline*}
 
 and the eigenvalue problem involves the calculation of the determinant of a $2\times2$ matrix,
@@ -180,7 +180,7 @@ $$
     600 -\omega^2 17 & 1400 -\omega^2 41 \\
     1400 -\omega^2 41 & 4600 -\omega^2 107
 \end{matrix}
-\right\vert \cdot 10^5 = 0
+\right\vert \times 10^5 = 0
 $$
 
 The result is the second order polynomial
@@ -188,8 +188,8 @@ $
 138 \omega^4 - 27600 \omega^2 + 800000 = 0
 $ with the following roots:
 \begin{align*}
-\omega_1^2& = 35.1 \quad \rightarrow \quad \omega_1 = 5.9\ rad\ s^{-1} \\
-\omega_2^2& = 164.8 \quad \rightarrow \quad \omega_2 = 12.8\ rad\ s^{-1} \\
+\omega_1^2& = 35.1 \quad \rightarrow \quad \omega_1 = \SI{5.9}{rad/s} \\
+\omega_2^2& = 164.8 \quad \rightarrow \quad \omega_2 = \SI{12.8}{rad/s} \\
 \end{align*}
 
 
