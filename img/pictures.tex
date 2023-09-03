@@ -99,8 +99,8 @@
         \pic {bracedPortico};
         \path (1.5,2.3) node [above] {$m$};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
-        \path (A) -- +(1.2,1) node [midway,below,rotate=35] {$EA,l$};
-        \path (B) node [left=5] {$\theta$};
+        \path (A) -- +(1.5,1.2) node [midway,below=4,rotate=35,inner sep=0] {$EA,l$};
+        \path (B) node [left=10,inner sep=0] {$\theta$};
     },
     portico3PinnedSol/.pic = {
         \pic {portico3Pinned};
@@ -252,7 +252,7 @@
         \draw (-1,0) -- (3,0);
         \foreach \x in {1,...,3} {
             \foreach \y in {1,...,5} {
-                \draw [thick,gray,fill=white] (\x/2-.1, \y/1.5-.1) rectangle +(0.2,0.3);
+                \draw [thick,gray,left color=blue!35, shading angle=45] (\x/2-.1, \y/1.5-.1) rectangle +(0.2,0.3);
             }
         }
     },
