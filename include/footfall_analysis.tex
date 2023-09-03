@@ -14,15 +14,19 @@ A concrete ribbed slab floor spans 9 m and has an average mass of $500 kg/m^2$. 
 \end{center}
 
 \shortAnswer ...
+
+References: \cite[page ??]{chopra}
 \end{Exercise}
 
 
 
 \begin{Answer}[ref={footfall_analysis}]
-A transient walking force is a periodic loading with piecewise definition. Hence, two approaches may be followed. The first one consist on supperposing the solutions of the piecewise excitating force. The solution will be analytical and piecewise, but restricted to that function. The second approach consist on approximating the pulse by a Fourier series. There will be a truncation error, but the procedure is valid for any arbitrary pulse.
+A transient walking force is a periodic loading with piecewise definition. Hence, two approaches may be followed. The first one consist on supperposing the solutions of the piecewise excitating force. The solution will be analytical, but according to a piecewise definition. The second approach is more generic, it consist on approximating the pulse by a Fourier series. There will be a truncation error, but the procedure is valid for any arbitrary pulse. In this exercise we will follow the Fourier series approach.
+
+
 
 \paragraph{Pre computed Fourier terms}
-Each component of a Fourier series is also known ar harmonic. For a half sine activity, the amplitude of the first harmonics is
+Each component of a Fourier series is also known as harmonic. For a half sine activity, the amplitude of the first harmonics is
 
 \begin{center}
 \begin{tabular}{|l|c|cccc|}
@@ -36,7 +40,7 @@ Each component of a Fourier series is also known ar harmonic. For a half sine ac
 \end{center}
 
 
-\paragraph{Fourier series}
+\paragraph{Calculation of the Fourier terms}
 Most commonly, Fourier series are expressed as a linear combination of $\sin$ and $\cos$,
 $$
 F(t) \approx \frac{a_0}{2} + \sum_{n=0}^{\infty} \left(a_n\cos(n\Omega t) + b_n\sin(n\Omega t)\right)

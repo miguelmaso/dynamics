@@ -23,8 +23,8 @@
 
 
 % Definition of some colors
-\definecolor{titlebackground}{cmyk}{.09, .55, 1, .39} % moderate gamboe (brown)
-\definecolor{entitybackground}{cmyk}{.04, .27, .5, .25} %
+\definecolor{titlebackground}{cmyk}{.09, .55, 1, .39}    % moderate gamboe (brown)
+\definecolor{entitybackground}{cmyk}{.04, .27, .5, .25}  % light brown
 \definecolor{titlecolor}{gray}{.95}
 
 
@@ -96,12 +96,12 @@
 \renewcommand{\ExerciseHeader}{\sffamily\normalsize\bfseries
 \colorbox{titlebackground}{\color{titlecolor}{
 \ExerciseName\ \ExerciseHeaderNB\ }}
-\medskip}
+\smallskip}
  
 \renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
 \colorbox{titlebackground}{\color{titlecolor}{
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
-\medskip}
+\smallskip}
 
 \newcommand{\shortAnswer}{
 \hyperref[\ExerciseLabel-Answer]{\AnswerListName}:

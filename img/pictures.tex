@@ -15,6 +15,9 @@
 \pgfdeclareimage[height=1.5cm]{stone}     {img/shapes/stone}
 \pgfdeclareimage[height=1.5cm]{walking}   {img/shapes/walking}
 
+% Useful libraries
+\usetikzlibrary{calc}
+
 % Macro for inserting pictures
 \newcommand{\pictures}[1]{
     \begin{tikzpicture}
@@ -45,6 +48,9 @@
     pinned0/.pic = {
         \draw (-.1,-.2) -- (.1,-.2) -- (0,0) -- cycle;
         \draw [fill=white] (0,-.05) circle (.05);
+    },
+    triangle/.pic = {
+        \fill (-.1,-.2) -- (.1,-.2) -- (0,0) -- cycle;
     },
     %
     % Structures
@@ -284,7 +290,7 @@
     longBeam/.pic = {
         \coordinate (A) at (0,0);
         \coordinate (B) at (5,0);
-        \draw [ultra thick] (A) -- (B);
+        \draw [line width=2.5pt] (A) -- (B);
         \pic at (A) {pinned};
         \pic at (B) {pinned};
     },
@@ -374,6 +380,57 @@
         \draw (B) ++(.5,3.0) node [right] {$k_3=10^7N/m$};
         \draw (B) ++(.5,1.8) node [right] {$k_2=2\cdot10^7N/m$};
         \draw (B) ++(.5,0.6) node [right] {$k_1=3\cdot10^7N/m$};
+    },
+    %
+    % Example NNN
+    %
+    singleTrain/.pic = {
+        \tikzset{
+            wheel/.style={draw, circle, thick, minimum width=5pt, inner sep=0pt, fill=gray!75},
+            window/.style={draw, rectangle, very thin, left color=blue!50, shading angle=45, minimum width=6pt, minimum height=4.5pt, inner sep=0pt},
+            wagon/.style={draw, very thin, shading angle=0}
+        }
+        \def\l{2}
+        \def\h{.4}
+        \path [draw]
+            (0,1.2pt) coordinate (trolley) ++(-.5*\l,2pt) node (w1) [wheel] {}
+            ++(\l,0) node (w2) [wheel] {};
+        \path [wagon]
+          [rounded corners=1pt] (w1.west |- trolley) -| (trolley -| .04-\l,0) |- ++(\l,\h) -| ++(\l-.08,-\h) 
+          [sharp corners] -| (w2.east) -- (w2.west) |- (trolley) -| (w1.east) -- (w1.west) |- cycle;
+        \foreach \pos in {0,.3,...,\l} {
+            \path (trolley) ++(.9*\pos,.25) node [window] {};
+            \path (trolley) ++(-.9*\pos,.25) node [window] {};
+        }
+    },
+    fullTrain/.pic = {
+        \pic at (0,0) {singleTrain};
+        \def\l{2}
+        \def\h{.5}
+        \def\s{.04}
+        \begin{scope}
+            \clip (\l,0) rectangle ++(\l,\h) ++(\s,-\h) rectangle ++(\s,\h) ++(\s,-\h) rectangle ++(\s,\h);
+            \pic at (2*\l,0) {singleTrain};
+        \end{scope}
+        \begin{scope}
+            \clip (-\l,0) rectangle ++(-.1,\h) ++(-\s,-\h) rectangle ++(-\s,\h) ++(-\s,-\h) rectangle ++(-\s,\h);
+            \pic at (-2*\l,0) {singleTrain};
+        \end{scope}
+    },
+    trainOverBridge/.pic = {
+        \tikzset{
+            offset1/.style={yshift=.4pt},
+            offset2/.style={yshift=.8pt}
+        }
+        \def\ya{-0.6pt}
+        \def\yb{-1.2pt}
+        \pic {fullTrain};
+        \fill [lightgray] (1.6,0) coordinate (p1) rectangle ++(2.6,-.5);
+        \fill [lightgray] (-.4,0) coordinate (p2) rectangle ++(-1.9,-.5);
+        \draw [ultra thick,offset1] ([yshift=\ya]p1) -- ([yshift=\ya]p2);
+        \pic at ([yshift=\yb]p1) {triangle};
+        \pic at ([yshift=\yb]p2) {triangle};
+        \pic at ([yshift=\yb]$(p1)!.5!(p2)$) {triangle};
     }
 }
 
