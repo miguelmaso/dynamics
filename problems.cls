@@ -25,11 +25,15 @@
 
 
 % Get short git commit hash
-\CatchFileDef{\headfull}{.git/HEAD}{}
-\StrGobbleRight{\headfull}{1}[\head]
+\CatchFileDef{\head}{.git/HEAD}{}
+\StrGobbleRight{\head}{1}[\head]
 \StrBehind[2]{\head}{/}[\branch]
-\CatchFileDef{\HEAD}{.git/refs/heads/\branch}{}
-\newcommand{\gitrevision}{\StrLeft{\HEAD}{7}}
+\IfFileExists{.git/refs/heads/\branch}{
+    \CatchFileDef{\hash}{.git/refs/heads/\branch}{}
+    \newcommand{\gitrevision}{\StrLeft{\hash}{7}}
+}{
+    \newcommand{\gitrevision}{}
+}
 
 
 % Definition of some colors
