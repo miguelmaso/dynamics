@@ -25,11 +25,6 @@
 
 
 % Get short git commit hash
-% \makeatletter
-%     \begingroup\everyeof{\noexpand}
-%         \xdef\gitdate{\@@input|"git rev-parse HEAD"\space}
-%     \endgroup
-% \makeatother
 \CatchFileDef{\headfull}{.git/HEAD}{}
 \StrGobbleRight{\headfull}{1}[\head]
 \StrBehind[2]{\head}{/}[\branch]
@@ -93,7 +88,7 @@
     \renewcommand{\footrulewidth}{0pt}
     \fancyhead[L]{\scshape\shorttitle}
     \fancyhead[R]{\raisebox{-0.2\height}{\includegraphics[height=35pt]{img/camins.jpeg}}}
-    \fancyfoot[L]{\footnotesize\color{gray}Revision: \gitrevision}
+    \fancyfoot[R]{\footnotesize\color{gray}rev \gitrevision}
 }
 \pagestyle{problems}
 
