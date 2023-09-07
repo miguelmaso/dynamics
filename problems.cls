@@ -15,11 +15,26 @@
 \RequirePackage{hyphenat}
 \RequirePackage{csquotes}
 \RequirePackage{fancyhdr}
+\RequirePackage{xstring}
+\RequirePackage{catchfile}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage[answerdelayed]{exercise}
 \RequirePackage[backend=bibtex,style=authortitle]{biblatex}
+
+
+% Get short git commit hash
+% \makeatletter
+%     \begingroup\everyeof{\noexpand}
+%         \xdef\gitdate{\@@input|"git rev-parse HEAD"\space}
+%     \endgroup
+% \makeatother
+\CatchFileDef{\headfull}{.git/HEAD}{}
+\StrGobbleRight{\headfull}{1}[\head]
+\StrBehind[2]{\head}{/}[\branch]
+\CatchFileDef{\HEAD}{.git/refs/heads/\branch}{}
+\newcommand{\gitrevision}{\StrLeft{\HEAD}{7}}
 
 
 % Definition of some colors
@@ -78,6 +93,7 @@
     \renewcommand{\footrulewidth}{0pt}
     \fancyhead[L]{\scshape\shorttitle}
     \fancyhead[R]{\raisebox{-0.2\height}{\includegraphics[height=35pt]{img/camins.jpeg}}}
+    \fancyfoot[L]{\footnotesize\color{gray}Revision: \gitrevision}
 }
 \pagestyle{problems}
 
