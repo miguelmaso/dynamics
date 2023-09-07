@@ -30,7 +30,7 @@
 \StrBehind[2]{\head}{/}[\branch]
 \IfFileExists{.git/refs/heads/\branch}{
     \CatchFileDef{\hash}{.git/refs/heads/\branch}{}
-    \newcommand{\gitrevision}{\StrLeft{\hash}{7}}
+    \newcommand{\gitrevision}{rev \StrLeft{\hash}{7}}
 }{
     \newcommand{\gitrevision}{}
 }
@@ -92,7 +92,7 @@
     \renewcommand{\footrulewidth}{0pt}
     \fancyhead[L]{\scshape\shorttitle}
     \fancyhead[R]{\raisebox{-0.2\height}{\includegraphics[height=35pt]{img/camins.jpeg}}}
-    \fancyfoot[R]{\footnotesize\color{gray}rev \gitrevision}
+    \fancyfoot[R]{\footnotesize\color{gray}\gitrevision}
 }
 \pagestyle{problems}
 
