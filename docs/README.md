@@ -5,7 +5,7 @@ Following this double scope, the examples are classified in two parts, a static 
 
 ## Examples 
 
-<object data="problems.pdf" width="100%" height="500" type='application/pdf'></object>
+<object data="problems.pdf" width="100%" height="700" type="application/pdf"></object>
 
 ## Notebooks
 
