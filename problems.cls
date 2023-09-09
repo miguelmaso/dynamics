@@ -24,7 +24,7 @@
 \RequirePackage[backend=bibtex,style=authortitle]{biblatex}
 
 
-% Get short git commit hash
+% Definition of the git revision tag
 \CatchFileDef{\head}{.git/HEAD}{}
 \StrGobbleRight{\head}{1}[\head]
 \StrBehind[2]{\head}{/}[\branch]
@@ -71,7 +71,7 @@
         }
     }}
     {\setlength{\parskip}{-1pt}\par\noindent
-    \colorbox{entitybackground}{\parbox{.984\textwidth}{
+    \colorbox{entitybackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
             \smallskip\par\noindent
             {\sffamily\@entity}
@@ -112,7 +112,7 @@
 \colorbox{titlebackground}{\color{titlecolor}{
 \ExerciseName\ \ExerciseHeaderNB\ }}
 \smallskip}
- 
+
 \renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
 \colorbox{titlebackground}{\color{titlecolor}{
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
