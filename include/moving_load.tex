@@ -62,8 +62,8 @@ Given that the load is a piecewise function in time, the dynamic magnification f
 $$
 u =
 \begin{cases}
-C_1\sin(\omega t + \varphi_1) + \frac{P}{k}H\sin(\Omega t + \phi - \Delta\phi) \quad \text{if}\ t < \frac{l}{v} \\
-C_2\sin(\omega t + \varphi_2) \quad \text{if}\ t \geq \frac{l}{v}
+C_1\sin(\omega t + \varphi_1) + \frac{P}{k}H\sin(\Omega t + \phi - \Delta\phi) \quad &\text{if}\ t < \frac{l}{v} \\
+C_2\sin(\omega t + \varphi_2) \quad &\text{if}\ t \geq \frac{l}{v}
 \end{cases}
 $$
 
@@ -80,8 +80,8 @@ C_1 = -\frac{P}{k}H\gamma
 $$
 with $\gamma = \frac{\Omega}{\omega} = \frac{\pi v}{\omega l}$. For the second part of the motion, the expression must satisfy continuity at $t = l/v$,
 \begin{align*}
-u_2(l/v) = C_2\sin\left(\frac{\omega l}{v}+\varphi_2\right) &= u_1(l/v) = \frac{P}{k}H\gamma\sin\frac{\omega l}{v} \\
-\dot{u}_2(l/v) = C_2\omega\cos\left(\frac{\omega l}{v}+\varphi_2\right) &= \dot{u}_1(l/v) = \frac{P}{k}H\gamma\omega\cos\frac{\omega l}{v} + \frac{P}{k}H\Omega
+u_2(l/v) = C_2\sin\left(\frac{\omega l}{v}+\varphi_2\right) &= u_1(l/v) = -\frac{P}{k}H\gamma\sin\frac{\omega l}{v} \\
+\dot{u}_2(l/v) = C_2\omega\cos\left(\frac{\omega l}{v}+\varphi_2\right) &= \dot{u}_1(l/v) = -\frac{P}{k}H\gamma\omega\cos\frac{\omega l}{v} - \frac{P}{k}H\Omega
 \end{align*}
 Note that $\Omega l/v = \pi$.
 
@@ -93,11 +93,19 @@ The values of the integration constants are obtained after applying some trigono
 \end{gather*}
 and
 \begin{gather*}
-C_2 = \frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v + \varphi_2)} =
-    \frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v - \omega l/(2v))} \\[4pt]
-C_2 = \frac{P}{k}H\gamma\frac{2\sin(\omega l/(2v))\cos(\omega l/(2v))}{\sin(\omega l/(2v))} \\[2pt]
-C_2 = 2\frac{P}{k}H\gamma\cos\frac{\omega l}{2v}
+C_2 = -\frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v + \varphi_2)} =
+    -\frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v - \omega l/(2v))} \\[4pt]
+C_2 = -\frac{P}{k}H\gamma\frac{2\sin(\omega l/(2v))\cos(\omega l/(2v))}{\sin(\omega l/(2v))} \\[2pt]
+C_2 = -2\frac{P}{k}H\gamma\cos\frac{\omega l}{2v}
 \end{gather*}
 
+The result is
+$$
+u = \frac{P}{k}\frac{\omega^2l^2}{\omega^2l^2-\pi^2v^2}
+\begin{cases}
+\sin\frac{\pi vt}{l} - \frac{\pi v}{\omega l}\sin(\omega t) \quad &\text{if}\ t < \frac{l}{v} \\
+-\frac{2\pi v}{\omega l}\cos\frac{\omega l}{2v}\sin(\omega t - \frac{\omega l}{2v}) \quad &\text{if}\ t \geq \frac{l}{v}
+\end{cases}
+$$
 
 \end{Answer}
