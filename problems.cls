@@ -76,7 +76,7 @@
             \smallskip\par\noindent
             {\sffamily\@entity}
         }
-    }}
+    }}\\
     }
     \bigskip\par
     \thispagestyle{empty}
