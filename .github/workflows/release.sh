@@ -1,6 +1,6 @@
 #!/bin/sh
 
 pdflatex problems
-bibtex problems
+biber    problems
 pdflatex problems
 pdflatex problems
