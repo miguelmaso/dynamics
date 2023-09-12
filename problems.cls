@@ -21,7 +21,7 @@
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
 \RequirePackage[answerdelayed]{exercise}
-\RequirePackage[backend=bibtex,style=authortitle]{biblatex}
+\RequirePackage[style=authortitle]{biblatex}
 
 
 % Definition of the git revision tag
