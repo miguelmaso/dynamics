@@ -17,6 +17,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{xstring}
 \RequirePackage{catchfile}
+\RequirePackage[symbol*]{footmisc}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
