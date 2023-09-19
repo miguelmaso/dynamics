@@ -17,6 +17,8 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{xstring}
 \RequirePackage{catchfile}
+\RequirePackage{footnote}
+\RequirePackage[symbol*]{footmisc}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
@@ -59,6 +61,7 @@
 \makeatletter
 \renewcommand{\maketitle}{
     \noindent
+    \savenotes
     \colorbox{titlebackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
             \medskip\par\noindent
@@ -70,6 +73,7 @@
             \smallskip
         }
     }}
+    \spewnotes
     {\setlength{\parskip}{-1pt}\par\noindent
     \colorbox{entitybackground}{\parbox{.984\textwidth}{
         \color{titlecolor}{
