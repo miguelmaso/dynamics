@@ -1,32 +1,32 @@
 
 \begin{Exercise}[label={moving_load}]
-A point load $F=\SI{1}{KN}$ moves along with constant speed $v=\SI{10}{m/s}$ on a simply supported beam of length $l=10\pi\,\si{m}$ as shown in the figure. The beam is made of concrete, has a rectangular section of \SI{1}{m} width and \SI{0.5}{m} height and an average density of \SI{2800}{Kg/m^3}. Determine the deflection of the beam as a function of time, the dynamic magnification factor and the maximum bending moment at the centre section.
+A point load $P=\SI{1}{KN}$ moves along with constant speed $v=\SI{10}{m/s}$ on a simply supported beam of length $l=10\pi\,\si{m}$ as shown in the figure. The beam is made of concrete, has a rectangular section of \SI{1}{m} width and \SI{0.5}{m} height and an average density of \SI{2800}{Kg/m^3}. Determine the deflection of the beam as a function of time, the dynamic magnification factor and the maximum bending moment at the centre section.
 
 \begin{center}
 \pictures{beamPointLoad}
 \end{center}
 
-\shortAnswer $H=1.11$, $u=0.5\sin(t)\,\si{cm}$, $M_{max} = 8.7\,\si{KN.m}$
+\shortAnswer $H=1.11$, $u=0.5\sin(t)\,\si{cm}$, $M_{max} = 8.7\,\si{KN.m}$. \\
+References: \cite[page 305]{chopra}
 \end{Exercise}
 
 
 
 \begin{Answer}[ref={moving_load}]
-In that case, the magnitude of the external force $P=\SI{1}{KN}$ is not varying with time, but moving with constant speed $v=\SI{10}{m/s}$. The Rayleigh's method allow us to compute the equivalent force applied as a function of time. For that purpose, we choose a periodic shape function $\psi$ satisfying the kinematic boundary conditions
+In that case, the magnitude of the external force $P=\SI{1}{KN}$ is not varying with time, but moving with constant speed $v=\SI{10}{m/s}$. The Rayleigh's method allow us to compute the generalized force applied as a function of time. For that purpose, we choose a periodic shape function $\psi$ satisfying the kinematic boundary conditions
 \begin{align*}
 &\psi = \sin\left(\frac{\pi x}{l}\right) \\
 &F = P\psi(x) = P\psi(vt) = P\sin\left(\frac{\pi vt}{l}\right)
 \end{align*}
-thus, the equivalent period of the external excitation is $\Omega = \pi v/l = \SI{1}{rad/s}$.
+thus, the period of the external excitation is $\Omega = \pi v/l = \SI{1}{rad/s}$.
 
-From the structure description, we know that the mechanical properties of the section are:
+From the structure dimensions, we know that the mechanical properties of the section are:
 \begin{align*}
 &A = \SI{0.5}{m^2} \\
 &I = \frac{1}{12}0.5^3 = \frac{0.125}{12} \approx \SI{0.01}{m^4}\\
 &E = \SI{14}{GPa}
 \end{align*}
-
-Now, the equivalent mass and stiffness can be computed with the Rayleigh's method,
+and the generalized mass and stiffness can be computed with the Rayleigh's method,
 \begin{align*}
 m& \begin{multlined}[t]= \int_0^l \rho A\psi^2dx = \int_0^l \rho A\sin^2\left(\frac{\pi x}{l}\right)dx = \frac{\rho Al}{2} = \\
 \phantom{\hspace{10em}}= \frac{2800 \cdot 0.5 \cdot 10\pi}{2} = 7000\pi Kg = 7\pi \,\si{Tn}\end{multlined} \\
@@ -34,7 +34,7 @@ k& \begin{multlined}[t]= \int_0^l EI\psi''^2dx = \int_0^l EI\left(-\left(\frac{\
 = \frac{14\cdot 10^6 \cdot 0.01 \cdot \pi^4}{2 \cdot (10\pi)^3} =
 70\pi \,\si{KN/m} \end{multlined}
 \end{align*}
-and the frequency is
+with frequency equal to
 $$
 \omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{70\pi}{7\pi}} = \sqrt{10} = \SI{3.16}{rad/s}
 $$
@@ -56,4 +56,56 @@ And the maximum bending moment at the centre section is
 $$
 M_{max} = \frac{Pl}{4}H = \frac{1 \cdot 10\pi}{4}1.11 = \SI{8.7}{KN.m}
 $$
+
+\paragraph{Solution of the differential equation}
+Given that the load is a piecewise function in time, the dynamic magnification factor $H$ may not be accurate. The full solution to the differential equation is also a piecewise function of the form
+$$
+u =
+\begin{cases}
+C_1\sin(\omega t + \varphi_1) + \frac{P}{k}H\sin(\Omega t + \phi - \Delta\phi) \quad &\text{if}\ t < \frac{l}{v} \\
+C_2\sin(\omega t + \varphi_2) \quad &\text{if}\ t \geq \frac{l}{v}
+\end{cases}
+$$
+
+The first part of the solution must satisfy homogeneous boundary conditions
+$$
+\begin{array}{l}
+u_1(0) = 0 \\
+\dot{u}_1(0) = 0
+\end{array} \rightarrow
+\begin{array}{l}
+\varphi_1 = 0 \\
+C_1 = -\frac{P}{k}H\gamma
+\end{array}
+$$
+with $\gamma = \frac{\Omega}{\omega} = \frac{\pi v}{\omega l}$. For the second part of the motion, the expression must satisfy continuity at $t = l/v$,
+\begin{align*}
+u_2(l/v) = C_2\sin\left(\frac{\omega l}{v}+\varphi_2\right) &= u_1(l/v) = -\frac{P}{k}H\gamma\sin\frac{\omega l}{v} \\
+\dot{u}_2(l/v) = C_2\omega\cos\left(\frac{\omega l}{v}+\varphi_2\right) &= \dot{u}_1(l/v) = -\frac{P}{k}H\gamma\omega\cos\frac{\omega l}{v} - \frac{P}{k}H\Omega
+\end{align*}
+Note that $\Omega l/v = \pi$.
+
+The values of the integration constants are obtained after applying some trigonometric identities:
+\begin{gather*}
+\omega\cot\left(\frac{\omega l}{v}+\varphi_2\right) = \omega\cot\frac{\omega l}{v} + \omega\csc(\omega l/v) \\
+\cot\left(\frac{\omega l}{v}+\varphi_2\right) = \cot\frac{\omega l}{2v} \\
+\varphi_2 = -\frac{\omega l}{2v}
+\end{gather*}
+and
+\begin{gather*}
+C_2 = -\frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v + \varphi_2)} =
+    -\frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v - \omega l/(2v))} \\[4pt]
+C_2 = -\frac{P}{k}H\gamma\frac{2\sin(\omega l/(2v))\cos(\omega l/(2v))}{\sin(\omega l/(2v))} \\[2pt]
+C_2 = -2\frac{P}{k}H\gamma\cos\frac{\omega l}{2v}
+\end{gather*}
+
+The result is
+$$
+u = \frac{P}{k}\frac{\omega^2l^2}{\omega^2l^2-\pi^2v^2}
+\begin{cases}
+\sin\frac{\pi vt}{l} - \frac{\pi v}{\omega l}\sin(\omega t) \quad &\text{if}\ t < \frac{l}{v} \\
+-\frac{2\pi v}{\omega l}\cos\frac{\omega l}{2v}\sin(\omega t - \frac{\omega l}{2v}) \quad &\text{if}\ t \geq \frac{l}{v}
+\end{cases}
+$$
+
 \end{Answer}

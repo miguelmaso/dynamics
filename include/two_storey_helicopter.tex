@@ -5,10 +5,65 @@ The two storey building from the previous exercise is hit by a helicopter with a
     \item Determine the resulting vibration and the maximum displacement at the top of the building using both modes of vibration.
     \item Determine the resulting vibration and the maximum displacement at the top on the assumption that the linearly increasing mode absorbs the total momentum.
 \end{enumerate}
-\shortAnswer
+\shortAnswer (a) $u_{max} = \SI{15}{cm}$, (b) $u_{max} = \SI{14.5}{cm}$.
 \end{Exercise}
 
 
 
 \begin{Answer}[ref={two_storey_helicopter}]
+The impulse of the helicopter from exercise \ref{helicopter_impulse} is fully transmitted to the building with dynamic properties caluclated in exercise \ref{two_storey}. The impulse of the helicopter is applied at the top level of the building,
+\begin{align*}
+I &= (mv)_{helicopter} = 10 \times 20 = \SI{200}{Tn.m/s} \\
+\mathbf{I} &= \begin{bmatrix}0 \\ 200\end{bmatrix} \si{Tn.m/s}
+\end{align*}
+
+\paragraph{Both modes of vibration}
+When several modes are present, the resulting vibration is calculated using modal decomposition. Finally, the full vibration os obtained by superposition of each mode of vibration. For the first mode of vibration,
+\begin{align*}
+    I_1 &= \mathbf{v}_1^T\mathbf{I} =
+    \begin{bmatrix}2 \\ 3\end{bmatrix}^T \begin{bmatrix}0 \\ 200\end{bmatrix} =
+    \SI{600}{Tn.m/s} \\
+    m_1 &= \mathbf{v}_1^T\mathbf{M}\mathbf{v}_1 =
+    \begin{bmatrix}2 \\ 3\end{bmatrix}^T \begin{bmatrix}150 & 0 \\ 0 & 100\end{bmatrix} \begin{bmatrix}2 \\ 3\end{bmatrix} =
+    \SI{1500}{Tn} \\
+    \omega_1 &= \SI{10}{rad/s} \\
+    x_1 &= \frac{I_1}{m_1\omega_1} = \frac{600}{1500\times10} \si{m}
+\end{align*}
+And for the second mode of vibration
+\begin{align*}
+    I_2 &= \mathbf{v}_1^T\mathbf{I} =
+    \begin{bmatrix}1 \\ -1\end{bmatrix}^T \begin{bmatrix}0 \\ 200\end{bmatrix} =
+    \SI{-200}{Tn.m/s} \\
+    m_2 &= \mathbf{v}_1^T\mathbf{M}\mathbf{v}_1 =
+    \begin{bmatrix}1 \\ -1\end{bmatrix}^T \begin{bmatrix}150 & 0 \\ 0 & 100\end{bmatrix} \begin{bmatrix}1 \\ -1\end{bmatrix} =
+    \SI{250}{Tn} \\
+    \omega_2 &= \SI{24.5}{rad/s} \\
+    x_2 &= \frac{I_2}{m_2\omega_2} = \frac{-200}{250\times24.5} \si{m}
+\end{align*}
+Then, the resulting vibration is
+$$
+\mathbf{u}(t) = \sum x_i(t)\mathbf{v}_i =
+\begin{bmatrix}0.08 \\ 0.12\end{bmatrix} \sin(10t) +
+\begin{bmatrix}-0.032 \\ 0.032\end{bmatrix} \sin(24.5t)
+$$
+being $u_{max} = 0.12 + 0.032 \approx \SI{15}{cm}$.
+
+
+\paragraph{Linearly increasing mode}
+When the Ritz-Rayleigh method is applied, the equivalent action shall be computed. The values from exercise \ref{two_storey} are considered.
+\begin{align*}
+    \hat{\mathbf{I}} &= \mathbf{R}^T\mathbf{I} =
+    \begin{bmatrix}1 \\ 2\end{bmatrix}^T \begin{bmatrix}0 \\ 200\end{bmatrix} =
+    \SI{400}{Tn.m/s} \\
+    \hat{\mathbf{M}} &= \SI{550}{Tn} \\
+    \omega_1 &= \SI{10.4}{rad/s} \\
+    x_1 &= \frac{\hat{I}_1}{\hat{m}_1\omega_1} = \frac{400}{550\times10.4} \si{m}
+\end{align*}
+And the resulting vibration is
+$$
+\mathbf{u}(t) = x_1(t)\mathbf{r}_1 =
+\begin{bmatrix}0.072 \\ 0.145\end{bmatrix} \sin(10.4t)
+$$
+being $u_{max} = \SI{14.5}{cm}$.
+
 \end{Answer}

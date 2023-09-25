@@ -26,7 +26,7 @@
 \RequirePackage[style=authortitle]{biblatex}
 
 
-% Get short git commit hash
+% Definition of the git revision tag
 \CatchFileDef{\head}{.git/HEAD}{}
 \StrGobbleRight{\head}{1}[\head]
 \StrBehind[2]{\head}{/}[\branch]
@@ -75,12 +75,12 @@
     }}
     \spewnotes
     {\setlength{\parskip}{-1pt}\par\noindent
-    \colorbox{entitybackground}{\parbox{.984\textwidth}{
+    \colorbox{entitybackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
             \smallskip\par\noindent
             {\sffamily\@entity}
         }
-    }}
+    }}\\
     }
     \bigskip\par
     \thispagestyle{empty}
@@ -116,7 +116,7 @@
 \colorbox{titlebackground}{\color{titlecolor}{
 \ExerciseName\ \ExerciseHeaderNB\ }}
 \smallskip}
- 
+
 \renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
 \colorbox{titlebackground}{\color{titlecolor}{
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
@@ -134,3 +134,8 @@
        {\bibhyperref{#1}}
        {\href{\thefield{url}}{#1}}
 }
+
+
+% Enforce hyphenation of urls
+\def\UrlBreaks{\do\/\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do/\do.\do:}
+\setcounter{biburllcpenalty}{9000}
