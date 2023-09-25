@@ -199,9 +199,9 @@
         \pic {fixedPortico};
         \draw [<->] ([xshift=-10]A) -- +(0,2);
         \draw [<->] ([yshift=8]A) -- ([yshift=8]B);
-        \path (A) -- +(0,2) node [midway,left=2,fill=white] {\qty{4}{m}};
-        \path (A) -- (B) node [midway,above,fill=white] {\qty{5}{m}};
-        \path (1.5,2.3) node [above] {\qty{100}{KN}};
+        \path (A) -- +(0,2) node [midway,left=2,fill=white] {\SI{4}{m}};
+        \path (A) -- (B) node [midway,above,fill=white] {\SI{5}{m}};
+        \path (1.5,2.3) node [above] {\SI{100}{KN}};
     },
     porticoDimensions2/.pic = {
         \pic {bracedPortico};
@@ -217,7 +217,7 @@
         \draw [fill=lightgray] (0,2.3) rectangle (3,2.5);
         \pic at (A) {fixed};
         \pic at (B) {fixed};
-        \path (1.5,2.5) node [above] {\qty{150}{KN}};
+        \path (1.5,2.5) node [above] {\SI{150}{KN}};
     },
     %
     % Example 4
@@ -233,7 +233,7 @@
         \pic at (B) {pinned};
         \draw [<-] (C) -- +(0,.5);
         \draw [<-] (C0) -- +(0,-.5);
-        \path (C) node [above right] {\qty{5}{mm}};
+        \path (C) node [above right] {\SI{5}{mm}};
     },
     %
     % Example 5
@@ -270,8 +270,8 @@
         \coordinate (W0) at (-.5,0);
         \coordinate (W1) at (-1.5,4);
         \draw (W0) -- (W1);
-        \node [above left] at (W0) {\qty{0.3}{KN/m}};
-        \node [left] at (W1) {\qty{1}{KN/m}};
+        \node [above left] at (W0) {\SI{0.3}{KN/m}};
+        \node [left] at (W1) {\SI{1}{KN/m}};
         \draw [dashed] (2,0) -- (3,4);
         \draw [dashed] (2,4) -- (3,4);
     },
@@ -353,8 +353,8 @@
         \pic at (0,0.0) {storey2col};
         \pic at (A) {fixed};
         \pic at (B) {fixed};
-        \draw [<->] (A) ++(.4,1.2) -- ++(0,1) node [midway, right] {\qty{3}{m}};
-        \draw [<->] (A) ++(.4,0.0) -- ++(0,1) node [midway, right] {\qty{3}{m}};
+        \draw [<->] (A) ++(.4,1.2) -- ++(0,1) node [midway, right] {\SI{3}{m}};
+        \draw [<->] (A) ++(.4,0.0) -- ++(0,1) node [midway, right] {\SI{3}{m}};
         \draw [-latex] (B) ++(.2,2.3) -- ++(.5,0) node [right] {$u_2$};
         \draw [-latex] (B) ++(.2,1.1) -- ++(.5,0) node [right] {$u_1$};
     },
@@ -365,9 +365,9 @@
         \pic at (A) {fixed};
         \pic at (B) {fixed};
         \pic at (C) {fixed};
-        \draw [<->] (A) ++(.4,2.4) -- ++(0,1) node [midway, right] {\qty{3}{m}};
-        \draw [<->] (A) ++(.4,1.2) -- ++(0,1) node [midway, right] {\qty{3}{m}};
-        \draw [<->] (A) ++(.4,0.0) -- ++(0,1) node [midway, right] {\qty{3}{m}};
+        \draw [<->] (A) ++(.4,2.4) -- ++(0,1) node [midway, right] {\SI{3}{m}};
+        \draw [<->] (A) ++(.4,1.2) -- ++(0,1) node [midway, right] {\SI{3}{m}};
+        \draw [<->] (A) ++(.4,0.0) -- ++(0,1) node [midway, right] {\SI{3}{m}};
         \draw [-latex] (B) ++(.2,3.5) -- ++(.5,0) node [right] {$u_3$};
         \draw [-latex] (B) ++(.2,2.3) -- ++(.5,0) node [right] {$u_2$};
         \draw [-latex] (B) ++(.2,1.1) -- ++(.5,0) node [right] {$u_1$};
