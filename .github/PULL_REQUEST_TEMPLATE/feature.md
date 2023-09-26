@@ -4,7 +4,7 @@ about: New features or wider changes
 
 ---
 
-## Description
+**Description**
 
-## Changelog
+**Changelog**
 - 
