@@ -1,0 +1,127 @@
+
+\begin{Exercise}[label={two_storey}]
+The two storey building shown is supported by four square concrete columns of dimensions $0.35 \times \SI{0.35}{m^2}$. The total masses of the bottom and top floors are $150$ and \SI{100}{Tn} respectively.
+\begin{enumerate}[(a)]
+    \item Determine the natural modes and frequencies of vibration in the horizontal direction shown.
+    \item Determine the frequency of vibration that would be obtained making the assumption that the fundamental mode of vibration increases linearly with height.
+\end{enumerate}
+
+\begin{center}
+\pictures{twoStorey}
+\pictures{storeyPlanView}
+\end{center}
+
+\shortAnswer (a) $\omega_1=\SI{10}{rad/s}$, $\omega_2=\SI{24.5}{rad/s}$, $\mathbf{v}_1 = [2\ 3]^T$, $\mathbf{v}_2 = [1\ {-}1]^T$
+(b) $\omega_1=\SI{10.4}{rad/s}$, $\mathbf{v}_1 = [1\ 2]^T$.
+\end{Exercise}
+
+
+
+\begin{Answer}[ref={two_storey}]
+The inter-storey stiffness is obtained from the concrete columns properties,
+\begin{align*}
+&E = \SI{14}{GPa} = \SI{14e6}{KPa} \\
+&I = \frac{1}{12}bc^3 = \frac{1}{12}0.35^4 = \frac{15}{12}\times10^{-3}\si{m^4} \\
+&k_{column} = \frac{12EI}{h^3} = \frac{12\times14\times15\times10^3}{12\times27} = \SI{7.77e3}{KN/m} \\
+&k = 4k_{column} = \SI{31.1}{KN/m}
+\end{align*}
+
+Using those values, the mass and stiffness matrices are
+$$
+\mathbf{M} =
+\begin{bmatrix}
+    m_1 & 0 \\
+    0 & m_2
+\end{bmatrix} =
+\begin{bmatrix}
+    150 & 0 \\
+    0 & 100
+\end{bmatrix} \si{Tn}
+$$
+
+$$
+\mathbf{K} =
+\begin{bmatrix}
+    k_1 + k_2 & -k_2\\
+    -k_2 & k_2
+\end{bmatrix} \approx
+\begin{bmatrix}
+    60 & -30 \\
+    -30 & 30
+\end{bmatrix} \times10^3 \si{KN/m}
+$$
+
+\paragraph{(a) Natural modes of vibration}
+The natural modes of vibration can be obtained from the solution to the generalized eigenvalue problem
+\begin{align*}
+|\mathbf{K} - \omega^2 \mathbf{M}| &= 0 \\
+\left\vert \begin{matrix}
+    60000 -\omega^2 150 & -30000 \\
+    -30000 & 30000 -\omega^2 100
+\end{matrix} \right\vert &= 0 \\
+(6000-15\omega^2)(3000-1\omega^2)-3000\times3000 &= 0 \\
+15\omega^2 - 10500\omega^2 + 900000 &= 0
+\end{align*}
+$$
+\omega^2 = \begin{cases}
+    100 \rightarrow \omega_1 = \SI{10}{rad/s} \\
+    600 \rightarrow \omega_2 = \SI{24.5}{rad/s}
+\end{cases}
+$$
+
+Since the the determinant of the system is zero for the eigenvalues, the eigenvectors are found assigning an arbitrary value to a component,
+\begin{align*}
+(\mathbf{K} -\omega_1^2\mathbf{M})\mathbf{v}_1 = \mathbf{0} \\
+\begin{bmatrix}
+    4500 & -3000 \\
+    -3000 & 2000
+\end{bmatrix} \mathbf{v}_1 = \mathbf{0} \\
+\mathbf{v}_1 = \begin{bmatrix}
+    2 \\ 3
+\end{bmatrix}
+\end{align*}
+
+\begin{align*}
+(\mathbf{K} -\omega_2^2\mathbf{M})\mathbf{v}_2 = \mathbf{0} \\
+\begin{bmatrix}
+    -3000 & -3000 \\
+    -3000 & -3000
+\end{bmatrix} \mathbf{v}_2 = \mathbf{0} \\
+\mathbf{v}_2 = \begin{bmatrix}
+    1 \\ -1
+\end{bmatrix}
+\end{align*}
+
+
+\paragraph{(b) Ritz-Rayleigh method}
+In order to show the possibilities of the Ritz-Rayleigh method, a linearly increasing mode of vibration $\mathbf{r}_1$ is choosen. If it were the case of a more complex structure, more trial modes of vibration $\mathbf{r}_i$ could be provided.
+\begin{align*}
+\mathbf{R} &= [\mathbf{r}_1] = \begin{bmatrix}
+    1 \\ 2
+\end{bmatrix} \\
+\hat{\mathbf{M}} &= \mathbf{R}^T\mathbf{M}\mathbf{R} = \begin{bmatrix}
+    1 \\ 2
+\end{bmatrix}^T \begin{bmatrix}
+    150 & 0 \\
+    0 & 100
+\end{bmatrix} \begin{bmatrix}
+    1 \\
+    2
+\end{bmatrix} = \SI{550}{Tn} \\
+\hat{\mathbf{K}} &= \mathbf{R}^T\mathbf{K}\mathbf{R} = \begin{bmatrix}
+    1 \\ 2
+\end{bmatrix}^T \begin{bmatrix}
+    60000 & -30000 \\
+    -30000 & 30000
+\end{bmatrix} \begin{bmatrix}
+    1 \\
+    2
+\end{bmatrix} = \SI{6e4}{KN/m}
+\end{align*}
+And the eigenvalue problem is reduced to a scalar equation,
+$$
+|\hat{\mathbf{K}} - \omega^2\hat{\mathbf{M}}| = 0
+\quad\rightarrow\quad \omega_1^2 = \frac{6\times10^4}{550} \quad\rightarrow\quad \omega_1 = \SI{10.4}{rad/s}
+$$
+
+\end{Answer}

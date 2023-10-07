@@ -5,21 +5,42 @@
 
 \RequirePackage[english]{babel}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[shortlabels]{enumitem}
+\RequirePackage[OT1]{fontenc}
+\RequirePackage{mathtools}
 \RequirePackage{amsmath}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
+\RequirePackage{siunitx}
 \RequirePackage{hyphenat}
-\RequirePackage{titlesec}
-\RequirePackage{hyperref}
+\RequirePackage{csquotes}
+\RequirePackage{fancyhdr}
+\RequirePackage{xstring}
+\RequirePackage{catchfile}
+\RequirePackage{footnote}
+\RequirePackage[symbol*]{footmisc}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[shortlabels]{enumitem}
+\RequirePackage[answerdelayed]{exercise}
+\RequirePackage[style=authortitle]{biblatex}
+
+
+% Definition of the git revision tag
+\CatchFileDef{\head}{.git/HEAD}{}
+\StrGobbleRight{\head}{1}[\head]
+\StrBehind[2]{\head}{/}[\branch]
+\IfFileExists{.git/refs/heads/\branch}{
+    \CatchFileDef{\hash}{.git/refs/heads/\branch}{}
+    \newcommand{\gitrevision}{rev \StrLeft{\hash}{7}}
+}{
+    \newcommand{\gitrevision}{}
+}
 
 
 % Definition of some colors
-\definecolor{titlebackground}{cmyk}{.16, .0, .42, .0} % pale light lime green
-\definecolor{titlebackground}{cmyk}{.24, .03, .07, .02} % duva (blue)
-\definecolor{titlebackground}{cmyk}{.09, .55, 1, .39} % moderate gamboe (brown)
-\definecolor{entitybackground}{cmyk}{.04, .27, .5, .25} %
+\definecolor{titlebackground}{cmyk}{.09, .55, 1, .39}    % moderate gamboe (brown)
+\definecolor{entitybackground}{cmyk}{.04, .27, .5, .25}  % light brown
 \definecolor{titlecolor}{gray}{.95}
 
 
@@ -30,10 +51,17 @@
 \makeatother
 
 
+% Definition of the short title field
+\makeatletter
+\renewcommand{\title}[2][]{\gdef\shorttitle{#1}\gdef\@title{#2}}
+\makeatother
+
+
 % Definition of the custom title format
 \makeatletter
 \renewcommand{\maketitle}{
     \noindent
+    \savenotes
     \colorbox{titlebackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
             \medskip\par\noindent
@@ -45,40 +73,69 @@
             \smallskip
         }
     }}
+    \spewnotes
     {\setlength{\parskip}{-1pt}\par\noindent
-    \colorbox{entitybackground}{\parbox{.984\textwidth}{
+    \colorbox{entitybackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
             \smallskip\par\noindent
             {\sffamily\@entity}
         }
-    }}
+    }}\\
     }
     \bigskip\par
+    \thispagestyle{empty}
 }
 \makeatother
 
 
-% Removing numbering of sections
-\makeatletter
-\renewcommand{\@seccntformat}[1]{}
-\makeatother
+% Definition of the custom pagestyle
+\fancypagestyle{problems}{
+    \setlength{\headheight}{35pt}
+    \addtolength{\topmargin}{-20pt}
+    \renewcommand{\headrulewidth}{0pt} % remove lines as well
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[L]{\scshape\shorttitle}
+    \fancyhead[R]{\raisebox{-0.2\height}{\includegraphics[height=35pt]{img/camins.jpeg}}}
+    \fancyfoot[R]{\footnotesize\color{gray}\gitrevision}
+}
+\pagestyle{problems}
 
 
-% Definition of the sectioning for examples and solutions
-\titleclass{\example}{straight}[\subsection]
-\newcounter{example}
-\setcounter{secnumdepth}{2}
-\titleformat{\example}[runin]{\rmfamily\normalsize\bfseries}{}{0em}{Example~}
-\titlespacing*{\example}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-\newcommand{\exampleautorefname}{example}
-\makeatletter
-  \def\toclevel@example{2}
-\makeatother
+% Removing numbering of sections and setting custom format
+\titleformat{\section}{\sffamily\Large\bfseries}{}{0em}{#1}
+\titleformat{\subsection}{\sffamily\large\bfseries}{}{0em}{#1}
 
 
+% Definition of the section level of examples and solutions
+\ListOfExerciseInToc
+\ExerciseLevelInToc{subsection}
 
-\makeatletter
-\newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
-\newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
-\makeatother
 
+% Definition of the examples and solutions style
+\renewcommand{\ExerciseHeader}{\sffamily\normalsize\bfseries
+\colorbox{titlebackground}{\color{titlecolor}{
+\ExerciseName\ \ExerciseHeaderNB\ }}
+\smallskip}
+
+\renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
+\colorbox{titlebackground}{\color{titlecolor}{
+\hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
+\smallskip}
+
+\newcommand{\shortAnswer}{
+\hyperref[\ExerciseLabel-Answer]{\AnswerListName}:
+}
+
+
+% Add link to url in citations
+\DeclareFieldFormat{bibhyperref}{\usebibmacro{citelink}{#1}}
+\newbibmacro*{citelink}[1]{%
+    \iffieldundef{url}
+       {\bibhyperref{#1}}
+       {\href{\thefield{url}}{#1}}
+}
+
+
+% Enforce hyphenation of urls
+\def\UrlBreaks{\do\/\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9\do=\do/\do.\do:}
+\setcounter{biburllcpenalty}{9000}
