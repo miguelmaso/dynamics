@@ -34,3 +34,9 @@
 *.synctex*
 *.run.xml
 *.DS_Store
+
+# files that are not latex
+*.doc
+*.docx
+*.xls
+*.xlsx
