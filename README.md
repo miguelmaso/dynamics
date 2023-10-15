@@ -13,7 +13,7 @@ pdflatex problems
 ```
 
 ### VS Code configuration
-If you are using VS Code with a LaTeX extension, make sure the following options are available on the configuration (`ctrl+,`):
+If you are using VS Code with a LaTeX extension, make sure the following options are available on the configuration (`ctrl`+`,`):
 ```json
 "latex-workshop.latex.tools": [
   {
