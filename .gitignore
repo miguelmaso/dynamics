@@ -1,10 +1,9 @@
 # Global gitignore for the article repository
 # This settings are the same for all the users
 # For additional cusomization the local gitignore
-# (.git/info/exclude) could be modified
+# (.git/info/exclude) may be modified
 
-# main output. Note that the pdf in folders are included
-#/*.pdf
+# Pdf output
 *.pdf
 
 # recovery files
