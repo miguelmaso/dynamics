@@ -14,7 +14,7 @@ pdflatex problems
 
 ### VS Code configuration
 If you are using VS Code with a LaTeX extension, make sure the following options are available on the configuration (`ctrl`+`,`):
-```json
+```jsonc
 "latex-workshop.latex.tools": [
   {
     "name": "pdflatex",
@@ -41,7 +41,7 @@ If you are using VS Code with a LaTeX extension, make sure the following options
 
 and
 
-```json
+```jsonc
 "latex-workshop.latex.recipes": [
   {
     "name": "pdflatex -> biber -> pdflatex * 2",
