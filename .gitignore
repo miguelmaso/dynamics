@@ -4,7 +4,8 @@
 # (.git/info/exclude) could be modified
 
 # main output. Note that the pdf in folders are included
-/*.pdf
+#/*.pdf
+*.pdf
 
 # recovery files
 *~
@@ -34,6 +35,12 @@
 *.synctex*
 *.run.xml
 *.DS_Store
+
+# Tikz auxiliry files
+*.auxlock
+*.figlist
+*.dpth
+*.md5
 
 # files that are not latex
 *.doc
