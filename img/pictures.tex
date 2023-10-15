@@ -62,7 +62,7 @@
     %
     % Structures
     %
-    basicPortico/.pic = {
+    basicFrame/.pic = {
         \coordinate (A) at (0.2,0);
         \coordinate (B) at (2.8,0);
         \draw [fill=lightgray] (0,2) rectangle (3,2.3);
@@ -74,26 +74,26 @@
         \coordinate (B) at (3,0);
         \draw [ultra thick] (A) -- (B);
     },
-    fixedPortico/.pic = {
-        \pic {basicPortico};
+    fixedFrame/.pic = {
+        \pic {basicFrame};
         \pic at (A) {fixed};
         \pic at (B) {fixed};
     },
-    bracedPortico/.pic = {
-        \pic {fixedPortico};
+    bracedFrame/.pic = {
+        \pic {fixedFrame};
         \draw (A) -- (2.8,2);
         \draw (0.2,2) -- (B);
     },
     %
     % Example 1
     %
-    portico/.pic = {
-        \pic {fixedPortico};
+    frame/.pic = {
+        \pic {fixedFrame};
         \path (1.5,2.3) node [above] {$m$};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
     },
-    portico3Pinned/.pic = {
-        \pic {basicPortico};
+    frame3Pinned/.pic = {
+        \pic {basicFrame};
         \coordinate (C) at (1.5,0);
         \draw [ultra thick] (C) -- +(0,2);
         \pic at (A) {pinned};
@@ -102,15 +102,15 @@
         \path (1.5,2.3) node [above] {$m$};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
     },
-    porticoBracing/.pic = {
-        \pic {bracedPortico};
+    frameBracing/.pic = {
+        \pic {bracedFrame};
         \path (1.5,2.3) node [above] {$m$};
         \path (A) -- +(0,2) node [midway,right] {$EI,h$};
         \path (A) -- +(1.5,1.2) node [midway,below=4,rotate=35,inner sep=0] {$EA,l$};
         \path (B) node [left=10,inner sep=0] {$\theta$};
     },
-    portico3PinnedSol/.pic = {
-        \pic {portico3Pinned};
+    frame3PinnedSol/.pic = {
+        \pic {frame3Pinned};
         \draw [dashed] (1,2) rectangle +(3,0.3);
         \draw [dashed] (A) to[out=40,in=270] +(1,2);
         \draw [dashed] (B) to[out=40,in=270] +(1,2);
@@ -118,16 +118,16 @@
         \draw [<->] (3,2.6) -- +(1,0) node [midway,fill=white] {$u_0$};
         \draw [->] (4,2.15) -- +(1,0) node [above] {$F_0$};
     },
-    porticoSol/.pic = {
-        \pic {portico};
+    frameSol/.pic = {
+        \pic {frame};
         \draw [dashed] (1,2) rectangle +(3,0.3);
         \draw [dashed] (A) to[out=90,in=270] +(1,2);
         \draw [dashed] (B) to[out=90,in=270] +(1,2);
         \draw [<->] (3,2.6) -- +(1,0) node [midway,fill=white] {$u_0$};
         \draw [->] (4,2.15) -- +(1,0) node [above] {$F_0$};
     },
-    porticoBracingSol/.pic = {
-        \pic {porticoBracing};
+    frameBracingSol/.pic = {
+        \pic {frameBracing};
         \draw [dashed] (1,2) rectangle +(3,0.3);
         \draw [dashed] (A) to[out=90,in=270] +(1,2);
         \draw [dashed] (B) to[out=90,in=270] +(1,2);
@@ -202,23 +202,23 @@
     %
     % Example 3
     %
-    porticoDimensions/.pic = {
-        \pic {fixedPortico};
+    frameDimensions/.pic = {
+        \pic {fixedFrame};
         \draw [<->] ([xshift=-10]A) -- +(0,2);
         \draw [<->] ([yshift=8]A) -- ([yshift=8]B);
         \path (A) -- +(0,2) node [midway,left=2,fill=white] {\SI{4}{m}};
         \path (A) -- (B) node [midway,above,fill=white] {\SI{5}{m}};
         \path (1.5,2.3) node [above] {\SI{100}{KN}};
     },
-    porticoDimensions2/.pic = {
-        \pic {bracedPortico};
+    frameDimensions2/.pic = {
+        \pic {bracedFrame};
         \draw (A) -- (2.8,2);
         \draw (0.2,2) -- (B);
         \pic at (A) {fixed};
         \pic at (B) {fixed};
     },
-    porticoDimensions3/.pic = {
-        \pic {bracedPortico};
+    frameDimensions3/.pic = {
+        \pic {bracedFrame};
         \draw (A) -- (2.8,2);
         \draw (0.2,2) -- (B);
         \draw [fill=lightgray] (0,2.3) rectangle (3,2.5);
@@ -245,8 +245,8 @@
     %
     % Example 5
     %
-    porticoForced/.pic = {
-        \pic {porticoDimensions};
+    frameForced/.pic = {
+        \pic {frameDimensions};
         \node [right] (C) at (B) {};
         \draw [<<->>] (C) -- +(1.5,0);
         \node [above right] at (C) {$a_g(t) = 2\sin(\Omega t)$};
@@ -444,9 +444,39 @@
 \begin{document}
 
 
-\tikzsetnextfilename{portico}
+\tikzsetnextfilename{frame}
 \begin{tikzpicture}
-    \pic{portico};
+    \pic{frame};
+\end{tikzpicture}
+
+
+\tikzsetnextfilename{frame3Pinned}
+\begin{tikzpicture}
+    \pic{frame3Pinned};
+\end{tikzpicture}
+
+
+\tikzsetnextfilename{frameBracing}
+\begin{tikzpicture}
+    \pic{frame3Pinned};
+\end{tikzpicture}
+
+
+\tikzsetnextfilename{frameSol}
+\begin{tikzpicture}
+    \pic{frame3Pinned};
+\end{tikzpicture}
+
+
+\tikzsetnextfilename{frame3PinnedSol}
+\begin{tikzpicture}
+    \pic{frame3Pinned};
+\end{tikzpicture}
+
+
+\tikzsetnextfilename{frameBracingSol}
+\begin{tikzpicture}
+    \pic{frame3Pinned};
 \end{tikzpicture}
 
 
