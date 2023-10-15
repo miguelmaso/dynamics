@@ -1,3 +1,9 @@
+---
+permalink: /
+layout: home
+title: Welcome
+list_title: My blog posts
+---
 
 This page contains a collection of examples for the structural dynamics course.
 It aims to illustrate the theoretical concepts of structural dynamics and to connect the theory lessons with the laboratory activities.
