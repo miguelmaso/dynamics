@@ -19,13 +19,17 @@ rho = 0.05
 gammas = np.linspace(0, 2, 500)
 xi = 0.1
 eta_opt = 1 / (1+rho)
+xi_opt = np.sqrt(3*rho/8/(1+rho)**3)
+xi_opt = np.sqrt(rho*(3-np.sqrt(0.5*rho))/8/(1+rho)/(1-0.5*rho))
+
+# Dynamic amplification factor without TMD
+Df_0 = H_simple(gammas, xi=0)
 
 
 # Frequency sensitivity
 eta_1 = eta_opt - 0.05
 eta_2 = eta_opt
 eta_3 = eta_opt + 0.05
-DF_0 = H_simple(gammas, xi=0)
 H_eta = lambda e, g=gammas: H_TMD(g, xi=xi, eta=e, rho=rho)
 Df_1 = H_eta(eta_1)
 Df_2 = H_eta(eta_2)
@@ -33,7 +37,7 @@ Df_3 = H_eta(eta_3)
 
 # Frequencies plot
 fig, ax = plt.subplots()
-ax.fill_between(gammas, DF_0, color='lightgray')
+ax.fill_between(gammas, Df_0, color='lightgray')
 ax.plot(gammas, Df_1)
 ax.plot(gammas, Df_2)
 ax.plot(gammas, Df_3)
@@ -51,8 +55,6 @@ if savefig: plt.savefig('tmd-frequencies.pdf')
 
 
 # Damping sentitivity
-xi_opt = np.sqrt(3*rho/8/(1+rho)**3)
-xi_opt = np.sqrt(rho*(3-np.sqrt(0.5*rho))/8/(1+rho)/(1-0.5*rho))
 xi_1 = xi_opt - 0.07
 xi_2 = xi_opt
 xi_3 = xi_opt + 0.07
@@ -63,7 +65,7 @@ Df_3 = H_xi(xi_3)
 
 # Dampings plot
 fig, ax = plt.subplots()
-ax.fill_between(gammas, DF_0, color='lightgray')
+ax.fill_between(gammas, Df_0, color='lightgray')
 ax.plot(gammas, Df_1)
 ax.plot(gammas, Df_2)
 ax.plot(gammas, Df_3)
