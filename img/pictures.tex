@@ -382,6 +382,29 @@
         \draw (B) ++(.5,0.6) node [right] {$k_1=\SI{3e7}{N/m}$};
     },
     %
+    % Pneumatic hammer
+    %
+    concretePlate/.pic = {
+        \def\cubex{5}
+        \def\cubey{4}
+        \def\cubez{.5}
+        \def\fx{1}
+        \def\fy{1}
+        \def\fz{1}
+        \draw [thin,fill=lightgray,semitransparent] (0,0,0) -- ++(-\cubex,0,0) -- ++(0,-\cubez,0) coordinate (a) -- ++(\cubex,0,0) coordinate (b) -- cycle;
+        \draw [thin,fill=lightgray,semitransparent] (0,0,0) -- ++(0,0,-\cubey) -- ++(0,-\cubez,0) coordinate (c) -- ++(0,0,\cubey) -- cycle;
+        \draw [thin,fill=lightgray,semitransparent] (0,0,0) -- ++(-\cubex,0,0) -- ++(0,0,-\cubey) -- ++(\cubex,0,0) -- cycle;
+        \path (a) ++(0,-.6) coordinate (a1);
+        \path (b) ++(.4,-.4) coordinate (b1);
+        \path (c) ++(.4,-.4) coordinate (c1);
+        \draw [<->] (a1) -- (a1 -| b) node [midway,above] {\SI{12}{m}};
+        \draw [<->] (b1) -- (c1) node [midway,above,rotate=45] {\SI{12}{m}};
+        \coordinate (F) at (-\cubex+\fx, \fx, -\cubey+\fy);
+        \draw [thick,-latex] (F) -- ++(0,-\fz, 0);
+        \draw [<->] (F) ++(0,.2,0) -- ++(-\fx,0,0) node [midway,below] {\SI{2}{m}};
+        \draw [<->] (F) ++(0,.2,0) -- ++(0,0,-\fy) node [midway,below,rotate=45] {\SI{2}{m}};
+    },
+    %
     % Example NNN
     %
     singleTrain/.pic = {
