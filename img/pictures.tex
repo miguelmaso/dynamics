@@ -410,7 +410,7 @@
     singleTrain/.pic = {
         \tikzset{
             wheel/.style={draw, circle, thick, minimum width=8pt, inner sep=0pt, fill=gray!75},
-            window/.style={draw, rectangle, very thin, left color=blue!20, shading angle=45, minimum width=6pt, minimum height=4.5pt, inner sep=0pt},
+            window/.style={draw, rectangle, very thin, left color=blue!20, shading angle=45, minimum width=7pt, minimum height=5pt, inner sep=0pt},
             wagon/.style={draw, very thin, shading angle=0}
         }
         \def\l{3}
@@ -421,7 +421,7 @@
         \path [wagon]
           [rounded corners=1pt] (w1.west |- trolley) -| (trolley -| .04-\l,0) |- ++(\l,\h) -| ++(\l-.08,-\h) 
           [sharp corners] -| (w2.east) -- (w2.west) |- (trolley) -| (w1.east) -- (w1.west) |- cycle;
-        \foreach \pos in {0,.3,...,\l} {
+        \foreach \pos in {0,.4,...,\l} {
             \path (trolley) ++(.9*\pos,.35) node [window] {};
             \path (trolley) ++(-.9*\pos,.35) node [window] {};
         }
@@ -459,6 +459,7 @@
         \pic at ([yshift=\yb]p3) {triangle};
         \draw [<->] (p1 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
         \draw [<->] (p2 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
+        \draw [<->] (-1.5, 1) -- ++(3,0) node [midway,above] {\SI{12}{m}};
     }
 }
 
