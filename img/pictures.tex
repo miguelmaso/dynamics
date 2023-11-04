@@ -460,6 +460,18 @@
         \draw [<->] (p1 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
         \draw [<->] (p2 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
         \draw [<->] (-1.5, 1) -- ++(3,0) node [midway,above] {\SI{12}{m}};
+    },
+    rampForce/.pic = {
+        \coordinate (O);
+        \coordinate (t0) at (1,0);
+        \coordinate (t1) at (5,0);
+        \coordinate (P) at (0,1.4);
+        \fill [lightgray,semitransparent] (O) -- (t0 |- P) -- (t1 |- P) -- (t1) -- cycle;
+        \draw plot coordinates {(O) (t0 |- P) (t1 |- P)};
+        \draw [->] (O) -- ++(6,0) coordinate (X) node [right] {$x$};
+        \draw [->] (O) -- ++(0,2) coordinate (Y) node [left] {$y$};
+        \draw [dotted] (t0) node [below] {$t_0$} -- (t0 |- P);
+        \draw [dotted] (P) node [left] {$P$} -- (P -| t0);
     }
 }
 
