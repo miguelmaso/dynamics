@@ -386,12 +386,12 @@
     %
     singleTrain/.pic = {
         \tikzset{
-            wheel/.style={draw, circle, thick, minimum width=5pt, inner sep=0pt, fill=gray!75},
-            window/.style={draw, rectangle, very thin, left color=blue!50, shading angle=45, minimum width=6pt, minimum height=4.5pt, inner sep=0pt},
+            wheel/.style={draw, circle, thick, minimum width=8pt, inner sep=0pt, fill=gray!75},
+            window/.style={draw, rectangle, very thin, left color=blue!20, shading angle=45, minimum width=6pt, minimum height=4.5pt, inner sep=0pt},
             wagon/.style={draw, very thin, shading angle=0}
         }
-        \def\l{2}
-        \def\h{.4}
+        \def\l{3}
+        \def\h{.6}
         \path [draw]
             (0,1.2pt) coordinate (trolley) ++(-.5*\l,2pt) node (w1) [wheel] {}
             ++(\l,0) node (w2) [wheel] {};
@@ -399,21 +399,21 @@
           [rounded corners=1pt] (w1.west |- trolley) -| (trolley -| .04-\l,0) |- ++(\l,\h) -| ++(\l-.08,-\h) 
           [sharp corners] -| (w2.east) -- (w2.west) |- (trolley) -| (w1.east) -- (w1.west) |- cycle;
         \foreach \pos in {0,.3,...,\l} {
-            \path (trolley) ++(.9*\pos,.25) node [window] {};
-            \path (trolley) ++(-.9*\pos,.25) node [window] {};
+            \path (trolley) ++(.9*\pos,.35) node [window] {};
+            \path (trolley) ++(-.9*\pos,.35) node [window] {};
         }
     },
     fullTrain/.pic = {
         \pic at (0,0) {singleTrain};
-        \def\l{2}
-        \def\h{.5}
+        \def\l{3}
+        \def\h{.7}
         \def\s{.04}
         \begin{scope}
-            \clip (\l,0) rectangle ++(\l,\h) ++(\s,-\h) rectangle ++(\s,\h) ++(\s,-\h) rectangle ++(\s,\h);
+            \clip (\l,-1.2pt) rectangle ++(\l,\h) ++(\s,-\h) rectangle ++(\s,\h) ++(\s,-\h) rectangle ++(\s,\h);
             \pic at (2*\l,0) {singleTrain};
         \end{scope}
         \begin{scope}
-            \clip (-\l,0) rectangle ++(-.1,\h) ++(-\s,-\h) rectangle ++(-\s,\h) ++(-\s,-\h) rectangle ++(-\s,\h);
+            \clip (-\l,-1.2pt) rectangle ++(-.1,\h) ++(-\s,-\h) rectangle ++(-\s,\h) ++(-\s,-\h) rectangle ++(-\s,\h);
             \pic at (-2*\l,0) {singleTrain};
         \end{scope}
     },
@@ -424,13 +424,18 @@
         }
         \def\ya{-0.6pt}
         \def\yb{-1.2pt}
-        \pic {fullTrain};
-        \fill [lightgray] (1.6,0) coordinate (p1) rectangle ++(2.6,-.5);
-        \fill [lightgray] (-.4,0) coordinate (p2) rectangle ++(-1.9,-.5);
+        \def\yc{-.9}
+        \coordinate (annot) at (0, -.9);
+        \pic at (0, 1.2pt) {fullTrain};
+        \fill [lightgray,semitransparent] (-.4,0) coordinate (p1) rectangle ++(-2.7,-.5);
+        \fill [lightgray,semitransparent] (2.6,0) coordinate (p2) rectangle ++(3.4,-.5);
         \draw [ultra thick,offset1] ([yshift=\ya]p1) -- ([yshift=\ya]p2);
+        \coordinate (p3) at ($(p1)!.5!(p2)$);
         \pic at ([yshift=\yb]p1) {triangle};
         \pic at ([yshift=\yb]p2) {triangle};
-        \pic at ([yshift=\yb]$(p1)!.5!(p2)$) {triangle};
+        \pic at ([yshift=\yb]p3) {triangle};
+        \draw [<->] (p1 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
+        \draw [<->] (p2 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
     }
 }
 
