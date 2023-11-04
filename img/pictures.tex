@@ -472,6 +472,14 @@
         \draw [->] (O) -- ++(0,2) coordinate (Y) node [left] {$y$};
         \draw [dotted] (t0) node [below] {$t_0$} -- (t0 |- P);
         \draw [dotted] (P) node [left] {$P$} -- (P -| t0);
+    },
+    infLongForce/.pic = {
+        \pic {longBeam};
+        \draw (-1,1) -- (2,1) coordinate (w) node [midway,above] {$w$};
+        \draw [->] (w) ++(.3,0) -- ++(1,0) node [midway,above] {$v$};
+        \foreach \x in {-.4,-.1,...,2} {
+            \draw [-latex] (\x, 1) -- (\x, .1);
+        }
     }
 }
 
