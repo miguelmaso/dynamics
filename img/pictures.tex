@@ -15,9 +15,6 @@
 \pgfdeclareimage[height=1.5cm]{stone}     {img/shapes/stone}
 \pgfdeclareimage[height=1.5cm]{walking}   {img/shapes/walking}
 
-% Useful libraries
-\usetikzlibrary{calc}
-
 % Macro for inserting pictures
 \newcommand{\pictures}[1]{
     \begin{tikzpicture}
@@ -453,7 +450,7 @@
         \fill [lightgray,semitransparent] (-.4,0) coordinate (p1) rectangle ++(-2.7,-.5);
         \fill [lightgray,semitransparent] (2.6,0) coordinate (p2) rectangle ++(3.4,-.5);
         \draw [ultra thick,offset1] ([yshift=\ya]p1) -- ([yshift=\ya]p2);
-        \coordinate (p3) at ($(p1)!.5!(p2)$);
+        \path (p1) -- (p2) node [midway] (p3) {};
         \pic at ([yshift=\yb]p1) {triangle};
         \pic at ([yshift=\yb]p2) {triangle};
         \pic at ([yshift=\yb]p3) {triangle};
