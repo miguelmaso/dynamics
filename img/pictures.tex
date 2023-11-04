@@ -480,6 +480,22 @@
         \foreach \x in {-.4,-.1,...,2} {
             \draw [-latex] (\x, 1) -- (\x, .1);
         }
+    },
+    elsaticSpectrum/.pic = {
+        \begin{scope}[xscale=1.5,yscale=3]
+        \fill [lightgray,semitransparent] (0,0) coordinate (O) -- (0,.2) coordinate (s0) -- (.2,.5) coordinate (s1) --
+            (1,.5) coordinate (s2) -- plot [domain=1:2] ({\x}, {.5/\x}) coordinate (s3) -- plot [domain=2:4] ({\x}, {1/\x/\x}) -- (4,0) -- cycle;
+        \draw plot coordinates {(s0) (s1) (s2)} plot [domain=1:2] ({\x}, {.5/\x}) plot [domain=2:4] ({\x}, {1/\x/\x});
+        \draw [->] (O) -- (5,0) node [right] {$T$};
+        \draw [->] (O) -- (0,.8) node [left] {$S_a/g$};
+        \node [left] at (s0) {$0.2$};
+        \draw [dotted] (O |- s1) node [left] {$0.5$} -- (s1);
+        \draw [dotted] (O -| s1) node [below] {$0.15$} -- (s1);
+        \draw [dotted] (O -| s2) node [below] {$0.6$} -- (s2);
+        \draw [dotted] (O -| s3) node [below] {$3.0$} -- (s3);
+        \draw [<-] (s2) ++(.5,-.1) -- ++(.2,.2) node [above right] {$0.3/T$};
+        \draw [<-] (s3) ++(.6,-.05) -- ++(.2,.2) node [above right] {$0.9/T^2$};
+        \end{scope}
     }
 }
 
