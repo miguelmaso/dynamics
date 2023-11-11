@@ -36,13 +36,17 @@ $$
 $$
 
 The modal mass is
-$$
-m_\psi = \int_0^{l_y}\int_0^{l_x} \rho t \psi^2 dxdy
-$$
+\begin{multline*}
+m_\psi = \int_0^{l_y}\int_0^{l_x} \rho t \psi^2 dxdy =
+\int_0^{l_y}\int_0^{l_x} \rho t \sin^2\left(\frac{\pi nx}{l_x}\right) \sin^2\left(\frac{\pi my}{l_y}\right) dxdy = \\
+= \rho t \int_0^{l_x} \sin^2\left(\frac{\pi nx}{l_x}\right) dx \int_0^{l_y} \sin^2\left(\frac{\pi my}{l_y}\right) dy =
+\frac{\rho t l_x l_y}{4mn}.
+\end{multline*}
 
 The modal stiffness is
-$$
-m_\psi = \int_0^{l_y}\int_0^{l_x} D \psi''^2 dxdy
-$$
+\begin{multline*}
+m_\psi = \int_0^{l_y}\int_0^{l_x} D \psi''^2 dxdy = \dots\\
+= \frac{\pi^4D}{4}\left(\frac{l_yn^3}{l_x^3m} + \frac{l_xm^3}{l_y^3m} + \frac{2mn}{l_xl_y}\right)
+\end{multline*}
 
 \end{document}
