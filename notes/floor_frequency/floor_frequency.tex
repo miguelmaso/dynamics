@@ -5,12 +5,26 @@
 \usepackage{amsmath}
 \usepackage{wrapfig}
 \usepackage{tikz}
-
+\usepackage{pgfplots}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \lfoot{Miguel Masó\\miguel.maso@upc.edu}
 \rfoot{\today}
+
+\pgfplotsset{width=7cm,compat=1.18}
+\pgfplotsset{colormap={white}{color=(gray!20) color=(white)},
+    colormap/white/.style={colormap name=white}}
+\pgfplotsset{empty axes/.style={
+    xtick=\empty,
+    ytick=\empty,
+    ztick=\empty}}
+\pgfplotsset{white style/.style={
+    surf,
+    colormap/white,
+    samples=5, % 5 for fast rendering, 20 for accurate rendering
+    domain=0:1}}
+
 
 \begin{document}
 
@@ -48,5 +62,29 @@ The modal stiffness is
 m_\psi = \int_0^{l_y}\int_0^{l_x} D \psi''^2 dxdy = \dots\\
 = \frac{\pi^4D}{4}\left(\frac{l_yn^3}{l_x^3m} + \frac{l_xm^3}{l_y^3m} + \frac{2mn}{l_xl_y}\right)
 \end{multline*}
+
+
+\begin{tikzpicture}
+    \begin{axis}[empty axes, title=Mode 1]
+        \addplot3 [white style] {sin(180*x) * sin(180*y)};
+    \end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+    \begin{axis}[empty axes,title=Mode 2]
+        \addplot3 [white style] {sin(360*x) * sin(180*y)};
+    \end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+    \begin{axis}[empty axes,title=Mode 3]
+        \addplot3 [white style] {sin(180*x) * sin(360*y)};
+    \end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+    \begin{axis}[empty axes,title=Mode 4]
+        \addplot3 [white style] {sin(360*x) * sin(360*y)};
+    \end{axis}
+\end{tikzpicture}
+
 
 \end{document}
