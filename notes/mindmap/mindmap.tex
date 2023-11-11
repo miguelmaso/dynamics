@@ -10,16 +10,16 @@
 \colorlet{third}{blue!50}
 
 \begin{document}
-\begin{tikzpicture}[mindmap]
+\begin{tikzpicture}
 
-\path [concept color=first] node [concept] (a) at (0,0) {SDOF\\$F=0$}
+\path [mindmap,concept color=first] node [concept] (a) at (0,0) {SDOF\\$F=0$}
     child [grow=220] {node [concept] {Frequency $\omega^2=\frac{k}{m}$}
         child [grow=240] {node [concept] {\textbf{Fourier transform}}}
     }
     child [grow=180] {node [concept] {Damping $e^{-\xi\omega t}$}}
     child [grow=150] {node [concept] {\textbf{Rayleigh's method}}}
 ;
-\path [concept color=second] node [concept] (b) at (8,0){SDOF\\$F=F(t)$}
+\path [mindmap,concept color=second] node [concept] (b) at (8,0){SDOF\\$F=F(t)$}
     child [grow=130] {node [concept] {Dynamic magnification}
         child [grow=180] {node [concept] {Static response}}
         child [grow=120] {node [concept] {Resso-\\nance}}
@@ -38,7 +38,7 @@
         child [grow=300] {node [concept] {Response spectra}}
     }
 ;
-\path [concept color=third] node [concept] (c) at (16,0) {MDOF}
+\path [mindmap,concept color=third] node [concept] (c) at (16,0) {MDOF}
     child [grow=120] {node [concept] {Tuned mass dampers}}
     child [grow=60]  {node [concept] {Modal decomposition}
         child [grow=120] {node [concept] {Ortho-\\gonality}}
@@ -55,6 +55,9 @@
 
 \path (a) to[circle connection bar switch color=from (first) to (second)] (b);
 \path (b) to[circle connection bar switch color=from (second) to (third)] (c);
+
+\node at (current bounding box.north west) [anchor=north west,align=left] {\huge{Structural dynamics}\\[5pt]250704};
+\node at (current bounding box.south west) [anchor=south west] {\small{miguel.maso@upc.edu}};
 
 \end{tikzpicture}
 \end{document}
