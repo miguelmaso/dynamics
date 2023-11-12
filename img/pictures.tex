@@ -248,32 +248,32 @@
     % Examples 6 and 7
     %
     building/.pic = {
-        \draw [thick,gray,fill=lightgray] (0,0) rectangle (2,4);
-        \draw (-1,0) -- (3,0);
-        \foreach \x in {1,...,3} {
-            \foreach \y in {1,...,5} {
-                \draw [thick,gray,left color=blue!25, shading angle=45] (\x/2-.15, \y/1.5-.1) rectangle +(0.3,0.35);
+        \draw [gray,fill=lightgray] (0,0) rectangle (1.5,5);
+        \foreach \x in {0,.5,1} {
+            \foreach \y in {0,...,6} {
+                \draw [gray,left color=blue!10, shading angle=45] (\x+.05, \y/1.5+.1) rectangle +(0.4,0.6);
             }
         }
+        \draw (-1,0) -- (2.5,0);
+    },
+    buildingPsi/.pic = {
+        \pic {building};
+        \draw [dashed] (1.5,0) coordinate (O) -- (3,5);
+        \draw [dashed] (1.5,5) -- (3,5) coordinate (T);
+        \path (O) -- (T) node [midway,right] {$\psi$};
     },
     buildingHelicopter/.pic = {
-        \node at (0,4) {\pgfuseimage{helicopter}};
-        \pic at (2,0) {building};
-        \draw [dashed] (4,0) -- (5,4);
-        \draw [dashed] (4,4) -- (5,4);
+        \node at (0,4.5) {\pgfuseimage{helicopter}};
+        \pic at (2,0) {buildingPsi};
         },
     buildingWind/.pic = {
-        \pic {building};
-        \foreach \y in {0,...,8} {
-            \draw [->] (-.5-\y/8, \y/2) -- (0, \y/2);
+        \pic {buildingPsi};
+        \foreach \y in {0,...,10} {
+            \draw [->] (-.5-\y/10, \y/2) -- (0, \y/2);
         }
-        \coordinate (W0) at (-.5,0);
-        \coordinate (W1) at (-1.5,4);
-        \draw (W0) -- (W1);
+        \draw (-.5,0) coordinate (W0) -- (-1.5,5) coordinate (W1);
         \node [above left] at (W0) {\SI{0.3}{KN/m}};
         \node [left] at (W1) {\SI{1}{KN/m}};
-        \draw [dashed] (2,0) -- (3,4);
-        \draw [dashed] (2,4) -- (3,4);
     },
     %
     % Example 8
