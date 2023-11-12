@@ -51,6 +51,7 @@ For a rectangular floor \emph{simply supported at the four sides}, the natural f
 $$
 \psi = \sin\left(\frac{n\pi x}{l_x}\right) \sin\left(\frac{m\pi y}{l_y}\right).
 $$
+\\\vspace{1pt} % Enforce end of figure wrapping
 
 The modal mass is
 \begin{multline*}
@@ -85,11 +86,14 @@ and the first natural frequency is
 f_1 = \frac{\omega_1}{2\pi} = \frac{\pi}{2}\sqrt{\frac{D}{\rho t}} \left(\frac{1}{l_x^2} + \frac{1}{l_y^2}\right)
 \end{equation*}
 
+
+\begin{center}
 \begin{tikzpicture}
     \begin{axis}[empty axes,title={$1^\text{st}$ mode ($n=1$, $m=1$)}]
         \addplot3 [white style] {sin(180*x) * sin(180*y)};
     \end{axis}
 \end{tikzpicture}
+    \hspace{1em}
 \begin{tikzpicture}
     \begin{axis}[empty axes,title={$2^\text{nd}$ mode ($n=2$, $m=1$)}]
         \addplot3 [white style] {sin(360*x) * sin(180*y)};
@@ -101,11 +105,13 @@ f_1 = \frac{\omega_1}{2\pi} = \frac{\pi}{2}\sqrt{\frac{D}{\rho t}} \left(\frac{1
         \addplot3 [white style] {sin(180*x) * sin(360*y)};
     \end{axis}
 \end{tikzpicture}
+    \hspace{1em}
 \begin{tikzpicture}
     \begin{axis}[empty axes,title={$4^\text{th}$ mode ($n=2$, $m=2$)}]
         \addplot3 [white style] {sin(360*x) * sin(360*y)};
     \end{axis}
 \end{tikzpicture}
+\end{center}
 
 
 \end{document}
