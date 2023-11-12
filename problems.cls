@@ -127,6 +127,10 @@
 }
 
 
+% Globally set the item enumeration with small cap letter
+\renewcommand{\theenumi}{\alph{enumi}}
+
+
 % Add link to url in citations
 \DeclareFieldFormat{bibhyperref}{\usebibmacro{citelink}{#1}}
 \newbibmacro*{citelink}[1]{%
