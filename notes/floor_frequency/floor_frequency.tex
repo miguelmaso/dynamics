@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{../sty/notes}
+\notenum{2}
 
 \pgfplotsset{width=7cm}
 \pgfplotsset{colormap={white}{color=(gray!20) color=(white)},
@@ -40,7 +41,7 @@ $$
 \begin{wrapfigure}{l}{4cm}
 \vspace{-1em}
 \begin{tikzpicture}
-\draw [fill=gray!30] coordinate (O) rectangle (3,2) coordinate (P);
+\draw [fill=gray!20] coordinate (O) rectangle (3,2) coordinate (P);
 \path (O) -- node [midway,below] {$l_x$} (O -| P);
 \path (O -| P) -- node [midway,right] {$l_y$} (P);
 \end{tikzpicture}
@@ -50,6 +51,7 @@ For a rectangular floor \emph{simply supported at the four sides}, the natural f
 $$
 \psi = \sin\left(\frac{n\pi x}{l_x}\right) \sin\left(\frac{m\pi y}{l_y}\right).
 $$
+\\\vspace{1pt} % Enforce end of figure wrapping
 
 The modal mass is
 \begin{multline*}
@@ -64,12 +66,9 @@ The modal stiffness is
 k_\psi =
 \int_0^{l_y}\int_0^{l_x}D \left[-\frac{n^2\pi^2}{l_x^2} \sin\left(\frac{n\pi x}{l_x}\right) \sin\left(\frac{m\pi y}{l_y}\right)\right.\\
 \left.-\frac{m^2\pi^2}{l_y^2} \sin\left(\frac{n\pi x}{l_x}\right) \sin\left(\frac{m\pi y}{l_y}\right) \right]^2 dxdy = \\
-% \pi^4D \frac{n^4}{l_x^4} \int_0^{l_x} \sin^2\left(\frac{n\pi x}{l_x}\right) dx \int_0^{l_y} \sin^2\left(\frac{m\pi y}{l_y}\right) dy
-% + \pi^4D \frac{m^4}{l_y^4} \int_0^{l_x} \sin^2\left(\frac{n\pi x}{l_x}\right) dx \int_0^{l_y} \sin^2\left(\frac{m\pi y}{l_y}\right) dy
-% + 2\pi^4D \frac{n^2m^2}{l_x^2l_y^2} \dots = \\
 = \pi^4D \left[ \frac{n^4}{l_x^4}\frac{l_x}{2n}\frac{l_y}{2m} + \frac{m^4}{l_y^4}\frac{l_x}{2n}\frac{l_y}{2m}
 + 2\frac{n^2m^2}{l_x^2l_y^2}\frac{l_x}{2n}\frac{l_y}{2m} \right] = \\
-= \frac{\pi^4D}{4}\left(\frac{l_yn^3}{l_x^3m} + \frac{l_xm^3}{l_y^3m} + \frac{2mn}{l_xl_y}\right)
+= \frac{\pi^4D}{4}\left(\frac{l_yn^3}{l_x^3m} + \frac{l_xm^3}{l_y^3m} + \frac{2mn}{l_xl_y}\right).
 \end{multline*}
 
 Finally, the frequencies of the slab are obtained after division of the above results,
@@ -81,30 +80,35 @@ Finally, the frequencies of the slab are obtained after division of the above re
 \end{align*}
 and the first natural frequency is
 \begin{equation*}
-f_1 = \frac{\omega_1}{2\pi} = \frac{\pi}{2}\sqrt{\frac{D}{\rho t}} \left(\frac{1}{l_x^2} + \frac{1}{l_y^2}\right)
+f_1 = \frac{\omega_1}{2\pi} = \frac{\pi}{2}\sqrt{\frac{D}{\rho t}} \left(\frac{1}{l_x^2} + \frac{1}{l_y^2}\right).
 \end{equation*}
 
-\begin{tikzpicture}
-    \begin{axis}[empty axes,title={$1^\text{st}$ mode ($n=1$, $m=1$)}]
-        \addplot3 [white style] {sin(180*x) * sin(180*y)};
-    \end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-    \begin{axis}[empty axes,title={$2^\text{nd}$ mode ($n=2$, $m=1$)}]
-        \addplot3 [white style] {sin(360*x) * sin(180*y)};
-    \end{axis}
-\end{tikzpicture}
 
-\begin{tikzpicture}
-    \begin{axis}[empty axes,title={$3^\text{rd}$ mode ($n=1$, $m=2$)}]
-        \addplot3 [white style] {sin(180*x) * sin(360*y)};
-    \end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-    \begin{axis}[empty axes,title={$4^\text{th}$ mode ($n=2$, $m=2$)}]
-        \addplot3 [white style] {sin(360*x) * sin(360*y)};
-    \end{axis}
-\end{tikzpicture}
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[empty axes,title={$1^\text{st}$ mode ($n=1$, $m=1$)}]
+            \addplot3 [white style] {sin(180*x) * sin(180*y)};
+        \end{axis}
+    \end{tikzpicture}
+    \hspace{1em}
+    \begin{tikzpicture}
+        \begin{axis}[empty axes,title={$2^\text{nd}$ mode ($n=2$, $m=1$)}]
+            \addplot3 [white style] {sin(360*x) * sin(180*y)};
+        \end{axis}
+    \end{tikzpicture}
+    
+    \begin{tikzpicture}
+        \begin{axis}[empty axes,title={$3^\text{rd}$ mode ($n=1$, $m=2$)}]
+            \addplot3 [white style] {sin(180*x) * sin(360*y)};
+        \end{axis}
+    \end{tikzpicture}
+    \hspace{1em}
+    \begin{tikzpicture}
+        \begin{axis}[empty axes,title={$4^\text{th}$ mode ($n=2$, $m=2$)}]
+            \addplot3 [white style] {sin(360*x) * sin(360*y)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
 
 
 \end{document}
