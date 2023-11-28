@@ -3,8 +3,8 @@
 # For additional cusomization the local gitignore
 # (.git/info/exclude) could be modified
 
-# main output. Note that the pdf in folders are included
-/*.pdf
+# pdf is an output
+*.pdf
 
 # recovery files
 *~
@@ -34,3 +34,9 @@
 *.synctex*
 *.run.xml
 *.DS_Store
+
+# files that are not latex
+*.doc
+*.docx
+*.xls
+*.xlsx

@@ -1,20 +1,32 @@
-markdown: kramdown
+title: Dynamics
+description: A collection of examples of structural dynamics
+author: "Miguel Masó"
+
 theme: minima
 
-topnav_title: Structural dynamics
-# this appears on the top navigation bar next to the home button
+base_url: /test-pages
+repository: miguelmaso/test-pages
 
-site_title: Structural dynamics
-# this appears in the html browser tab for the site title (seen mostly by search engines, not users)
+# Minima social links
+github_username: miguelmaso
+linkedin_username: miguel-maso
 
-github_editme_path: KratosMultiphysics/Kratos/tree/master/docs/
-# if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
+# Minima: show excerpts in the frontpage
+show_excerpts: true
 
-feedback_email: miguel.maso@upc.edu
-# used as a contact email for the Feedback link in the top navigation bar
+minima:
+  date_format: "%Y-%m-%d"
 
-collections:
-  tooltips:
-    output: true
-# collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
+# Minima: custom header links
+header_pages:
+  - _pages/frontpage.md
+  - _pages/notebooks.md
+  - _pages/about.md
 
+include:
+    - _pages
+
+exclude: 
+    - .gitignore
+    - LICENSE
+    - README.md
