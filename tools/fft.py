@@ -38,7 +38,7 @@ class MplCanvas(FigureCanvasQTAgg):
 
 class MainWindow(QMainWindow):
 
-    message_time = 5000
+    message_duration = 5000
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -95,7 +95,7 @@ class MainWindow(QMainWindow):
 
     def InitializeFFT(self):
         msg = self.fft.ReadData(self.file_label.text())
-        self.statusBar.showMessage(msg)
+        self.statusBar.showMessage(msg, self.message_duration)
         if self.fft.is_initialized:
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
@@ -198,7 +198,7 @@ class SettingsWidget(QWidget):
             self.parent.fft.comments = str(self.comments.text())
             self.parent.fft.skiprows = int(self.skiprows.text())
         except Exception as e:
-            self.parent.statusBar.showMessage(str(e), self.parent.message_time)
+            self.parent.statusBar.showMessage(str(e), self.parent.message_duration)
         if self.parent.file_label.text():
             self.parent.InitializeFFT()
         super().hideEvent(event)
@@ -216,7 +216,8 @@ class FFTCalculator():
 
     def ReadData(self, filename):
         try:
-            self._time, self._acc = np.loadtxt(filename, delimiter=self.delimiter, usecols=(self.time_col, self.acc_col), unpack=True)
+            self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
+                delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
             self._time -= self._time[0]
             self.time = self._time
             self.acc = self._acc
