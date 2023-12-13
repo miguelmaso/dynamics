@@ -3,7 +3,7 @@ import numpy as np
 from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
-    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QStyle)
+    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QStyle, QStatusBar)
 from PyQt5.QtCore import Qt
 from qtrangeslider import QRangeSlider
 
@@ -38,6 +38,8 @@ class MplCanvas(FigureCanvasQTAgg):
 
 class MainWindow(QMainWindow):
 
+    message_time = 5000
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -45,6 +47,8 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
         self.setWindowTitle("Fourier transform")
         self.setMinimumWidth(500)
+        self.statusBar = QStatusBar()
+        self.setStatusBar(self.statusBar)
 
         layout = QFormLayout()
         widget = QWidget()
@@ -85,11 +89,13 @@ class MainWindow(QMainWindow):
 
     def UpdateFilename(self):
         filename = QFileDialog.getOpenFileName(self, 'Open file', filter='csv files (*.csv)')[0]
-        self.file_label.setText(filename)
-        self.InitializeFFT()
+        if filename:
+            self.file_label.setText(filename)
+            self.InitializeFFT()
 
     def InitializeFFT(self):
-        self.fft.ReadData(self.file_label.text())
+        msg = self.fft.ReadData(self.file_label.text())
+        self.statusBar.showMessage(msg)
         if self.fft.is_initialized:
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
@@ -147,25 +153,25 @@ class SettingsWidget(QWidget):
         layout = QGridLayout()
         self.setLayout(layout)
 
-        delim_label = QLabel('Delimiter')
-        self.delim = QLineEdit(self.parent.fft.delimiter)
-        self.delim.setToolTip('The character used to separate the values.')
+        delimiter_label = QLabel('Delimiter')
+        self.delimiter = QLineEdit()
+        self.delimiter.setToolTip('The character used to separate the values.')
         time_col_label = QLabel('Time at column')
-        self.time_col = QLineEdit(str(self.parent.fft.time_col))
+        self.time_col = QLineEdit()
         self.time_col.setToolTip('Zero-based index.')
         acc_col_label = QLabel('Acceleration at column')
-        self.acc_col = QLineEdit(str(self.parent.fft.acc_col))
+        self.acc_col = QLineEdit()
         self.acc_col.setToolTip('Zero-based index.')
         comments_label = QLabel('Comments')
-        self.comments = QLineEdit(self.parent.fft.comments)
+        self.comments = QLineEdit()
         self.comments.setToolTip('Character or list of characters.')
         skiprows_label = QLabel('Skiprows')
-        self.skiprows = QLineEdit(str(self.parent.fft.skiprows))
+        self.skiprows = QLineEdit()
         self.skiprows.setToolTip('Skip the first lines, including comments.')
         button = QPushButton('Accept')
-        button.clicked.connect(self.applySettings)
-        layout.addWidget(delim_label, 0, 0)
-        layout.addWidget(self.delim, 0, 1)
+        button.clicked.connect(self.hide)
+        layout.addWidget(delimiter_label, 0, 0)
+        layout.addWidget(self.delimiter, 0, 1)
         layout.addWidget(time_col_label, 1, 0)
         layout.addWidget(self.time_col, 1, 1)
         layout.addWidget(acc_col_label, 2, 0)
@@ -176,19 +182,26 @@ class SettingsWidget(QWidget):
         layout.addWidget(self.skiprows, 4, 1)
         layout.addWidget(button, 5, 1)
 
-    def applySettings(self):
+    def showEvent(self, event) -> None:
+        self.delimiter.setText(str(self.parent.fft.delimiter))
+        self.time_col.setText(str(self.parent.fft.time_col))
+        self.acc_col.setText(str(self.parent.fft.acc_col))
+        self.comments.setText(str(self.parent.fft.comments))
+        self.skiprows.setText(str(self.parent.fft.skiprows))
+        super().showEvent(event)
+
+    def hideEvent(self, event) -> None:
         try:
-            self.parent.fft.delimiter = str(self.delim.text())
+            self.parent.fft.delimiter = str(self.delimiter.text())
             self.parent.fft.time_col = int(self.time_col.text())
             self.parent.fft.acc_col = int(self.acc_col.text())
             self.parent.fft.comments = str(self.comments.text())
             self.parent.fft.skiprows = int(self.skiprows.text())
         except Exception as e:
-            print(e)
-        self.hide()
+            self.parent.statusBar.showMessage(str(e), self.parent.message_time)
         if self.parent.file_label.text():
             self.parent.InitializeFFT()
-
+        super().hideEvent(event)
 
 class FFTCalculator():
 
@@ -208,8 +221,9 @@ class FFTCalculator():
             self.time = self._time
             self.acc = self._acc
             self.is_initialized = True
+            return ''
         except Exception as e:
-            print(e)
+            return str(e)
 
     def TrimTimeseries(self, limits):
         self.time = self._time[limits[0]:limits[1]]
