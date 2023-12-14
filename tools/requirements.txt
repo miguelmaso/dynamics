@@ -2,4 +2,4 @@ numpy
 scipy
 matplotlib
 pyqt5
-qtrangeslider
+superqt

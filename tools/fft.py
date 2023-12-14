@@ -5,7 +5,7 @@ from scipy.fft import fft, fftfreq
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
     QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QStyle, QStatusBar)
 from PyQt5.QtCore import Qt
-from qtrangeslider import QRangeSlider
+from superqt import QRangeSlider
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
