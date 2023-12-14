@@ -4,17 +4,20 @@ This package implements a simple GUI to calculate Fourier transforms from data s
 
 ## Installation
 
-**Option A** Copy the file `fft.py` to a place of your choice and make sure all the dependencies are installed
+**Option A** Copy the file `fft.py` into a place of your choice and make sure all the dependencies are installed.
 ```sh
 pip install numpy scipy matplotlib pyqt5 superqt
 ```
-And then, execute the python script:
+Then, execute the python script:
 ```sh
 python fft
 ```
 
-**Option B** Install the wheels and call the package as a module:
+**Option B** Install the wheels:
 ```sh
 pip install fft
+```
+After that, you can call the package as a module from any location.
+```sh
 pip -m fft
 ```
