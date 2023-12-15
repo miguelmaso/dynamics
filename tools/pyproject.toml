@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "owl-fft"
+name = "owlfft"
 authors = [{name = "Miguel Masó", email = "miguel.maso@upc.edu"}]
 version = "0.0.1"
 license = "MIT"
