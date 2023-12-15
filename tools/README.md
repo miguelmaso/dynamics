@@ -4,20 +4,20 @@ This package implements a simple GUI to calculate real positive Fourier transfor
 
 ## Installation
 
-**Option A** Copy the file `fft.py` into a place of your choice and make sure all the dependencies are installed.
+**Option A** Copy the file `owlfft.py` into a place of your choice and make sure all the dependencies are installed.
 ```sh
 pip install numpy scipy matplotlib pyqt5 superqt
 ```
 Then, execute the python script:
 ```sh
-python owl-fft
+python owlfft
 ```
 
 **Option B** Install the wheels:
 ```sh
-pip install owl-fft
+pip install owlfft
 ```
 After that, you can call the package as a module from any location.
 ```sh
-pip -m owl-fft
+pip -m owlfft
 ```
