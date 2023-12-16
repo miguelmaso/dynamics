@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "owlfft"
 authors = [{name = "Miguel Masó", email = "miguel.maso@upc.edu"}]
-version = "0.0.2"
+version = "0.0.3"
 license = {text = "MIT License"}
 readme = "README.md"
 description = "Wrap scipy fft and numpy loadtxt within a simple GUI"

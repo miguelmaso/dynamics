@@ -1,4 +1,4 @@
-This package implements a simple GUI to calculate real positive Fourier transforms from data stored in a `.csv` file, e.g., the recording data of an accelerometer. It is aimed to be an educational resource for the structural dynamics course at the [Barcelona School of Civil Engineering](https://camins.upc.edu/en).
+This package implements a simple GUI to calculate real positive Fourier transforms from data stored in a `.csv` file, e.g., the recording data of an accelerometer. It aimts to be an educational resource for the structural dynamics course at the [Barcelona School of Civil Engineering](https://camins.upc.edu/en).
 
 ## Installation
 On the commandline, type the following command:
@@ -14,17 +14,17 @@ Alternatively, you can download the file `owlfft.py` into a place of your choice
 ```sh
 pip install numpy scipy matplotlib pyqt5 superqt
 ```
-Then, run the python script:
+and then, run the python script:
 ```sh
 python owlfft.py
 ```
 
 ## Usage
-The following window will be opened. It allows to select a `.csv` file and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
-![Main window](docs/main_window.png)
+![Main window](docs/https://github.com/miguelmaso/dynamics/blob/main/tools/docs/main_window.png)
+The above window will be opened. It allows to select a `.csv` file and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
 
 ## Why an owl?
-Because the python project must be unique, because I like birds and because the name is short.
+Because the python project must be unique, because the author likes birds and because the name is short.
 
 ## Thanks
 The author gratefully acknoledge [Flaticon](https://www.flaticon.com/free-icons/owl) for the design of the icon.
