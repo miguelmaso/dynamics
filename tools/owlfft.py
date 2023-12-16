@@ -23,6 +23,46 @@ from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
 
+class FFTCalculator():
+
+    delimiter = ','
+    time_col = 1
+    acc_col = 3
+    comments = '#'
+    skiprows = 0
+
+    def __init__(self):
+        self.is_initialized = False
+
+    def ReadData(self, filename):
+        try:
+            self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
+                delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
+            self._time -= self._time[0]
+            self.time = self._time
+            self.acc = self._acc
+            self.is_initialized = True
+            return ''
+        except Exception as e:
+            return str(e)
+
+    def TrimTimeseries(self, limits):
+        self.time = self._time[limits[0]:limits[1]]
+        self.acc = self._acc[limits[0]:limits[1]]
+
+    def TrimFrequencies(self, limits):
+        self.frequencies = self._frequencies[limits[0]:limits[1]]
+        self.spectrum = self._spectrum[limits[0]:limits[1]]
+
+    def Calculate(self):
+        n = len(self.time)
+        self._spectrum = fft(self.acc)[:n//2]
+        self._spectrum = 2/n * np.abs(self._spectrum)
+        self._frequencies = fftfreq(n, (self.time[1] - self.time[0]))[:n//2]
+        self.frequencies = self._frequencies
+        self.spectrum = self._spectrum
+
+
 class MplCanvas(FigureCanvasQTAgg):
 
     def __init__(self):
@@ -224,45 +264,6 @@ class SettingsWidget(QWidget):
         if self.parent.file_label.text():
             self.parent.InitializeFFT()
         super().hideEvent(event)
-
-class FFTCalculator():
-
-    delimiter = ','
-    time_col = 1
-    acc_col = 3
-    comments = '#'
-    skiprows = 0
-
-    def __init__(self):
-        self.is_initialized = False
-
-    def ReadData(self, filename):
-        try:
-            self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
-                delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
-            self._time -= self._time[0]
-            self.time = self._time
-            self.acc = self._acc
-            self.is_initialized = True
-            return ''
-        except Exception as e:
-            return str(e)
-
-    def TrimTimeseries(self, limits):
-        self.time = self._time[limits[0]:limits[1]]
-        self.acc = self._acc[limits[0]:limits[1]]
-
-    def TrimFrequencies(self, limits):
-        self.frequencies = self._frequencies[limits[0]:limits[1]]
-        self.spectrum = self._spectrum[limits[0]:limits[1]]
-
-    def Calculate(self):
-        n = len(self.time)
-        self._spectrum = fft(self.acc)[:n//2]
-        self._spectrum = 2/n * np.abs(self._spectrum)
-        self._frequencies = fftfreq(n, (self.time[1] - self.time[0]))[:n//2]
-        self.frequencies = self._frequencies
-        self.spectrum = self._spectrum
 
 OWL = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x14\x00\x00\x00\x14\x08\x06\x00\x00\x00\x8d\x89\x1d\r\x00\x00\x00\x01sRGB\x00\xae\xce\x1c\xe9\x00\x00\x00\xf5IDAT8O\x9d\x941\x0e\x02A\x08E\xdf\xdaib<\x9c\x16\x16\x1e\xc2\xce\xce\xc6\xca\xce;X\x99\xe8\xe54\xd1N\xcd\x98e\xc3\xb2\xb0L\xdc\x8ae\x98?|\xf8\xd0\xd0\xff>@\xd3\xba\x8a=\xf6\xe98\xb1\xbb\xcbr\xf1\tL\rJ\x17\x1c<\xf4\x02fr\xc7\x06\x17\x7f\xc9l\x05\xdcZ\xbb\xf8l\xd6\xe5\x7f\t\\\xd5\xd9\x0f3\x02\xd4\xfe\rpn3X\x03\x17\xc5@\x97\xc8\x05\x94\xbaE4S\xffX\x80\x06\xaf\xb1\xab2\x9c\x00oSK\xf1I\xbd{\xa5K)$\xd2\x19\x94hL\x12^\xc34\xbe\xd6i\xa8C\t:\x01\xdb\xf6v\xf4\xe8\x11\xd8\xd9\x98\x8cr4-\x9e.\xab\x9ab)f\tT\t[@\x07"v&\xe9o@\x01O\xbb,\xda\xda\x03\x87d\x13\x15\xfaU\x80\x02\x9aM\xd1\x1cxd]\xd6\xf5\xf2\x96G\xb4/C\x1dz\xc2\xd5\x99Z\x8a\xd5\x94=\xe0\x05p7us\x01\xb3U\x9f\x8cs\xff\xf8\x0b\xb6\xafE\x14\xc5SCR\x00\x00\x00\x00IEND\xaeB`\x82'
 
