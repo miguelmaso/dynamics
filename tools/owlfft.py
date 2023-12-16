@@ -8,13 +8,13 @@ Wrap scipy fft and numpy loadtxt within a simple GUI.
 Author: Miguel Masó, miguel.maso@upc.edu
 License: MIT License
 """
-import sys
+import sys, os
 import numpy as np
 from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
     QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QStatusBar)
-from PyQt5.QtCore import Qt, QByteArray
+from PyQt5.QtCore import Qt, QByteArray, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from superqt import QRangeSlider
 
@@ -72,7 +72,7 @@ class MplCanvas(FigureCanvasQTAgg):
         self.ax0.set_xlabel('Time (units from data)')
         self.ax0.set_ylabel('Acc (units from data)')
         self.ax1 = fig.add_subplot(212)
-        self.ax1.set_xlabel('Cyclic frequency (units from data)')
+        self.ax1.set_xlabel('Cyclic frequency (Hz, units from data)')
         self.ax1.set_ylabel('Fourier transform')
         fig.tight_layout()
         super().__init__(fig)
@@ -117,12 +117,13 @@ class MainWindow(QMainWindow):
         widget = QWidget()
         widget.setLayout(layout)
         
-        self.settings = SettingsWidget(self)
+        self.settings = QSettings(ENTITY, PROJECT)
+        self.settings_widget = SettingsWidget(self)
         self.file_label = QLineEdit()
         self.file_button = QPushButton('...')
         self.settings_button = QPushButton('>_')
         self.file_button.clicked.connect(self.UpdateFilename)
-        self.settings_button.clicked.connect(self.settings.show)
+        self.settings_button.clicked.connect(self.settings_widget.show)
 
         self.time_label = QLabel()
         self.time_slider = QRangeSlider(Qt.Orientation.Horizontal)
@@ -151,9 +152,10 @@ class MainWindow(QMainWindow):
         self.show()
 
     def UpdateFilename(self):
-        filename = QFileDialog.getOpenFileName(self, 'Open file', filter='csv files (*.csv)')[0]
+        filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()), 'csv files (*.csv)')[0]
         if filename:
             self.file_label.setText(filename)
+            self.settings.setValue('dirname', os.path.dirname(filename))
             self.InitializeFFT()
 
     def InitializeFFT(self):
@@ -211,7 +213,7 @@ class SettingsWidget(QWidget):
         self.parent = parent
         self.setWindowIcon(QIcon(self.parent.icon))
         self.setWindowTitle("File settings")
-        
+
         layout = QGridLayout()
         self.setLayout(layout)
 
@@ -245,11 +247,11 @@ class SettingsWidget(QWidget):
         layout.addWidget(button, 5, 1)
 
     def showEvent(self, event) -> None:
-        self.delimiter.setText(str(self.parent.fft.delimiter))
-        self.time_col.setText(str(self.parent.fft.time_col))
-        self.acc_col.setText(str(self.parent.fft.acc_col))
-        self.comments.setText(str(self.parent.fft.comments))
-        self.skiprows.setText(str(self.parent.fft.skiprows))
+        self.delimiter.setText(str(self.parent.settings.value('delimiter', self.parent.fft.delimiter)))
+        self.time_col.setText(str(self.parent.settings.value('time_col', self.parent.fft.time_col)))
+        self.acc_col.setText(str(self.parent.settings.value('acc_col', self.parent.fft.acc_col)))
+        self.comments.setText(str(self.parent.settings.value('comments', self.parent.fft.comments)))
+        self.skiprows.setText(str(self.parent.settings.value('skiprows', self.parent.fft.skiprows)))
         super().showEvent(event)
 
     def hideEvent(self, event) -> None:
@@ -259,12 +261,19 @@ class SettingsWidget(QWidget):
             self.parent.fft.acc_col = int(self.acc_col.text())
             self.parent.fft.comments = str(self.comments.text())
             self.parent.fft.skiprows = int(self.skiprows.text())
+            self.parent.settings.setValue('delimiter', str(self.delimiter.text()))
+            self.parent.settings.setValue('time_col', str(self.time_col.text()))
+            self.parent.settings.setValue('acc_col', str(self.acc_col.text()))
+            self.parent.settings.setValue('comments', str(self.comments.text()))
+            self.parent.settings.setValue('skiprows', str(self.skiprows.text()))
         except Exception as e:
             self.parent.statusBar.showMessage(str(e), self.parent.message_duration)
         if self.parent.file_label.text():
             self.parent.InitializeFFT()
         super().hideEvent(event)
 
+ENTITY = 'ETSCCPB'
+PROJECT = 'owlfft'
 OWL = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x14\x00\x00\x00\x14\x08\x06\x00\x00\x00\x8d\x89\x1d\r\x00\x00\x00\x01sRGB\x00\xae\xce\x1c\xe9\x00\x00\x00\xf5IDAT8O\x9d\x941\x0e\x02A\x08E\xdf\xdaib<\x9c\x16\x16\x1e\xc2\xce\xce\xc6\xca\xce;X\x99\xe8\xe54\xd1N\xcd\x98e\xc3\xb2\xb0L\xdc\x8ae\x98?|\xf8\xd0\xd0\xff>@\xd3\xba\x8a=\xf6\xe98\xb1\xbb\xcbr\xf1\tL\rJ\x17\x1c<\xf4\x02fr\xc7\x06\x17\x7f\xc9l\x05\xdcZ\xbb\xf8l\xd6\xe5\x7f\t\\\xd5\xd9\x0f3\x02\xd4\xfe\rpn3X\x03\x17\xc5@\x97\xc8\x05\x94\xbaE4S\xffX\x80\x06\xaf\xb1\xab2\x9c\x00oSK\xf1I\xbd{\xa5K)$\xd2\x19\x94hL\x12^\xc34\xbe\xd6i\xa8C\t:\x01\xdb\xf6v\xf4\xe8\x11\xd8\xd9\x98\x8cr4-\x9e.\xab\x9ab)f\tT\t[@\x07"v&\xe9o@\x01O\xbb,\xda\xda\x03\x87d\x13\x15\xfaU\x80\x02\x9aM\xd1\x1cxd]\xd6\xf5\xf2\x96G\xb4/C\x1dz\xc2\xd5\x99Z\x8a\xd5\x94=\xe0\x05p7us\x01\xb3U\x9f\x8cs\xff\xf8\x0b\xb6\xafE\x14\xc5SCR\x00\x00\x00\x00IEND\xaeB`\x82'
 
 if __name__ == '__main__':
