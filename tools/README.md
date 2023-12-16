@@ -23,5 +23,8 @@ python owlfft.py
 The following window will be opened. It allows to select a `.csv` file and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
 ![Main window](docs/main_window.png)
 
+## Why an owl?
+Because the python project must be unique, because I like birds and because the name is short.
+
 ## Thanks
 The author gratefully acknoledge [Flaticon](https://www.flaticon.com/free-icons/owl) for the design of the icon.
