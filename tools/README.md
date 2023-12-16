@@ -20,7 +20,7 @@ python owlfft.py
 ```
 
 ## Usage
-![Main window](docs/https://github.com/miguelmaso/dynamics/blob/main/tools/docs/main_window.png)
+![Main window](https://github.com/miguelmaso/dynamics/blob/main/tools/docs/main_window.png)
 The above window will be opened. It allows to select a `.csv` file and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
 
 ## Why an owl?
