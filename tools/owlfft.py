@@ -20,6 +20,7 @@ from superqt import QRangeSlider
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
+from matplotlib.widgets import Cursor
 
 
 class MplCanvas(FigureCanvasQTAgg):
@@ -33,18 +34,26 @@ class MplCanvas(FigureCanvasQTAgg):
         self.ax1 = fig.add_subplot(212)
         self.ax1.set_xlabel('Cyclic frequency (units from data)')
         self.ax1.set_ylabel('Fourier transform')
-        self.vline = self.ax1.axvline(color='k', lw=0.8)
-        self.text = self.ax1.text(0,0,s='')
-        fig.canvas.mpl_connect('motion_notify_event', self.on_mouse_move)
         fig.tight_layout()
         super().__init__(fig)
 
-    def on_mouse_move(self, event):
+
+class AnnotatedVCursor(Cursor):
+
+    def __init__(self, **cursorargs):
+        super().__init__(horizOn=False, useblit=True, **cursorargs)
+        self.text = self.ax.text(0, 0, "0", visible=False, animated=bool(self.useblit))
+
+    def onmove(self, event):
+        super().onmove(event)
         if event.inaxes:
-            self.vline.set_xdata([event.xdata])
+            self.text.set_position([event.xdata, event.ydata])
             self.text.set_text(f'{event.xdata:.2f}')
-            self.text.set(x=event.xdata, y=event.ydata)
-            self.ax1.figure.canvas.draw()
+            self.text.set_visible(True)
+            self.ax.draw_artist(self.text)
+            self.canvas.blit(self.ax.bbox)
+        else:
+            self.text.set_visible(False)
 
 
 class MainWindow(QMainWindow):
@@ -151,8 +160,7 @@ class MainWindow(QMainWindow):
         self.fft.TrimFrequencies(self.frequency_slider.value())
         self.canvas.ax1.cla()
         self.canvas.ax1.plot(self.fft.frequencies, self.fft.spectrum)
-        self.canvas.vline = self.canvas.ax1.axvline(self.fft.frequencies[0], color='k', lw=0.8)
-        self.canvas.text = self.canvas.ax1.text(self.fft.frequencies[0],0,s='')
+        self.canvas.cursor = AnnotatedVCursor(ax=self.canvas.ax1, color='k', lw=.8)
         self.canvas.draw()
 
 
