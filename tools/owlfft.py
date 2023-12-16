@@ -1,3 +1,13 @@
+"""
+======
+owlfft
+======
+
+Wrap scipy fft and numpy loadtxt within a simple GUI.
+
+Author: Miguel Masó, miguel.maso@upc.edu
+License: MIT License
+"""
 import sys
 import numpy as np
 from scipy.fft import fft, fftfreq
