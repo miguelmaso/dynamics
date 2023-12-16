@@ -86,7 +86,7 @@ class AnnotatedVCursor(Cursor):
 
     def onmove(self, event):
         super().onmove(event)
-        if event.inaxes:
+        if event.inaxes == self.ax:
             self.text.set_position([event.xdata, event.ydata])
             self.text.set_text(f'{event.xdata:.2f}')
             self.text.set_visible(True)
