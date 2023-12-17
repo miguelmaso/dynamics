@@ -21,7 +21,6 @@ from superqt import QRangeSlider
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
-from matplotlib import pyplot as plt
 
 
 class FFTCalculator():
@@ -67,24 +66,35 @@ class FFTCalculator():
 class MplCanvas(FigureCanvasQTAgg):
 
     def __init__(self):
-        fig, (self.ax0, self.ax1) = plt.subplots(2, 1, figsize=(10,6), facecolor='gray')
-        fig.patch.set_alpha(0.12)
+        super().__init__(Figure(figsize=(10,6), facecolor='gray'))
+        self.figure.patch.set_alpha(0.12)
+        self.ax0, self.ax1 = self.figure.subplots(2, 1)
         self.ax0.set_xlabel('Time (units from data)')
         self.ax0.set_ylabel('Acc (units from data)')
         self.ax1.set_xlabel('Cyclic frequency (Hz, units from data)')
         self.ax1.set_ylabel('Fourier transform')
-        fig.tight_layout()
-        super().__init__(fig)
+        self.l0, = self.ax0.plot([], [])
+        self.l1, = self.ax1.plot([], [])
+        self.cursor = AnnotatedVCursor(ax=self.ax1, color='k', lw=.8)
+        self.figure.tight_layout()
 
     def UpdateTimeDomainPlot(self, xdata, ydata):
-        self.ax0.cla()
-        self.ax0.plot(xdata, ydata)
+        # self.ax0.cla()
+        # self.ax0.plot(xdata, ydata)
+        # self.draw()
+        self.l0.set_data(xdata, ydata)
+        self.ax0.relim(visible_only=True)
+        self.ax0.autoscale()
         self.draw()
 
     def UpdateFrequencyDomainPlot(self, xdata, ydata):
-        self.ax1.cla()
-        self.ax1.plot(xdata, ydata)
-        self.cursor = AnnotatedVCursor(ax=self.ax1, color='k', lw=.8)
+        # self.ax1.cla()
+        # self.ax1.plot(xdata, ydata)
+        # self.cursor = AnnotatedVCursor(ax=self.ax1, color='k', lw=.8)
+        # self.draw()
+        self.l1.set_data(xdata, ydata)
+        self.ax1.relim(visible_only=True)
+        self.ax1.autoscale()
         self.draw()
 
 
