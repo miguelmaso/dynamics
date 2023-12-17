@@ -21,6 +21,7 @@ from superqt import QRangeSlider
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
+from matplotlib import pyplot as plt
 
 
 class FFTCalculator():
@@ -66,16 +67,25 @@ class FFTCalculator():
 class MplCanvas(FigureCanvasQTAgg):
 
     def __init__(self):
-        fig = Figure(figsize=(10, 6), dpi=100, facecolor='gray')
+        fig, (self.ax0, self.ax1) = plt.subplots(2, 1, figsize=(10,6), facecolor='gray')
         fig.patch.set_alpha(0.12)
-        self.ax0 = fig.add_subplot(211)
         self.ax0.set_xlabel('Time (units from data)')
         self.ax0.set_ylabel('Acc (units from data)')
-        self.ax1 = fig.add_subplot(212)
         self.ax1.set_xlabel('Cyclic frequency (Hz, units from data)')
         self.ax1.set_ylabel('Fourier transform')
         fig.tight_layout()
         super().__init__(fig)
+
+    def UpdateTimeDomainPlot(self, xdata, ydata):
+        self.ax0.cla()
+        self.ax0.plot(xdata, ydata)
+        self.draw()
+
+    def UpdateFrequencyDomainPlot(self, xdata, ydata):
+        self.ax1.cla()
+        self.ax1.plot(xdata, ydata)
+        self.cursor = AnnotatedVCursor(ax=self.ax1, color='k', lw=.8)
+        self.draw()
 
 
 class AnnotatedVCursor(Cursor):
@@ -128,7 +138,7 @@ class MainWindow(QMainWindow):
         self.time_label = QLabel()
         self.time_slider = QRangeSlider(Qt.Orientation.Horizontal)
         self.time_slider.valueChanged.connect(self.UpdateTime)
-        self.time_slider.sliderReleased.connect(self.UpdateCalculations)
+        self.time_slider.sliderReleased.connect(self.UpdateFFT)
 
         self.frequency_label = QLabel()
         self.frequency_slider = QRangeSlider(Qt.Orientation.Horizontal)
@@ -165,45 +175,34 @@ class MainWindow(QMainWindow):
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
             self.time_slider.setValue([0, n])
-            self.UpdateCalculations(True)
+            self.UpdateFFT(reset_slider=True)
 
     def UpdateTime(self):
         if self.fft.is_initialized:
-            idx = self.time_slider.value()
-            min_value = self.fft._time[idx[0]]
-            max_value = self.fft._time[idx[1] - 1]
+            rng = self.time_slider.value()
+            min_value = self.fft._time[rng[0]]
+            max_value = self.fft._time[rng[1] - 1]
             self.time_label.setText(f'Time span: {min_value:.1f} to {max_value:.1f}')
-            self.UpdateTimeDomainPlot()
+            self.fft.TrimTimeseries(rng)
+            self.canvas.UpdateTimeDomainPlot(self.fft.time, self.fft.acc)
 
-    def UpdateTimeDomainPlot(self):
-        self.fft.TrimTimeseries(self.time_slider.value())
-        self.canvas.ax0.cla()
-        self.canvas.ax0.plot(self.fft.time, self.fft.acc)
-        self.canvas.draw()
-
-    def UpdateCalculations(self, update_slider=False):
+    def UpdateFFT(self, reset_slider=False):
         if self.fft.is_initialized:
             self.fft.Calculate()
             n = len(self.fft._frequencies)
             self.frequency_slider.setRange(0, n)
-            if update_slider:
+            if reset_slider:
                 self.frequency_slider.setValue([0, n])
             self.UpdateFrequency()
 
     def UpdateFrequency(self):
         if self.fft.is_initialized:
-            idx = self.frequency_slider.value()
-            min_value = self.fft._frequencies[idx[0]]
-            max_value = self.fft._frequencies[idx[1] - 1]
+            rng = self.frequency_slider.value()
+            min_value = self.fft._frequencies[rng[0]]
+            max_value = self.fft._frequencies[rng[1] - 1]
             self.frequency_label.setText(f'Frequency span: {min_value:.1f} to {max_value:.1f}')
-            self.UpdateFrequencyDomainPlot()
-
-    def UpdateFrequencyDomainPlot(self):
-        self.fft.TrimFrequencies(self.frequency_slider.value())
-        self.canvas.ax1.cla()
-        self.canvas.ax1.plot(self.fft.frequencies, self.fft.spectrum)
-        self.canvas.cursor = AnnotatedVCursor(ax=self.canvas.ax1, color='k', lw=.8)
-        self.canvas.draw()
+            self.fft.TrimFrequencies(rng)
+            self.canvas.UpdateFrequencyDomainPlot(self.fft.frequencies, self.fft.spectrum)
 
 
 class SettingsWidget(QWidget):
