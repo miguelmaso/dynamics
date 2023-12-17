@@ -68,33 +68,21 @@ class MplCanvas(FigureCanvasQTAgg):
     def __init__(self):
         super().__init__(Figure(figsize=(10,6), facecolor='gray'))
         self.figure.patch.set_alpha(0.12)
-        self.ax0, self.ax1 = self.figure.subplots(2, 1)
-        self.ax0.set_xlabel('Time (units from data)')
-        self.ax0.set_ylabel('Acc (units from data)')
-        self.ax1.set_xlabel('Cyclic frequency (Hz, units from data)')
-        self.ax1.set_ylabel('Fourier transform')
-        self.l0, = self.ax0.plot([], [])
-        self.l1, = self.ax1.plot([], [])
-        self.cursor = AnnotatedVCursor(ax=self.ax1, color='k', lw=.8)
+        self.axes = self.figure.subplots(2, 1)
+        self.axes[0].set_xlabel('Time (units from data)')
+        self.axes[0].set_ylabel('Acc (units from data)')
+        self.axes[1].set_xlabel('Cyclic frequency (Hz, units from data)')
+        self.axes[1].set_ylabel('Fourier transform')
+        line0, = self.axes[0].plot([], [])
+        line1, = self.axes[1].plot([], [])
+        self.lines = [line0, line1]
+        self.cursor = AnnotatedVCursor(ax=self.axes[1], color='k', lw=.8)
         self.figure.tight_layout()
 
-    def UpdateTimeDomainPlot(self, xdata, ydata):
-        # self.ax0.cla()
-        # self.ax0.plot(xdata, ydata)
-        # self.draw()
-        self.l0.set_data(xdata, ydata)
-        self.ax0.relim(visible_only=True)
-        self.ax0.autoscale()
-        self.draw()
-
-    def UpdateFrequencyDomainPlot(self, xdata, ydata):
-        # self.ax1.cla()
-        # self.ax1.plot(xdata, ydata)
-        # self.cursor = AnnotatedVCursor(ax=self.ax1, color='k', lw=.8)
-        # self.draw()
-        self.l1.set_data(xdata, ydata)
-        self.ax1.relim(visible_only=True)
-        self.ax1.autoscale()
+    def UpdatePlot(self, idx, xdata, ydata):
+        self.lines[idx].set_data(xdata, ydata)
+        self.axes[idx].relim(visible_only=True)
+        self.axes[idx].autoscale()
         self.draw()
 
 
@@ -194,7 +182,7 @@ class MainWindow(QMainWindow):
             max_value = self.fft._time[rng[1] - 1]
             self.time_label.setText(f'Time span: {min_value:.1f} to {max_value:.1f}')
             self.fft.TrimTimeseries(rng)
-            self.canvas.UpdateTimeDomainPlot(self.fft.time, self.fft.acc)
+            self.canvas.UpdatePlot(0, self.fft.time, self.fft.acc)
 
     def UpdateFFT(self, reset_slider=False):
         if self.fft.is_initialized:
@@ -212,7 +200,7 @@ class MainWindow(QMainWindow):
             max_value = self.fft._frequencies[rng[1] - 1]
             self.frequency_label.setText(f'Frequency span: {min_value:.1f} to {max_value:.1f}')
             self.fft.TrimFrequencies(rng)
-            self.canvas.UpdateFrequencyDomainPlot(self.fft.frequencies, self.fft.spectrum)
+            self.canvas.UpdatePlot(1, self.fft.frequencies, self.fft.spectrum)
 
 
 class SettingsWidget(QWidget):
