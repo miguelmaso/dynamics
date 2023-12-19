@@ -66,8 +66,8 @@ class FFTCalculator():
 class MplCanvas(FigureCanvasQTAgg):
 
     def __init__(self):
-        super().__init__(Figure(figsize=(10,6), facecolor='gray'))
-        self.figure.patch.set_alpha(0.12)
+        super().__init__(Figure(figsize=(10,6), facecolor='None'))
+        self.setStyleSheet('background:transparent')
         self.axes = self.figure.subplots(2, 1)
         self.axes[0].set_xlabel('Time (units from data)')
         self.axes[0].set_ylabel('Acc (units from data)')
