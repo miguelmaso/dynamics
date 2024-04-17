@@ -20,5 +20,5 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/miguelmaso/dynamics"
-Repository = "https://github.com/miguelmaso/dynamics/tools"
+Homepage = "https://miguelmaso.github.io/dynamics/"
+Repository = "https://github.com/miguelmaso/dynamics/tree/main/tools"
