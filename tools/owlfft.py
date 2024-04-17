@@ -56,9 +56,10 @@ class FFTCalculator():
 
     def Calculate(self):
         n = len(self.time)
+        dt = self.time[1] - self.time[0]
         self._spectrum = fft(self.acc)[:n//2]
         self._spectrum = 2/n * np.abs(self._spectrum)
-        self._frequencies = fftfreq(n, (self.time[1] - self.time[0]))[:n//2]
+        self._frequencies = fftfreq(n, dt)[:n//2]
         self.frequencies = self._frequencies
         self.spectrum = self._spectrum
 
