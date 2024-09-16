@@ -15,22 +15,23 @@ References: \cite[p. 49]{chopra}; \cite[p. 287]{blanco}
 \begin{Answer}[ref={free_vibration}]
 The solution to the differential equation governing free vibration of a \emph{mass spring damper} system is governed by the natural and damped frequencies and the damping ratio:
 $$
-u(t) = e^{-\xi\omega t}\sin(\omega_D t) \quad ; \quad \omega_D = \omega\sqrt{1-\xi^2}
+u(t) = e^{-\xi\omega t}\sin(\omega_D t) \quad ; \quad \omega_D = \omega\sqrt{1-\xi^2}\ .
 $$
-For simplicity, we will assume a small damping and $\sqrt{1-\xi^2}\rightarrow1$, thus, the natural period can be obtained directly from the measured values
+For simplicity, we will assume a small damping and $\sqrt{1-\xi^2}\rightarrow1$. Thus, the natural period can be obtained directly from the measured values
 $$
 T \approx T_D = \frac{3}{20} = \SI{0.15}{s}
 $$
-And the damping ratio $\xi$ is directly related to the decay coefficient determined by the relation among two consecutive oscillations from a damped period
+and the damping ratio $\xi$ is directly related to the decay coefficient determined by the relation between two consecutive oscillations from a damped period
 $$
 \frac{u(t)}{u(t+T_D)} = e^{\xi\omega T_D} = e^{\frac{2\pi\xi}{\sqrt{1-\xi^2}}} \quad \rightarrow \quad
-\frac{u_0}{u_1} \frac{u_1}{u_2} \dots \frac{u_{n-1}}{u_n} = \frac{u_0}{u_n} = e^{\frac{2n\pi\xi}{\sqrt{1-\xi^2}}}
+\frac{u_0}{u_1} \frac{u_1}{u_2} \dots \frac{u_{n-1}}{u_n} = \frac{u_0}{u_n} = e^{\frac{2n\pi\xi}{\sqrt{1-\xi^2}}}.
 $$
-Since $\xi$ is small, the damping ratio can be found as
+
+Because $\xi$ is small, the damping ratio can be found as
 \begin{align*}
 2n\pi\xi = \log\left(\frac{u_0}{u_n}\right) \quad \rightarrow \quad
 \xi = \frac{1}{2n\pi} \log\left(\frac{u_0}{u_n}\right) = \frac{1}{2\cdot20\pi} \log\left(\frac{5}{1}\right) = 0.0128 \\
-\xi = \SI{1.28}{\%}
+\xi = \SI{1.28}{\%}.
 \end{align*}    
 
 \end{Answer}
