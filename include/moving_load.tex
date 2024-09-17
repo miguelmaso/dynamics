@@ -16,7 +16,7 @@ References: \cite[p. 305]{chopra}
 In this case, the magnitude of the external force $P=\SI{1}{kN}$ does not vary with time but moves with constant speed $v=\SI{10}{m/s}$. The Rayleigh method allows us to compute the generalized force applied as a function of time. For this purpose, we choose a periodic shape function $\psi$ satisfying the kinematic boundary conditions
 \begin{align*}
 &\psi = \sin\left(\frac{\pi x}{l}\right) \\
-&F = P\psi(x) = P\psi(vt) = P\sin\left(\frac{\pi vt}{l}\right)\ .
+&F = P\psi(x) = P\psi(vt) = P\sin\left(\frac{\pi vt}{l}\right).
 \end{align*}
 Thus, the period of the external excitation is $\Omega = \pi v/l = \SI{1}{rad/s}$.
 
@@ -36,7 +36,7 @@ k& \begin{multlined}[t]= \int_0^l EI\psi''^2dx = \int_0^l EI\left(-\left(\frac{\
 \end{align*}
 with frequency equal to
 $$
-\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{70\pi}{7\pi}} = \sqrt{10} = \SI{3.16}{rad/s}
+\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{70\pi}{7\pi}} = \sqrt{10} = \SI{3.16}{rad/s}\ .
 $$
 
 Finally, the structural response is obtained following the same steps as in Exercise \ref{frame_ground_acceleration}, a structure under periodic loading. The deflection depends on the dynamic magnification factor $H$ and assuming a small damping ratio:
@@ -44,7 +44,7 @@ Finally, the structural response is obtained following the same steps as in Exer
 \gamma& = \frac{\Omega}{\omega} = \frac{\pi v}{l\omega} \\
 H& \begin{multlined}[t]= \frac{1}{\sqrt{\left(1-\frac{\pi^2v^2}{l^2\omega^2}\right)^2 + 4\xi^2\frac{\pi^2v^2}{l^2\omega^2}}} \approx \frac{1}{1-\frac{\pi^2v^2}{l^2\omega^2}} = \frac{l^2\omega^2}{l^2\omega^2-\pi^2v^2} = \qquad \\
 = \frac{10^2\cdot\pi^2\cdot 3.16^2}{10^2\cdot\pi^2\cdot 3.16^2 - 10^2\cdot\pi^2}
-= \frac{10}{10-1} = 1.11 \end{multlined}\ .
+= \frac{10}{10-1} = 1.11\ . \end{multlined}
 \end{align*}
 
 Thus, the deflection of the beam as a function of time is
@@ -96,7 +96,7 @@ and
 C_2 = -\frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v + \varphi_2)} =
     -\frac{P}{k}H\gamma\frac{\sin(\omega l/v)}{\sin(\omega l/v - \omega l/(2v))} \\[4pt]
 C_2 = -\frac{P}{k}H\gamma\frac{2\sin(\omega l/(2v))\cos(\omega l/(2v))}{\sin(\omega l/(2v))} \\[2pt]
-C_2 = -2\frac{P}{k}H\gamma\cos\frac{\omega l}{2v}
+C_2 = -2\frac{P}{k}H\gamma\cos\frac{\omega l}{2v}\ .
 \end{gather*}
 
 The result is
@@ -104,7 +104,7 @@ $$
 u = \frac{P}{k}\frac{\omega^2l^2}{\omega^2l^2-\pi^2v^2}
 \begin{cases}
 \sin\frac{\pi vt}{l} - \frac{\pi v}{\omega l}\sin(\omega t) \quad &\text{if}\ t < \frac{l}{v} \\
--\frac{2\pi v}{\omega l}\cos\frac{\omega l}{2v}\sin(\omega t - \frac{\omega l}{2v}) \quad &\text{if}\ t \geq \frac{l}{v}
+-\frac{2\pi v}{\omega l}\cos\frac{\omega l}{2v}\sin(\omega t - \frac{\omega l}{2v}) \quad &\text{if}\ t \geq \frac{l}{v}\ .
 \end{cases}
 $$
 
