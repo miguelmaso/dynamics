@@ -117,6 +117,7 @@
 \ExerciseName\ \ExerciseHeaderNB\ }}
 \smallskip}
 
+\renewcommand{\AnswerName}{Answer to Exercise}
 \renewcommand{\AnswerHeader}{\sffamily\normalsize\bfseries
 \colorbox{titlebackground}{\color{titlecolor}{
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}

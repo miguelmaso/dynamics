@@ -198,7 +198,7 @@
         \draw [<->] ([yshift=8]A) -- ([yshift=8]B);
         \path (A) -- +(0,2) node [midway,left=2,fill=white] {\SI{4}{m}};
         \path (A) -- (B) node [midway,above,fill=white] {\SI{5}{m}};
-        \path (1.5,2.3) node [above] {\SI{100}{KN}};
+        \path (1.5,2.3) node [above] {\SI{100}{kN}};
     },
     porticoDimensions2/.pic = {
         \pic {bracedPortico};
@@ -214,7 +214,7 @@
         \draw [fill=lightgray] (0,2.3) rectangle (3,2.5);
         \pic at (A) {fixed};
         \pic at (B) {fixed};
-        \path (1.5,2.5) node [above] {\SI{150}{KN}};
+        \path (1.5,2.5) node [above] {\SI{150}{kN}};
     },
     %
     % Example 4
@@ -269,8 +269,8 @@
             \draw [->] (-.5-\y/10, \y/2) -- (0, \y/2);
         }
         \draw (-.5,0) coordinate (W0) -- (-1.5,5) coordinate (W1);
-        \node [above left] at (W0) {\SI{0.3}{KN/m}};
-        \node [left] at (W1) {\SI{1}{KN/m}};
+        \node [above left] at (W0) {\SI{0.3}{kN/m}};
+        \node [left] at (W1) {\SI{1}{kN/m}};
     },
     %
     % Example 8
