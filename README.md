@@ -12,6 +12,13 @@ pdflatex problems
 pdflatex problems
 ```
 
+<object data="https://github.com/miguelmaso/dynamics/blob/gh-pages/problems.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/miguelmaso/dynamics/blob/gh-pages/problems.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/miguelmaso/dynamics/blob/gh-pages/problems.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
+
 ### VS Code configuration
 If you are using VS Code with a LaTeX extension, make sure the following options are available on the configuration (`ctrl`+`,`):
 ```jsonc
