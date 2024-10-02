@@ -22,6 +22,7 @@
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
+\RequirePackage[margin=2.2cm]{geometry}
 \RequirePackage[answerdelayed]{exercise}
 \RequirePackage[style=authortitle]{biblatex}
 
@@ -73,7 +74,7 @@
             \smallskip
         }
     }}
-    \spewnotes
+    \hspace*{-1pt}\spewnotes
     {\setlength{\parskip}{-1pt}\par\noindent
     \colorbox{entitybackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
