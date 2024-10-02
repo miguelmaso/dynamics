@@ -123,8 +123,13 @@
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
 \smallskip}
 
+\makeatletter
+\newcommand{\silentref}[2]{
+    \@ifundefined{r@#1}{#2}{\hyperref[#1]{#2}}
+}
+\makeatother
 \newcommand{\shortAnswer}{
-\hyperref[\ExerciseLabel-Answer]{\AnswerListName}:
+    \silentref{\ExerciseLabel-Answer}{\AnswerListName}:
 }
 
 
