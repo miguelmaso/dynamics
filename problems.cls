@@ -22,6 +22,7 @@
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
+\RequirePackage[margin=2.5cm]{geometry}
 \RequirePackage[answerdelayed]{exercise}
 \RequirePackage[style=authortitle]{biblatex}
 
@@ -73,7 +74,7 @@
             \smallskip
         }
     }}
-    \spewnotes
+    \hspace*{-1pt}\spewnotes
     {\setlength{\parskip}{-1pt}\par\noindent
     \colorbox{entitybackground}{\parbox[t][][c]{.984\textwidth}{
         \color{titlecolor}{
@@ -123,8 +124,14 @@
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
 \smallskip}
 
+% Short answer label with link if extended answer defined
+\makeatletter
+\newcommand{\silentref}[2]{
+    \@ifundefined{r@#1}{#2}{\hyperref[#1]{#2}}
+}
+\makeatother
 \newcommand{\shortAnswer}{
-\hyperref[\ExerciseLabel-Answer]{\AnswerListName}:
+    \silentref{\ExerciseLabel-Answer}{\AnswerListName}:
 }
 
 
