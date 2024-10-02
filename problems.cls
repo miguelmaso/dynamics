@@ -123,6 +123,7 @@
 \hyperref[\ExerciseLabel]{\AnswerName\ \ExerciseHeaderNB\ }}}
 \smallskip}
 
+% Short answer label with link if extended answer defined
 \makeatletter
 \newcommand{\silentref}[2]{
     \@ifundefined{r@#1}{#2}{\hyperref[#1]{#2}}
