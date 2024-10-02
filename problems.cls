@@ -22,7 +22,7 @@
 \RequirePackage[explicit]{titlesec}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[shortlabels]{enumitem}
-\RequirePackage[margin=2.2cm]{geometry}
+\RequirePackage[margin=2.5cm]{geometry}
 \RequirePackage[answerdelayed]{exercise}
 \RequirePackage[style=authortitle]{biblatex}
 
