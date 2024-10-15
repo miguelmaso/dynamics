@@ -22,6 +22,8 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
+__version__ = "0.0.2"
+
 
 class FFTCalculator():
 
