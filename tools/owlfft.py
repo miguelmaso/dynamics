@@ -183,6 +183,8 @@ class MainWindow(QMainWindow):
             self.time_slider.setValue([0, n])
             self._UpdateTime()
             self._UpdateFFT(reset_slider=True)
+        else:
+            self._Clear()
 
     def _UpdateTime(self):
         if self.fft.is_initialized:
@@ -210,6 +212,10 @@ class MainWindow(QMainWindow):
             self.frequency_label.setText(f'Frequency span: {min_value:.1f} to {max_value:.1f}')
             self.fft.TrimFrequencies(rng)
             self.canvas.UpdatePlot(1, self.fft.frequencies, self.fft.spectrum)
+
+    def _Clear(self):
+        self.canvas.UpdatePlot(0, [], [])
+        self.canvas.UpdatePlot(1, [], [])
 
 
 class SettingsWidget(QWidget):
