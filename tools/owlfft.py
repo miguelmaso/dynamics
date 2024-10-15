@@ -44,6 +44,7 @@ class FFTCalculator():
             self.is_initialized = True
             return ''
         except Exception as e:
+            self.is_initialized = False
             return str(e)
 
     def TrimTimeseries(self, limits):
@@ -107,7 +108,7 @@ class AnnotatedVCursor(Cursor):
 
 class MainWindow(QMainWindow):
 
-    message_duration = 5000
+    message_duration = 8000
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -125,8 +126,9 @@ class MainWindow(QMainWindow):
         layout = QFormLayout()
         widget = QWidget()
         widget.setLayout(layout)
-        
+
         self.settings = QSettings(ENTITY, PROJECT)
+        self._ApplySettings()
         self.settings_widget = SettingsWidget(self)
         self.file_label = QLineEdit()
         self.file_button = QPushButton('...')
@@ -144,7 +146,7 @@ class MainWindow(QMainWindow):
         self.frequency_slider.valueChanged.connect(self.UpdateFrequency)
 
         self.canvas = MplCanvas()
-        
+
         container = QHBoxLayout()
         container.addWidget(self.file_label)
         container.addWidget(self.file_button)
@@ -160,6 +162,13 @@ class MainWindow(QMainWindow):
         self.update()
         self.show()
 
+    def _ApplySettings(self):
+        self.fft.delimiter = str(self.settings.value('delimiter', self.fft.delimiter))
+        self.fft.time_col = int(self.settings.value('time_col', self.fft.time_col))
+        self.fft.acc_col = int(self.settings.value('acc_col', self.fft.acc_col))
+        self.fft.comments = str(self.settings.value('comments', self.fft.comments))
+        self.fft.skiprows = int(self.settings.value('skiprows', self.fft.skiprows))
+
     def UpdateFilename(self):
         filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()), 'csv files (*.csv)')[0]
         if filename:
@@ -174,6 +183,7 @@ class MainWindow(QMainWindow):
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
             self.time_slider.setValue([0, n])
+            self.UpdateTime()
             self.UpdateFFT(reset_slider=True)
 
     def UpdateTime(self):
@@ -254,21 +264,18 @@ class SettingsWidget(QWidget):
 
     def hideEvent(self, event) -> None:
         try:
-            self.parent.fft.delimiter = str(self.delimiter.text())
-            self.parent.fft.time_col = int(self.time_col.text())
-            self.parent.fft.acc_col = int(self.acc_col.text())
-            self.parent.fft.comments = str(self.comments.text())
-            self.parent.fft.skiprows = int(self.skiprows.text())
             self.parent.settings.setValue('delimiter', str(self.delimiter.text()))
             self.parent.settings.setValue('time_col', str(self.time_col.text()))
             self.parent.settings.setValue('acc_col', str(self.acc_col.text()))
             self.parent.settings.setValue('comments', str(self.comments.text()))
             self.parent.settings.setValue('skiprows', str(self.skiprows.text()))
+            self.parent._ApplySettings()
         except Exception as e:
             self.parent.statusBar.showMessage(str(e), self.parent.message_duration)
         if self.parent.file_label.text():
             self.parent.InitializeFFT()
         super().hideEvent(event)
+
 
 ENTITY = 'ETSCCPB'
 PROJECT = 'owlfft'
