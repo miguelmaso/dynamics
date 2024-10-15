@@ -131,17 +131,17 @@ class MainWindow(QMainWindow):
         self.file_label = QLineEdit()
         self.file_button = QPushButton('...')
         self.file_settings_button = QPushButton('>_')
-        self.file_button.clicked.connect(self.UpdateFilename)
+        self.file_button.clicked.connect(self._UpdateFilename)
         self.file_settings_button.clicked.connect(self.settings_widget.show)
 
         self.time_label = QLabel()
         self.time_slider = QRangeSlider(Qt.Orientation.Horizontal)
-        self.time_slider.valueChanged.connect(self.UpdateTime)
-        self.time_slider.sliderReleased.connect(self.UpdateFFT)
+        self.time_slider.valueChanged.connect(self._UpdateTime)
+        self.time_slider.sliderReleased.connect(self._UpdateFFT)
 
         self.frequency_label = QLabel()
         self.frequency_slider = QRangeSlider(Qt.Orientation.Horizontal)
-        self.frequency_slider.valueChanged.connect(self.UpdateFrequency)
+        self.frequency_slider.valueChanged.connect(self._UpdateFrequency)
 
         self.canvas = MplCanvas()
 
@@ -167,24 +167,24 @@ class MainWindow(QMainWindow):
         self.fft.comments = str(self.settings.value('comments', self.fft.comments))
         self.fft.skiprows = int(self.settings.value('skiprows', self.fft.skiprows))
 
-    def UpdateFilename(self):
+    def _UpdateFilename(self):
         filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()), 'csv files (*.csv)')[0]
         if filename:
             self.file_label.setText(filename)
             self.settings.setValue('dirname', os.path.dirname(filename))
-            self.InitializeFFT()
+            self._InitializeFFT()
 
-    def InitializeFFT(self):
+    def _InitializeFFT(self):
         msg = self.fft.ReadData(self.file_label.text())
         self.statusBar().showMessage(msg, self.message_duration)
         if self.fft.is_initialized:
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
             self.time_slider.setValue([0, n])
-            self.UpdateTime()
-            self.UpdateFFT(reset_slider=True)
+            self._UpdateTime()
+            self._UpdateFFT(reset_slider=True)
 
-    def UpdateTime(self):
+    def _UpdateTime(self):
         if self.fft.is_initialized:
             rng = self.time_slider.value()
             min_value = self.fft._time[rng[0]]
@@ -193,16 +193,16 @@ class MainWindow(QMainWindow):
             self.fft.TrimTimeseries(rng)
             self.canvas.UpdatePlot(0, self.fft.time, self.fft.acc)
 
-    def UpdateFFT(self, reset_slider=False):
+    def _UpdateFFT(self, reset_slider=False):
         if self.fft.is_initialized:
             self.fft.Calculate()
             n = len(self.fft._frequencies)
             self.frequency_slider.setRange(0, n)
             if reset_slider:
                 self.frequency_slider.setValue([0, n])
-            self.UpdateFrequency()
+            self._UpdateFrequency()
 
-    def UpdateFrequency(self):
+    def _UpdateFrequency(self):
         if self.fft.is_initialized:
             rng = self.frequency_slider.value()
             min_value = self.fft._frequencies[rng[0]]
@@ -268,10 +268,9 @@ class SettingsWidget(QWidget):
             self.parent.settings.setValue('comments', str(self.comments.text()))
             self.parent.settings.setValue('skiprows', str(self.skiprows.text()))
             self.parent._ApplySettings()
+            self.parent._InitializeFFT()
         except Exception as e:
             self.parent.statusBar().showMessage(str(e), self.parent.message_duration)
-        if self.parent.file_label.text():
-            self.parent.InitializeFFT()
         super().hideEvent(event)
 
 
