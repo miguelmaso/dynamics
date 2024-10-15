@@ -13,7 +13,7 @@ import numpy as np
 from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
-    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QStatusBar)
+    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit)
 from PyQt5.QtCore import Qt, QByteArray, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from superqt import QRangeSlider
@@ -34,7 +34,7 @@ class FFTCalculator():
     def __init__(self):
         self.is_initialized = False
 
-    def ReadData(self, filename):
+    def ReadData(self, filename: str):
         try:
             self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
                 delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
@@ -120,8 +120,6 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(self.icon))
         self.setWindowTitle("Fourier transform")
         self.setMinimumWidth(500)
-        self.statusBar = QStatusBar()
-        self.setStatusBar(self.statusBar)
 
         layout = QFormLayout()
         widget = QWidget()
@@ -178,7 +176,7 @@ class MainWindow(QMainWindow):
 
     def InitializeFFT(self):
         msg = self.fft.ReadData(self.file_label.text())
-        self.statusBar.showMessage(msg, self.message_duration)
+        self.statusBar().showMessage(msg, self.message_duration)
         if self.fft.is_initialized:
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
@@ -216,9 +214,9 @@ class MainWindow(QMainWindow):
 
 class SettingsWidget(QWidget):
 
-    def __init__(self, parent):
+    def __init__(self, parent: MainWindow):
         super().__init__()
-        self.parent = parent
+        self.parent: MainWindow = parent
         self.setWindowIcon(QIcon(self.parent.icon))
         self.setWindowTitle("File settings")
 
@@ -271,7 +269,7 @@ class SettingsWidget(QWidget):
             self.parent.settings.setValue('skiprows', str(self.skiprows.text()))
             self.parent._ApplySettings()
         except Exception as e:
-            self.parent.statusBar.showMessage(str(e), self.parent.message_duration)
+            self.parent.statusBar().showMessage(str(e), self.parent.message_duration)
         if self.parent.file_label.text():
             self.parent.InitializeFFT()
         super().hideEvent(event)
