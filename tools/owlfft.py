@@ -13,7 +13,7 @@ import numpy as np
 from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
-    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QStatusBar)
+    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit)
 from PyQt5.QtCore import Qt, QByteArray, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from superqt import QRangeSlider
@@ -21,6 +21,8 @@ from superqt import QRangeSlider
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
+
+__version__ = "0.0.2"
 
 
 class FFTCalculator():
@@ -34,7 +36,7 @@ class FFTCalculator():
     def __init__(self):
         self.is_initialized = False
 
-    def ReadData(self, filename):
+    def ReadData(self, filename: str):
         try:
             self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
                 delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
@@ -44,6 +46,7 @@ class FFTCalculator():
             self.is_initialized = True
             return ''
         except Exception as e:
+            self.is_initialized = False
             return str(e)
 
     def TrimTimeseries(self, limits):
@@ -107,7 +110,7 @@ class AnnotatedVCursor(Cursor):
 
 class MainWindow(QMainWindow):
 
-    message_duration = 5000
+    message_duration = 8000
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -119,32 +122,31 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(self.icon))
         self.setWindowTitle("Fourier transform")
         self.setMinimumWidth(500)
-        self.statusBar = QStatusBar()
-        self.setStatusBar(self.statusBar)
 
         layout = QFormLayout()
         widget = QWidget()
         widget.setLayout(layout)
-        
+
         self.settings = QSettings(ENTITY, PROJECT)
+        self._ApplySettings()
         self.settings_widget = SettingsWidget(self)
         self.file_label = QLineEdit()
         self.file_button = QPushButton('...')
         self.file_settings_button = QPushButton('>_')
-        self.file_button.clicked.connect(self.UpdateFilename)
+        self.file_button.clicked.connect(self._UpdateFilename)
         self.file_settings_button.clicked.connect(self.settings_widget.show)
 
         self.time_label = QLabel()
         self.time_slider = QRangeSlider(Qt.Orientation.Horizontal)
-        self.time_slider.valueChanged.connect(self.UpdateTime)
-        self.time_slider.sliderReleased.connect(self.UpdateFFT)
+        self.time_slider.valueChanged.connect(self._UpdateTime)
+        self.time_slider.sliderReleased.connect(self._UpdateFFT)
 
         self.frequency_label = QLabel()
         self.frequency_slider = QRangeSlider(Qt.Orientation.Horizontal)
-        self.frequency_slider.valueChanged.connect(self.UpdateFrequency)
+        self.frequency_slider.valueChanged.connect(self._UpdateFrequency)
 
         self.canvas = MplCanvas()
-        
+
         container = QHBoxLayout()
         container.addWidget(self.file_label)
         container.addWidget(self.file_button)
@@ -160,23 +162,33 @@ class MainWindow(QMainWindow):
         self.update()
         self.show()
 
-    def UpdateFilename(self):
+    def _ApplySettings(self):
+        self.fft.delimiter = str(self.settings.value('delimiter', self.fft.delimiter))
+        self.fft.time_col = int(self.settings.value('time_col', self.fft.time_col))
+        self.fft.acc_col = int(self.settings.value('acc_col', self.fft.acc_col))
+        self.fft.comments = str(self.settings.value('comments', self.fft.comments))
+        self.fft.skiprows = int(self.settings.value('skiprows', self.fft.skiprows))
+
+    def _UpdateFilename(self):
         filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()), 'csv files (*.csv)')[0]
         if filename:
             self.file_label.setText(filename)
             self.settings.setValue('dirname', os.path.dirname(filename))
-            self.InitializeFFT()
+            self._InitializeFFT()
 
-    def InitializeFFT(self):
+    def _InitializeFFT(self):
         msg = self.fft.ReadData(self.file_label.text())
-        self.statusBar.showMessage(msg, self.message_duration)
+        self.statusBar().showMessage(msg, self.message_duration)
         if self.fft.is_initialized:
             n = len(self.fft._time)
             self.time_slider.setRange(0, n)
             self.time_slider.setValue([0, n])
-            self.UpdateFFT(reset_slider=True)
+            self._UpdateTime()
+            self._UpdateFFT(reset_slider=True)
+        else:
+            self._Clear()
 
-    def UpdateTime(self):
+    def _UpdateTime(self):
         if self.fft.is_initialized:
             rng = self.time_slider.value()
             min_value = self.fft._time[rng[0]]
@@ -185,16 +197,16 @@ class MainWindow(QMainWindow):
             self.fft.TrimTimeseries(rng)
             self.canvas.UpdatePlot(0, self.fft.time, self.fft.acc)
 
-    def UpdateFFT(self, reset_slider=False):
+    def _UpdateFFT(self, reset_slider=False):
         if self.fft.is_initialized:
             self.fft.Calculate()
             n = len(self.fft._frequencies)
             self.frequency_slider.setRange(0, n)
             if reset_slider:
                 self.frequency_slider.setValue([0, n])
-            self.UpdateFrequency()
+            self._UpdateFrequency()
 
-    def UpdateFrequency(self):
+    def _UpdateFrequency(self):
         if self.fft.is_initialized:
             rng = self.frequency_slider.value()
             min_value = self.fft._frequencies[rng[0]]
@@ -203,12 +215,16 @@ class MainWindow(QMainWindow):
             self.fft.TrimFrequencies(rng)
             self.canvas.UpdatePlot(1, self.fft.frequencies, self.fft.spectrum)
 
+    def _Clear(self):
+        self.canvas.UpdatePlot(0, [], [])
+        self.canvas.UpdatePlot(1, [], [])
+
 
 class SettingsWidget(QWidget):
 
-    def __init__(self, parent):
+    def __init__(self, parent: MainWindow):
         super().__init__()
-        self.parent = parent
+        self.parent: MainWindow = parent
         self.setWindowIcon(QIcon(self.parent.icon))
         self.setWindowTitle("File settings")
 
@@ -254,21 +270,17 @@ class SettingsWidget(QWidget):
 
     def hideEvent(self, event) -> None:
         try:
-            self.parent.fft.delimiter = str(self.delimiter.text())
-            self.parent.fft.time_col = int(self.time_col.text())
-            self.parent.fft.acc_col = int(self.acc_col.text())
-            self.parent.fft.comments = str(self.comments.text())
-            self.parent.fft.skiprows = int(self.skiprows.text())
             self.parent.settings.setValue('delimiter', str(self.delimiter.text()))
             self.parent.settings.setValue('time_col', str(self.time_col.text()))
             self.parent.settings.setValue('acc_col', str(self.acc_col.text()))
             self.parent.settings.setValue('comments', str(self.comments.text()))
             self.parent.settings.setValue('skiprows', str(self.skiprows.text()))
+            self.parent._ApplySettings()
+            self.parent._InitializeFFT()
         except Exception as e:
-            self.parent.statusBar.showMessage(str(e), self.parent.message_duration)
-        if self.parent.file_label.text():
-            self.parent.InitializeFFT()
+            self.parent.statusBar().showMessage(str(e), self.parent.message_duration)
         super().hideEvent(event)
+
 
 ENTITY = 'ETSCCPB'
 PROJECT = 'owlfft'
