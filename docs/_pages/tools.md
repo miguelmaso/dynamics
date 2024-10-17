@@ -4,4 +4,5 @@ layout: page
 title: Tools
 ---
 
-{% include_relative ../../tools/README.md %}
+{% capture my_include %}{% include ../../tools/README.md %}{% endcapture %}
+{{ my_include | markdownify }}
