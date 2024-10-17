@@ -13,7 +13,7 @@ import numpy as np
 from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
-    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit)
+    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QDialog)
 from PyQt5.QtCore import Qt, QByteArray, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from superqt import QRangeSlider
@@ -129,12 +129,12 @@ class MainWindow(QMainWindow):
 
         self.settings = QSettings(ENTITY, PROJECT)
         self._ApplySettings()
-        self.settings_widget = SettingsWidget(self)
+        self.settings_dialog = SettingsDialog(self)
         self.file_label = QLineEdit()
         self.file_button = QPushButton('...')
         self.file_settings_button = QPushButton('>_')
         self.file_button.clicked.connect(self._UpdateFilename)
-        self.file_settings_button.clicked.connect(self.settings_widget.show)
+        self.file_settings_button.clicked.connect(self.settings_dialog.exec)
 
         self.time_label = QLabel()
         self.time_slider = QRangeSlider(Qt.Orientation.Horizontal)
@@ -220,7 +220,7 @@ class MainWindow(QMainWindow):
         self.canvas.UpdatePlot(1, [], [])
 
 
-class SettingsWidget(QWidget):
+class SettingsDialog(QDialog):
 
     def __init__(self, parent: MainWindow):
         super().__init__()
