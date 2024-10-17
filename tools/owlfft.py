@@ -13,7 +13,7 @@ import numpy as np
 from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
-    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit)
+    QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QDialog)
 from PyQt5.QtCore import Qt, QByteArray, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from superqt import QRangeSlider
@@ -22,7 +22,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 
 class FFTCalculator():
@@ -129,12 +129,13 @@ class MainWindow(QMainWindow):
 
         self.settings = QSettings(ENTITY, PROJECT)
         self._ApplySettings()
-        self.settings_widget = SettingsWidget(self)
+        self.settings_dialog = SettingsDialog(self)
         self.file_label = QLineEdit()
+        self.file_label.setEnabled(False)
         self.file_button = QPushButton('...')
         self.file_settings_button = QPushButton('>_')
         self.file_button.clicked.connect(self._UpdateFilename)
-        self.file_settings_button.clicked.connect(self.settings_widget.show)
+        self.file_settings_button.clicked.connect(self.settings_dialog.exec)
 
         self.time_label = QLabel()
         self.time_slider = QRangeSlider(Qt.Orientation.Horizontal)
@@ -220,7 +221,7 @@ class MainWindow(QMainWindow):
         self.canvas.UpdatePlot(1, [], [])
 
 
-class SettingsWidget(QWidget):
+class SettingsDialog(QDialog):
 
     def __init__(self, parent: MainWindow):
         super().__init__()
@@ -286,7 +287,13 @@ ENTITY = 'ETSCCPB'
 PROJECT = 'owlfft'
 OWL = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x18\x00\x00\x00\x18\x08\x03\x00\x00\x00\xd7\xa9\xcd\xca\x00\x00\x00BPLTEGpL\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00s\xd3\xb4\xfb\x00\x00\x00\x15tRNS\x00\x03\x11\x19+?M[fgjz\x86\x96\xa6\xb1\xbd\xca\xdb\xec\xf5\x93\xc0G\xfc\x00\x00\x00\xddIDATx\xdau\xce\xd1n\xc5 \x08\x80aT\xaa]\xab\x05A\xde\xffU\xe7<mG\x96\xec\xbf!\xfa%"\xcc\x9ab,\xac6S.\x11\xa5\xc1\'\\w\xb4\xcfh)\xc2]T\xadb\'\xc0iRU#\xdc\x85b\x1b\x84f\xc7a-\xc0f\x05\x9e\x98av\x8dq\xdd\xa7\'\xad\x80\r\x93\x8d4\x07T\xf1@F\xd0\xfb\x1aU\x7f\x81 \xf7\x0c\xf4\x19\xec`\xa4\xb5d\xadH\xc3\x81qx\xbf\xc8\xe6\x80\x07%X%2\xff\xd4\x99u\xb4\xbd\x94\xbd\r\xcd\xa7\x07HUl&5\x81\x03\xa9\xeb\xf5\xd8\xd7v\x07\xf3b\xc5\x7f\xa1\xc9\x0b\x88\x1e\xb2\xe1\x03\x17{\x08Bk\x12A\x13\x0fP,\xdfOf\xcb\x1e\x02\r\x9cc\xb3\r.\x13\x07\x10\xfb\xc8st\x89\xe1\x98\xe0\x85\x8d\x10P\xfb\xfb\xab\xfd\xee\xab\x9bI\xbb\xcc\x88\xc7\xcf\x19\xec\x9f\xbe\x01\x81\xae\x10P\nk\xe4b\x00\x00\x00\x00IEND\xaeB`\x82'
 
-if __name__ == '__main__':
+
+def main():
     app = QApplication(sys.argv)
     window = MainWindow()
+    window.show()
     app.exec()
+
+
+if __name__ == '__main__':
+    main()
