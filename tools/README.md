@@ -5,21 +5,20 @@ On the commandline, type the following command:
 ```sh
 pip install owlfft
 ```
-After that, you can call the package as a module from any location, like
+
+## Usage
+The package as a module from any location, like
 ```sh
 python -m owlfft
 ```
 
-Alternatively, you can download the file `owlfft.py` into a place of your choice and make sure all the dependencies are installed,
-```sh
-pip install numpy scipy matplotlib pyqt5 superqt
-```
-and then, run the python script:
-```sh
-python owlfft.py
+Alternatively, you can create a python launcher (e.g., `fft.pyw`) to run it without opening the commandline.
+```py
+import owlfft
+owlfft.main()
 ```
 
-## Usage
+## Example
 ![](https://github.com/miguelmaso/dynamics/raw/main/tools/docs/main_window.png)
 
 The above window will be opened. It allows to select a `.csv` file and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
