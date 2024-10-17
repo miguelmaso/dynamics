@@ -131,6 +131,7 @@ class MainWindow(QMainWindow):
         self._ApplySettings()
         self.settings_dialog = SettingsDialog(self)
         self.file_label = QLineEdit()
+        self.file_label.setEnabled(False)
         self.file_button = QPushButton('...')
         self.file_settings_button = QPushButton('>_')
         self.file_button.clicked.connect(self._UpdateFilename)
