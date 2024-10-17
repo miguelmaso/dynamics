@@ -1,7 +1,7 @@
 This package implements a simple GUI to calculate real positive Fourier transforms from data stored in a `.csv` file, e.g., the recording data of an accelerometer. It aimts to be an educational resource for the structural dynamics course at the [Barcelona School of Civil Engineering](https://camins.upc.edu/en).
 
 ## Installation
-On the commandline, type the following command:
+The recommended installation is via [pip](https://pypi.org/project/owlfft/):
 ```sh
 pip install owlfft
 ```

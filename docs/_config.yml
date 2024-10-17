@@ -21,6 +21,7 @@ minima:
 header_pages:
   - _pages/frontpage.md
   - _pages/notebooks.md
+  - _pages/tools.md
   - _pages/about.md
 
 include:
