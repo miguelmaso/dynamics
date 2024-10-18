@@ -29,7 +29,8 @@ jobs:
           bash build_pdf.sh
       - name: Gather build artifacts
         run: |
-          mv problems.pdf docs/
+          cp problems.pdf docs/
+          cp tools/README.md docs/_pages/owlfft-README.md
       - name: Publish to GitHub pages
         if: success() && github.ref == 'refs/heads/main'
         uses: crazy-max/ghaction-github-pages@v4
