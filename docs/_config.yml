@@ -7,10 +7,11 @@ author:
 theme: minima
 
 base_url: /dynamics
-repository: miguelmaso/dynamics
+repository:
+  url: https://github.com/miguelmaso/dynamics
 
 # Minima social links
-github_username: miguelmaso/dynamics
+github_username: miguelmaso
 linkedin_username: miguel-maso
 
 # Minima: show excerpts in the frontpage

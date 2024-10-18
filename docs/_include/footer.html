@@ -7,9 +7,8 @@
                 <ul class="contact-list">
                     {%- if site.author.name -%}
                     <li class="p-name">{{ site.author.name | escape }}</li>
-                    {%- else -%}
-                    <li class="p-name">{{ site.title | escape }}</li>
                     {%- endif -%}
+                    <li><a class="page-link" href="{{ site.repository.url }}">Repository</a></li>
                 </ul>
             </div>
 
