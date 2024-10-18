@@ -28,8 +28,8 @@ __version__ = "0.0.3"
 class FFTCalculator():
 
     delimiter = ','
-    time_col = 1
-    acc_col = 3
+    time_col = 0
+    acc_col = 1
     comments = '#'
     skiprows = 0
 
