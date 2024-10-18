@@ -1,14 +1,16 @@
 title: Dynamics
 description: A collection of examples of structural dynamics
-author: "Miguel Masó"
+author:
+  name: "Miguel Masó"
+  email: "miguel.maso@upc.edu"
 
 theme: minima
 
-base_url: /test-pages
-repository: miguelmaso/test-pages
+base_url: /dynamics
+repository: miguelmaso/dynamics
 
 # Minima social links
-github_username: miguelmaso
+github_username: miguelmaso/dynamics
 linkedin_username: miguel-maso
 
 # Minima: show excerpts in the frontpage
@@ -25,9 +27,9 @@ header_pages:
   - _pages/about.md
 
 include:
-    - _pages
+  - _pages
 
 exclude: 
-    - .gitignore
-    - LICENSE
-    - README.md
+  - .gitignore
+  - LICENSE
+  - README.md
