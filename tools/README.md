@@ -7,12 +7,12 @@ pip install owlfft
 ```
 
 ## Usage
-The package as a module from any location, like
+The package can be called as a module from any location, like
 ```sh
 python -m owlfft
 ```
 
-Alternatively, you can create a python launcher (e.g., `fft.pyw`) to run it without opening the commandline.
+Alternatively, you can create a python launcher (e.g., `fft.pyw`) to run it without opening the commandline. The file should contain the following lines:
 ```py
 import owlfft
 owlfft.main()
