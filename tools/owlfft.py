@@ -38,6 +38,7 @@ class FFTCalculator():
 
     def ReadData(self, filename: str):
         try:
+            self.delimiter = self.delimiter.replace('\\t', '\t')
             self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
                 delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
             self._time -= self._time[0]
