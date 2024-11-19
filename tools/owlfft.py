@@ -171,10 +171,18 @@ class MainWindow(QMainWindow):
         self.fft.skiprows = int(self.settings.value('skiprows', self.fft.skiprows))
 
     def _UpdateFilename(self):
-        filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()), 'csv files (*.csv)')[0]
+        filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()),
+                                               'csv files (*.csv);;text files (*.txt);;all files (*.*)',
+                                               self.settings.value('selected_filter', 'csv files (*.csv)'))[0]
         if filename:
             self.file_label.setText(filename)
             self.settings.setValue('dirname', os.path.dirname(filename))
+            if filename.endswith('.csv'):
+                self.settings.setValue('selected_filter', 'csv files (*.csv)')
+            elif filename.endswith('.txt'):
+                self.settings.setValue('selected_filter', 'text files (*.txt)')
+            else:
+                self.settings.setValue('selected_filter', 'all files (*.*)')
             self._InitializeFFT()
 
     def _InitializeFFT(self):
