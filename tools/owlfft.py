@@ -161,8 +161,8 @@ class MainWindow(QMainWindow):
         layout.addRow(self.time_slider)
         layout.addRow(self.frequency_label)
         layout.addRow(self.frequency_slider)
-        layout.addRow(self.canvas)
         layout.addRow(toolbar)
+        layout.addRow(self.canvas)
 
         self.setCentralWidget(widget)
         self.update()
