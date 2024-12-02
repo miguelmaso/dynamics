@@ -22,7 +22,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 
 class FFTCalculator():
@@ -38,6 +38,7 @@ class FFTCalculator():
 
     def ReadData(self, filename: str):
         try:
+            self.delimiter = self.delimiter.replace('\\t', '\t')
             self._time, self._acc = np.loadtxt(filename, usecols=(self.time_col, self.acc_col),
                 delimiter=self.delimiter, unpack=True, comments=self.comments, skiprows=self.skiprows)
             self._time -= self._time[0]
@@ -171,10 +172,18 @@ class MainWindow(QMainWindow):
         self.fft.skiprows = int(self.settings.value('skiprows', self.fft.skiprows))
 
     def _UpdateFilename(self):
-        filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()), 'csv files (*.csv)')[0]
+        filename = QFileDialog.getOpenFileName(self, 'Open file', self.settings.value('dirname', os.getcwd()),
+                                               'csv files (*.csv);;text files (*.txt);;all files (*.*)',
+                                               self.settings.value('selected_filter', 'csv files (*.csv)'))[0]
         if filename:
             self.file_label.setText(filename)
             self.settings.setValue('dirname', os.path.dirname(filename))
+            if filename.endswith('.csv'):
+                self.settings.setValue('selected_filter', 'csv files (*.csv)')
+            elif filename.endswith('.txt'):
+                self.settings.setValue('selected_filter', 'text files (*.txt)')
+            else:
+                self.settings.setValue('selected_filter', 'all files (*.*)')
             self._InitializeFFT()
 
     def _InitializeFFT(self):
