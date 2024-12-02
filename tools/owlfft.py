@@ -22,10 +22,10 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationTool
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 NavigationToolbar2QT.toolitems = (('Save', 'Save the figure', 'filesave', 'save_figure'),)
-NavigationToolbar2QT.set_message = lambda _: ""
+NavigationToolbar2QT.set_message = lambda *_: ""
 
 
 class FFTCalculator():
