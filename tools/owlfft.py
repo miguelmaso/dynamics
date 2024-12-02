@@ -18,11 +18,14 @@ from PyQt5.QtCore import Qt, QByteArray, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from superqt import QRangeSlider
 
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
 __version__ = "0.0.4"
+
+NavigationToolbar2QT.toolitems = (('Save', 'Save the figure', 'filesave', 'save_figure'),)
+NavigationToolbar2QT.set_message = lambda _: ""
 
 
 class FFTCalculator():
@@ -148,6 +151,7 @@ class MainWindow(QMainWindow):
         self.frequency_slider.valueChanged.connect(self._UpdateFrequency)
 
         self.canvas = MplCanvas()
+        toolbar = NavigationToolbar2QT(self.canvas)
 
         container = QHBoxLayout()
         container.addWidget(self.file_label)
@@ -158,6 +162,7 @@ class MainWindow(QMainWindow):
         layout.addRow(self.time_slider)
         layout.addRow(self.frequency_label)
         layout.addRow(self.frequency_slider)
+        layout.addRow(toolbar)
         layout.addRow(self.canvas)
 
         self.setCentralWidget(widget)
