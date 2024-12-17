@@ -34,5 +34,3 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         packages-dir: tools/dist/
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
