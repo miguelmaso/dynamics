@@ -13,7 +13,6 @@ keywords = ["structural dynamics", "Fourier transform", "teaching"]
 requires-python = ">=3"
 dependencies = [
     "numpy",
-    "scipy",
     "matplotlib",
     "pyqt5",
     "superqt",
