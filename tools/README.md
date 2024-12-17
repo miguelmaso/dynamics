@@ -3,7 +3,7 @@ This package implements a simple GUI to calculate real positive Fourier transfor
 ## Installation
 The recommended installation is via [pip](https://pypi.org/project/owlfft/):
 ```sh
-pip install owlfft
+pip install -u owlfft
 ```
 
 ## Usage
