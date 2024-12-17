@@ -3,14 +3,13 @@
 owlfft
 ======
 
-Wrap scipy fft and numpy loadtxt within a simple GUI.
+Wrap numpy.fft and numpy.loadtxt within a simple GUI.
 
 Author: Miguel Masó, miguel.maso@upc.edu
 License: MIT License
 """
 import sys, os
 import numpy as np
-from scipy.fft import fft, fftfreq
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QFileDialog,
     QGridLayout, QHBoxLayout, QFormLayout, QLabel, QPushButton, QLineEdit, QDialog)
@@ -22,10 +21,10 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationTool
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
-__version__ = "0.0.5"
+__version__ = '0.0.6'
 
 NavigationToolbar2QT.toolitems = (('Save', 'Save the figure', 'filesave', 'save_figure'),)
-NavigationToolbar2QT.set_message = lambda *_: ""
+NavigationToolbar2QT.set_message = lambda *_: ''
 
 
 class FFTCalculator():
@@ -53,20 +52,19 @@ class FFTCalculator():
             self.is_initialized = False
             return str(e)
 
-    def TrimTimeseries(self, limits):
+    def TrimTimeseries(self, limits: tuple):
         self.time = self._time[limits[0]:limits[1]]
         self.acc = self._acc[limits[0]:limits[1]]
 
-    def TrimFrequencies(self, limits):
+    def TrimFrequencies(self, limits: tuple):
         self.frequencies = self._frequencies[limits[0]:limits[1]]
         self.spectrum = self._spectrum[limits[0]:limits[1]]
 
     def Calculate(self):
         n = len(self.time)
         dt = self.time[1] - self.time[0]
-        self._spectrum = fft(self.acc)[:n//2]
-        self._spectrum = 2/n * np.abs(self._spectrum)
-        self._frequencies = fftfreq(n, dt)[:n//2]
+        self._spectrum = 2/n * np.abs(np.fft.rfft(self.acc))
+        self._frequencies = np.fft.rfftfreq(n, dt)
         self.frequencies = self._frequencies
         self.spectrum = self._spectrum
 
@@ -98,7 +96,7 @@ class AnnotatedVCursor(Cursor):
 
     def __init__(self, **cursorargs):
         super().__init__(horizOn=False, useblit=True, **cursorargs)
-        self.text = self.ax.text(0, 0, "0", visible=False, animated=bool(self.useblit))
+        self.text = self.ax.text(0, 0, '0', visible=False, animated=bool(self.useblit))
 
     def onmove(self, event):
         super().onmove(event)
@@ -124,7 +122,7 @@ class MainWindow(QMainWindow):
 
         self.fft = FFTCalculator()
         self.setWindowIcon(QIcon(self.icon))
-        self.setWindowTitle("Fourier transform")
+        self.setWindowTitle('Fourier transform')
         self.setMinimumWidth(500)
 
         layout = QFormLayout()
@@ -241,7 +239,7 @@ class SettingsDialog(QDialog):
         super().__init__()
         self.parent: MainWindow = parent
         self.setWindowIcon(QIcon(self.parent.icon))
-        self.setWindowTitle("File settings")
+        self.setWindowTitle('File settings')
 
         layout = QGridLayout()
         self.setLayout(layout)
