@@ -1,6 +1,6 @@
 
 \begin{Exercise}[label={frame_ground_acceleration}]
-The portal frame of example \ref{frames_modification} (a) is subject to a sinusoidal ground vibration with horizontal acceleration amplitude of \SI{2}{m/s^2}. Assuming a damping ratio of \SI{5}{\%}, determine the maximum displacement and maximum total acceleration of the frame when the period of floor vibration is: (a) 0.1 seconds; (b) 0.9 seconds and (c) 5 seconds.
+The portal frame in Exercise \ref{frames_modification} (a) is subject to a sinusoidal ground vibration with a horizontal acceleration amplitude of \SI{2}{m/s^2}. Assuming a damping ratio of \SI{5}{\%}, determine the maximum displacement and maximum total acceleration of the frame when the period of floor vibration is: (a) \SI{0.1}{s}; (b) \SI{0.9}{s} and (c) \SI{5}{s}.
 
 \begin{center}
 \pictures{porticoForced}
@@ -21,20 +21,20 @@ u(t) = \frac{F_0}{k}H\sin(\Omega t + \phi - \Delta\phi)
 where $H$ is known as the magnification factor and is equal to
 $$
 H = \frac{1}{\sqrt{(1-\gamma^2)^2 + 4\xi^2\gamma^2}} \quad ; \quad
-\gamma = \frac{\Omega}{\omega} = \frac{T_{struct}}{T_{force}}
+\gamma = \frac{\Omega}{\omega} = \frac{T_{struct}}{T_{force}}\ .
 $$
 
-From the solution to example 3 (a) we know that the period is $T=0.9$ seconds and the frequency is $\omega = 2\pi/T \approx \SI{7}{rad/s}$ and the lateral stiffness is $k=\SI{487}{KN/m}$. The damping ratio is $\xi=\SI{5}{\%}$.
+From the solution to Exercise \ref{frames_modification} (a) we know that the period is $T=\SI{0.9}{s}$, the frequency is $\omega = 2\pi/T \approx \SI{7}{rad/s}$ and the lateral stiffness is $k=\SI{487}{kN/m}$. The damping ratio is $\xi=\SI{5}{\%}$.
 
 The amplitude $F_0$ of the external force is computed from the amplitude of the ground acceleration and the moving mass of the structure
 $$
-F_0 = ma_{0} = \frac{Pa_0}{g} = \frac{100\cdot2}{10} = \SI{20}{KN}
+F_0 = ma_{0} = \frac{Pa_0}{g} = \frac{100\cdot2}{10} = \SI{20}{kN}\ .
 $$
 
 Finally, the maximum displacements will depend on the period $\Omega$ of the external force,
 \begin{align*}
 &u_0 = \frac{F_0}{k}H = \frac{20}{487}H = 0.041H\,\si{m} = 4.1H\,\si{cm} \\
-&\ddot{u}_0 = \frac{F_0}{m}\gamma^2H = \Omega^2u_0
+&\ddot{u}_0 = \frac{F_0}{m}\gamma^2H = \Omega^2u_0\ .
 \end{align*}
 
 
@@ -43,26 +43,26 @@ When the period of the ground acceleration is $T_g=\SI{0.15}{s}$, the maximum di
 &\gamma = \frac{0.9}{0.15} = 9 \quad ; \quad
 H = \frac{1}{\sqrt{(1-9^2)^2 + 4\cdot 0.05^2\cdot 9^2}} = \frac{1}{\sqrt{80^4 + \cdots}} = 0.00015 \\
 &u_0 = 4.1\cdot 0.00015 = \SI{0.00064}{cm} \\
-&\ddot{u}_0 = \left(\frac{2\pi}{0.15}\right)^2 \cdot 0.00064 = \SI{1.1}{cm/s^2} = \SI{0.011}{m/s^2}
+&\ddot{u}_0 = \left(\frac{2\pi}{0.15}\right)^2 \cdot 0.00064 = \SI{1.1}{cm/s^2} = \SI{0.011}{m/s^2}\ .
 \end{align*}
-This situation is \emph{mass dominated}, also known as \emph{vibration isolation}.
+This situation is \emph{mass-dominated}, and is also known as \emph{vibration isolation}.
 
 When the period of the ground acceleration is $T_g=\SI{0.9}{s}$, the maximum values are
 \begin{align*}
 &\gamma = \frac{0.9}{0.9} = 1 \quad ; \quad
 H = \frac{1}{\sqrt{(1-1^2)^2 + 4\cdot 0.05^2\cdot 1^2}} = \frac{1}{\sqrt{0 + 4\cdot 0.05^2}} = 10 \\
 &u_0 = 4.1\cdot 10 = \SI{41}{cm} \\
-&\ddot{u}_0 = \left(\frac{2\pi}{0.9}\right)^2 \cdot 41 = \SI{2000}{cm/s^2} = \SI{20}{m/s^2}
+&\ddot{u}_0 = \left(\frac{2\pi}{0.9}\right)^2 \cdot 41 = \SI{2000}{cm/s^2} = \SI{20}{m/s^2}\ .
 \end{align*}
-The \emph{resonance} situation is \emph{damping dominated}.
+The \emph{resonance} situation is \emph{damping-dominated}.
 
-And for a period $T_g=\SI{5}{s}$, the maximum values are
+For a period $T_g=\SI{5}{s}$, the maximum values are
 \begin{align*}
 &\gamma = \frac{0.9}{5} = 0.18 \quad ; \quad
 H = \frac{1}{\sqrt{(1-0.18^2)^2 + 4\cdot 0.05^2\cdot 0.18^2}} = 1.033 \\
 &u_0 = 4.1\cdot 1.033 = \SI{4.2}{cm} \\
-&\ddot{u}_0 = \left(\frac{2\pi}{5}\right)^2 \cdot 4.2 = \SI{6.6}{cm/s^2} = \SI{0.066}{m/s^2}
+&\ddot{u}_0 = \left(\frac{2\pi}{5}\right)^2 \cdot 4.2 = \SI{6.6}{cm/s^2} = \SI{0.066}{m/s^2}\ ,
 \end{align*}
-Which is a practically \emph{static} situation or \emph{stiffness dominated}.
+which is a practically \emph{static} or \emph{stiffness dominated} situation.
 
 \end{Answer}

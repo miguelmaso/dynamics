@@ -4,15 +4,15 @@ author: "Miguel Masó"
 
 theme: minima
 
-base_url: /test-pages
-repository: miguelmaso/test-pages
+base_url: /dynamics
+repository: miguelmaso/dynamics
 
 # Minima social links
 github_username: miguelmaso
 linkedin_username: miguel-maso
 
 # Minima: show excerpts in the frontpage
-show_excerpts: true
+show_excerpts: false
 
 minima:
   date_format: "%Y-%m-%d"
@@ -21,12 +21,13 @@ minima:
 header_pages:
   - _pages/frontpage.md
   - _pages/notebooks.md
+  - _pages/tools.md
   - _pages/about.md
 
 include:
-    - _pages
+  - _pages
 
 exclude: 
-    - .gitignore
-    - LICENSE
-    - README.md
+  - .gitignore
+  - LICENSE
+  - README.md

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "owlfft"
+authors = [{name = "Miguel Masó", email = "miguel.maso@upc.edu"}]
+dynamic = ["version"]
+license = {text = "MIT License"}
+readme = "README.md"
+description = "Wrap numpy.fft and numpy.loadtxt within a simple GUI"
+keywords = ["structural dynamics", "Fourier transform", "teaching"]
+requires-python = ">=3"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "pyqt5",
+    "superqt",
+]
+
+[tool.hatch.version]
+path = "./owlfft.py"
+
+[project.urls]
+Homepage = "https://miguelmaso.github.io/dynamics/"
+Repository = "https://github.com/miguelmaso/dynamics/tree/main/tools"

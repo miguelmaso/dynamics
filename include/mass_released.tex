@@ -12,29 +12,29 @@ A mass $m$ is released from a given height attached to a massless cable of lengt
 
 
 \begin{Answer}[ref={mass_released}]
-The motion of the mass released from a given height and attached to a cable has two parts. Firstly, a free fall. Secondly, a vibration. The velocity at the end of the free fall is
+The motion of the mass released from a given height and attached to a cable has two parts: first, a free fall; second, a vibration. The velocity at the end of the free fall is
 $$
 \frac{1}{2}m\dot{u}_0^2 = mgl \quad \rightarrow \quad \dot{u}_0 = \sqrt{gl}
 $$
-and may be taken as initial condition of the vibration. Lately, the elastic response of the cable is the superposition of the static elongation and the vibration. From the cable properties,
+and may be taken as the initial condition of the vibration. Lastly, the elastic response of the cable is the superposition of the static elongation and the vibration. From the cable properties,
 \begin{align*}
 k &= \frac{EA}{l} \\
 m &= \sqrt{\frac{k}{m}} = \sqrt{\frac{EA}{ml}} \\
-u_{stat} &= \frac{F}{M} = \frac{mgl}{EA}
+u_{stat} &= \frac{F}{M} = \frac{mgl}{EA}\ .
 \end{align*}
 
-Then, neglecting damping, we can consider the motion as the transient solution of the differential equation satisfying the appropriate initial conditions,
+Then, neglecting damping, we can consider the motion as the transient solution to the differential equation satisfying the appropriate initial conditions,
 \begin{align*}
 u(t) &= C\sin(\omega t + \phi) + u_{stat} \\
 u(0) &= u_{stat} \rightarrow C\sin(\phi) = 0 \rightarrow \phi = 0 \\
 \dot{u}(0) &= \sqrt{2gl} \rightarrow C\omega\cos(\phi) =  \sqrt{2gl} \rightarrow C = \sqrt{\frac{2mg}{EA}}l
 \end{align*}
 
-And the maximum displacement $u_{max}$ and stress $\sigma$ are
+and the maximum displacement $u_{max}$ and stress $\sigma$ are
 \begin{align*}
 u_{max} &= \left(\frac{mg}{EA} + \sqrt{\frac{2mg}{EA}}\right)l \\
-\sigma &= E\epsilon = E\frac{u_{max}}{l} = \frac{mg}{A} + \sqrt{\frac{2mgE}{A}}
+\sigma &= E\epsilon = E\frac{u_{max}}{l} = \frac{mg}{A} + \sqrt{\frac{2mgE}{A}}\ .
 \end{align*}
 
-Note, the maximum displacement can also be obtained applying energy conservation.
+N.B. the maximum displacement can also be obtained by applying energy conservation.
 \end{Answer}
