@@ -40,3 +40,6 @@
 *.docx
 *.xls
 *.xlsx
+
+# ide auxiliary files
+.vs
