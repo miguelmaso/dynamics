@@ -135,7 +135,9 @@ class MainWindow(QMainWindow):
         self.file_label = QLineEdit()
         self.file_label.setEnabled(False)
         self.file_button = QPushButton('...')
-        self.file_settings_button = QPushButton('>_')
+        self.file_button.setToolTip('Select file')
+        self.file_settings_button = QPushButton('⛭')
+        self.file_settings_button.setToolTip('File settings')
         self.file_button.clicked.connect(self._UpdateFilename)
         self.file_settings_button.clicked.connect(self.settings_dialog.exec)
 
@@ -169,8 +171,8 @@ class MainWindow(QMainWindow):
 
     def _ApplySettings(self):
         self.fft.delimiter = str(self.settings.value('delimiter', self.fft.delimiter))
-        self.fft.time_col = int(self.settings.value('time_col', self.fft.time_col))
-        self.fft.acc_col = int(self.settings.value('acc_col', self.fft.acc_col))
+        self.fft.time_col = int(self.settings.value('time_col', self.fft.time_col + 1)) - 1
+        self.fft.acc_col = int(self.settings.value('acc_col', self.fft.acc_col + 1)) - 1
         self.fft.comments = str(self.settings.value('comments', self.fft.comments))
         self.fft.skiprows = int(self.settings.value('skiprows', self.fft.skiprows))
 
@@ -246,19 +248,19 @@ class SettingsDialog(QDialog):
 
         delimiter_label = QLabel('Delimiter')
         self.delimiter = QLineEdit()
-        self.delimiter.setToolTip('The character used to separate the values.')
+        self.delimiter.setToolTip('The character used to separate the columns. "\t" for tabs')
         time_col_label = QLabel('Time at column')
         self.time_col = QLineEdit()
-        self.time_col.setToolTip('Zero-based index.')
+        self.time_col.setToolTip('Natural index')
         acc_col_label = QLabel('Acceleration at column')
         self.acc_col = QLineEdit()
-        self.acc_col.setToolTip('Zero-based index.')
+        self.acc_col.setToolTip('Natural index')
         comments_label = QLabel('Comments')
         self.comments = QLineEdit()
-        self.comments.setToolTip('Character or list of characters.')
+        self.comments.setToolTip('Character or list of characters')
         skiprows_label = QLabel('Skiprows')
         self.skiprows = QLineEdit()
-        self.skiprows.setToolTip('Skip the first lines, including comments.')
+        self.skiprows.setToolTip('Skip the first lines, including comments')
         button = QPushButton('Accept')
         button.clicked.connect(self.hide)
         layout.addWidget(delimiter_label, 0, 0)
