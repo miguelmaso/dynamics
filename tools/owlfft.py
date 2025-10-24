@@ -21,7 +21,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationTool
 from matplotlib.figure import Figure
 from matplotlib.widgets import Cursor
 
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 NavigationToolbar2QT.toolitems = (('Save', 'Save the figure', 'filesave', 'save_figure'),)
 NavigationToolbar2QT.set_message = lambda *_: ''
