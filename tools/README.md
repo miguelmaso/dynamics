@@ -21,7 +21,7 @@ owlfft.main()
 ## Example
 ![](https://github.com/miguelmaso/dynamics/raw/main/tools/docs/main_window.png)
 
-The above window will be opened. It allows to select a `.csv` or `.txt` file and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
+The above window will be opened. It allows to select `.csv` or `.txt` files and to specify how to read it (custom delimiter, columns where to read data, etc.). There are also two range sliders to trim the time and the frequency domains. Finally, a cursor is added to the FFT spectrum plot.
 
 ## Why an owl?
 Because the python project must be unique, because the author likes birds and because the name is short.
