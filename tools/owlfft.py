@@ -248,7 +248,7 @@ class SettingsDialog(QDialog):
 
         delimiter_label = QLabel('Delimiter')
         self.delimiter = QLineEdit()
-        self.delimiter.setToolTip('The character used to separate the columns. "\t" for tabs')
+        self.delimiter.setToolTip('The character used to separate the columns. \\t for tabs')
         time_col_label = QLabel('Time at column')
         self.time_col = QLineEdit()
         self.time_col.setToolTip('Natural index')
