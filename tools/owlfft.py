@@ -136,9 +136,9 @@ class MainWindow(QMainWindow):
         self.file_label.setEnabled(False)
         self.file_button = QPushButton('...')
         self.file_button.setToolTip('Select file')
+        self.file_button.clicked.connect(self._UpdateFilename)
         self.file_settings_button = QPushButton('⛭')
         self.file_settings_button.setToolTip('File settings')
-        self.file_button.clicked.connect(self._UpdateFilename)
         self.file_settings_button.clicked.connect(self.settings_dialog.exec)
 
         self.time_label = QLabel()
