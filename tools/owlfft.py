@@ -277,8 +277,8 @@ class SettingsDialog(QDialog):
 
     def showEvent(self, event) -> None:
         self.delimiter.setText(str(self.parent.settings.value('delimiter', self.parent.fft.delimiter)))
-        self.time_col.setText(str(self.parent.settings.value('time_col', self.parent.fft.time_col)))
-        self.acc_col.setText(str(self.parent.settings.value('acc_col', self.parent.fft.acc_col)))
+        self.time_col.setText(str(self.parent.settings.value('time_col', self.parent.fft.time_col + 1)))
+        self.acc_col.setText(str(self.parent.settings.value('acc_col', self.parent.fft.acc_col + 1)))
         self.comments.setText(str(self.parent.settings.value('comments', self.parent.fft.comments)))
         self.skiprows.setText(str(self.parent.settings.value('skiprows', self.parent.fft.skiprows)))
         super().showEvent(event)
