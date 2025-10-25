@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "owlfft"
 authors = [{name = "Miguel Masó", email = "miguel.maso@upc.edu"}]
 dynamic = ["version"]
-license = {text = "MIT License"}
+license = "MIT"
 readme = "README.md"
 description = "Wrap numpy.fft and numpy.loadtxt within a simple GUI"
 keywords = ["structural dynamics", "Fourier transform", "teaching"]
