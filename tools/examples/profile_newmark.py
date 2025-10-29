@@ -1,7 +1,9 @@
+import os
 import numpy as np
 from owlfft import newmark_integrate
 
-acc = np.loadtxt('C:\\Users\\miguelmaso\\source\\repos\\dynamics\\ipython\\AcMx1985.txt', skiprows=2)
+dir = os.path.dirname(os.path.abspath(__file__))
+acc = np.loadtxt(os.path.join(dir, 'AcMx1985.txt'), skiprows=2)
 acc /= 10
 
 import profile

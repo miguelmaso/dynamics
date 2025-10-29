@@ -1,8 +1,10 @@
+import os
 import numpy as np
 from matplotlib import pyplot as plt
 from owlfft import newmark_integrate
 
-acc = np.loadtxt('C:\\Users\\miguelmaso\\source\\repos\\dynamics\\ipython\\AcMx1985.txt', skiprows=2)
+dir = os.path.dirname(os.path.realpath(__file__))
+acc = np.loadtxt(os.path.join(dir, 'AcMx1985.txt'), skiprows=2)
 acc /= 10
 
 u, v, a = newmark_integrate(0.02, acc, frequency=10.0, damping=0.05)
