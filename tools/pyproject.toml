@@ -19,7 +19,7 @@ dependencies = [
 ]
 
 [tool.hatch.version]
-path = "./owlfft.py"
+path = "./src/owlfft/__init__.py"
 
 [project.urls]
 Homepage = "https://miguelmaso.github.io/dynamics/"
