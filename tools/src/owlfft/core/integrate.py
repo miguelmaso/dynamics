@@ -68,39 +68,3 @@ def newmark_integrate(t, f, mass=None, friction=None, stiffness=None, frequency=
         u[i] = un = u_trial + beta*dt**2*an
 
     return u, v, a
-
-
-# acc = np.loadtxt('C:\\Users\\miguelmaso\\source\\repos\\dynamics\\ipython\\AcMx1985.txt', skiprows=2)
-# acc /= 10
-
-
-# import profile
-# def integrate():
-#     for i in range(5000):
-#         newmark_integrate(0.02, acc, frequency=10.0, damping=0.05)
-# profile.run('integrate()')
-
-
-# import matplotlib.pyplot as plt
-
-# u, v, a = newmark_integrate(0.02, acc, frequency=10.0, damping=0.05)
-# f, (ax1, ax2) = plt.subplots(2)
-# t = np.linspace(0, 0.02*len(acc), len(acc))
-# ax1.plot(t,acc)
-# ax2.plot(t,a)
-# plt.show()
-
-# nT = 100
-# Su = np.empty(nT, float)
-# Sv = np.empty(nT, float)
-# Sa = np.empty(nT, float)
-# periods = np.linspace(0.1, 4, nT)
-# for i in range(nT):
-#     T = periods[i]
-#     w = 2*np.pi/T
-#     u, v, a = newmark_integrate(0.02, acc, frequency=w, damping=0.05)
-#     Su[i] = max(u)
-#     Sv[i] = max(v)
-#     Sa[i] = max(a) / 9.81
-# plt.plot(periods, Sa)
-# plt.show()
