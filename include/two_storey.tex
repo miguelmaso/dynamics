@@ -1,9 +1,9 @@
 
 \begin{Exercise}[label={two_storey}]
-The two storey building shown is supported by four square concrete columns of dimensions $0.35 \times \SI{0.35}{m^2}$. The total masses of the bottom and top floors are $150$ and \SI{100}{Tn} respectively.
+The two-storey building shown is supported by four square concrete columns of dimensions $0.35 \times \SI{0.35}{m^2}$. The total masses of the bottom and top floors are $150$ and \SI{100}{t} respectively.
 \begin{enumerate}[(a)]
     \item Determine the natural modes and frequencies of vibration in the horizontal direction shown.
-    \item Determine the frequency of vibration that would be obtained making the assumption that the fundamental mode of vibration increases linearly with height.
+    \item Determine the frequency of vibration that would be obtained, assuming that the fundamental mode of vibration increases linearly with height.
 \end{enumerate}
 
 \begin{center}
@@ -18,15 +18,15 @@ The two storey building shown is supported by four square concrete columns of di
 
 
 \begin{Answer}[ref={two_storey}]
-The inter-storey stiffness is obtained from the concrete columns properties,
+The inter-storey stiffness is obtained from the concrete column properties:
 \begin{align*}
 &E = \SI{14}{GPa} = \SI{14e6}{KPa} \\
 &I = \frac{1}{12}bc^3 = \frac{1}{12}0.35^4 = \frac{15}{12}\times10^{-3}\si{m^4} \\
-&k_{column} = \frac{12EI}{h^3} = \frac{12\times14\times15\times10^3}{12\times27} = \SI{7.77e3}{KN/m} \\
-&k = 4k_{column} = \SI{31.1}{KN/m}
+&k_{column} = \frac{12EI}{h^3} = \frac{12\times14\times15\times10^3}{12\times27} = \SI{7.77e3}{kN/m} \\
+&k = 4k_{column} = \SI{31.1}{kN/m}\ .
 \end{align*}
 
-Using those values, the mass and stiffness matrices are
+Using these values, the mass and stiffness matrices are
 $$
 \mathbf{M} =
 \begin{bmatrix}
@@ -36,7 +36,7 @@ $$
 \begin{bmatrix}
     150 & 0 \\
     0 & 100
-\end{bmatrix} \si{Tn}
+\end{bmatrix} \si{t}\ ,
 $$
 
 $$
@@ -48,7 +48,7 @@ $$
 \begin{bmatrix}
     60 & -30 \\
     -30 & 30
-\end{bmatrix} \times10^3 \si{KN/m}
+\end{bmatrix} \times10^3 \si{kN/m}\ .
 $$
 
 \paragraph{(a) Natural modes of vibration}
@@ -65,11 +65,11 @@ The natural modes of vibration can be obtained from the solution to the generali
 $$
 \omega^2 = \begin{cases}
     100 \rightarrow \omega_1 = \SI{10}{rad/s} \\
-    600 \rightarrow \omega_2 = \SI{24.5}{rad/s}
+    600 \rightarrow \omega_2 = \SI{24.5}{rad/s}\ .
 \end{cases}
 $$
 
-Since the the determinant of the system is zero for the eigenvalues, the eigenvectors are found assigning an arbitrary value to a component,
+Because the determinant of the system is zero for the eigenvalues, the eigenvectors are found by assigning an arbitrary value to a component,
 \begin{align*}
 (\mathbf{K} -\omega_1^2\mathbf{M})\mathbf{v}_1 = \mathbf{0} \\
 \begin{bmatrix}
@@ -89,12 +89,12 @@ Since the the determinant of the system is zero for the eigenvalues, the eigenve
 \end{bmatrix} \mathbf{v}_2 = \mathbf{0} \\
 \mathbf{v}_2 = \begin{bmatrix}
     1 \\ -1
-\end{bmatrix}
+\end{bmatrix}.
 \end{align*}
 
 
-\paragraph{(b) Ritz-Rayleigh method}
-In order to show the possibilities of the Ritz-Rayleigh method, a linearly increasing mode of vibration $\mathbf{r}_1$ is choosen. If it were the case of a more complex structure, more trial modes of vibration $\mathbf{r}_i$ could be provided.
+\paragraph{(b) The Ritz-Rayleigh method}
+To show the possibilities of the Ritz-Rayleigh method, a linearly increasing mode of vibration $\mathbf{r}_1$ is chosen. If the structure were more complex, more trial modes of vibration $\mathbf{r}_i$ could be provided.
 \begin{align*}
 \mathbf{R} &= [\mathbf{r}_1] = \begin{bmatrix}
     1 \\ 2
@@ -107,7 +107,7 @@ In order to show the possibilities of the Ritz-Rayleigh method, a linearly incre
 \end{bmatrix} \begin{bmatrix}
     1 \\
     2
-\end{bmatrix} = \SI{550}{Tn} \\
+\end{bmatrix} = \SI{550}{t} \\
 \hat{\mathbf{K}} &= \mathbf{R}^T\mathbf{K}\mathbf{R} = \begin{bmatrix}
     1 \\ 2
 \end{bmatrix}^T \begin{bmatrix}
@@ -116,12 +116,13 @@ In order to show the possibilities of the Ritz-Rayleigh method, a linearly incre
 \end{bmatrix} \begin{bmatrix}
     1 \\
     2
-\end{bmatrix} = \SI{6e4}{KN/m}
+\end{bmatrix} = \SI{6e4}{kN/m}\ .
 \end{align*}
-And the eigenvalue problem is reduced to a scalar equation,
+
+The eigenvalue problem is reduced to a scalar equation,
 $$
 |\hat{\mathbf{K}} - \omega^2\hat{\mathbf{M}}| = 0
-\quad\rightarrow\quad \omega_1^2 = \frac{6\times10^4}{550} \quad\rightarrow\quad \omega_1 = \SI{10.4}{rad/s}
+\quad\rightarrow\quad \omega_1^2 = \frac{6\times10^4}{550} \quad\rightarrow\quad \omega_1 = \SI{10.4}{rad/s}\ .
 $$
 
 \end{Answer}

@@ -1,32 +1,34 @@
 
 \begin{Exercise}[label={helicopter_impulse}]
-A building has a height of \SI{100}{m}, a square base measuring $20\times\SI{20}{m^2}$, an average specific weight of \SI{1500}{N/m^3} and a natural period of vibration of 5 seconds. The top floor is hit by an helicopter with a mass of \SI{10000}{Kg} and traveling at \SI{30}{m/s}. Determine the maximum deflection at the top assuming conservation of linear momentum and a vibration shape function that increases linearly with the height.
+A building has a height of \SI{100}{m}, a square base measuring $20\times\SI{20}{m^2}$, an average specific weight of \SI{1500}{N/m^3} and a natural period of vibration of \SI{5}{s}. The top floor is hit by a helicopter with a mass of \SI{10000}{kg} and travelling at \SI{30}{m/s}. Determine the maximum deflection at the top assuming conservation of linear momentum and a vibration shape function that increases linearly with the height.
 
 \begin{center}
 \pictures{buildingHelicopter}
 \end{center}
 
-\shortAnswer $u_0 = \SI{12}{cm}$.
+\shortAnswer $u_0 = \SI{8}{cm}$.
 \end{Exercise}
 
 
 
 \begin{Answer}[ref={helicopter_impulse}]
-When the building is hit by the helicopter, the impulse or linear momentum is preserved. To compute the linear momentum of the building, we need to know the equivalent mass and we can use the Rayleigh's method for that purpose. As it is suggested, we will use a linear shape function
+When the building is hit by the helicopter, the impulse or linear momentum is preserved. To compute the linear momentum absorbed by the building, we can make use of the Raileygh method, it will be the integral value of the mass and velocity product. As suggested, we will use a linear shape function
 \begin{align*}
-u& = u_0\psi \quad ; \quad \psi = \frac{z}{h} \\
-m& \begin{multlined}[t]= \int_0^h \rho A\psi^2dz = \rho A\int_0^h\frac{z^2}{h^2}dz = \frac{1}{3}\rho Ah = \frac{1}{3} 1500 \times 400 \times 100 = \\
-    = \SI{2e7}{N} = \SI{2e6}{Kg} \end{multlined}
+\dot{u}& = \dot{u}_0\psi \quad ; \quad \psi = \frac{z}{h} \\
+m\dot{u}_0& \begin{multlined}[t] = \int_0^h \rho A\dot{u}dz = \int_0^h \rho A\dot{u}_0\frac{z}{h}dz = \frac{1}{2}\rho A\dot{u}_0h = \\
+    \qquad= \frac{1}{2}150\times400\times100\ \dot{u}_0
+        = \num{3e6}\ \dot{u}_0\ \si{kg.m/s}\ .\end{multlined}
 \end{align*}
 
 The impulse of the helicopter is
 $$
-I = (mv)_{helicopter} = 10^4 \times 30 = \SI{3e5}{Kg.m/s}
+I = (mv)_{helicopter} = 10^4 \times 30 = \SI{3e5}{kg.m/s}\ ,
 $$
 which is transferred to the building. Then, the maximum deflection at the top of the building is inferred according to the following expressions:
 \begin{align*}
-&I = m\dot{u}_0 \quad \rightarrow \quad u_0 = \frac{I}{m\omega} \\
+&I = m\dot{u}_0 \quad \rightarrow \quad u_0 = \frac{\dot{u}_0}{\omega} \\
 &\omega = \frac{2\pi}{T} = \frac{2\pi}{5} = \SI{1.25}{rad/s} \\
-&u_0 = \frac{3\times 10^5}{2\times 10^6\times 1.25} = \SI{0.12}{m} = \SI{12}{cm}
+&u_0 = \frac{3\times 10^5}{3\times 10^6\times 1.25} = \SI{0.08}{m} = \SI{8}{cm}\ .
 \end{align*}
+
 \end{Answer}

@@ -22,14 +22,15 @@ jobs:
       image: danteev/texlive:latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Build LaTeX
         run: |
           cp .github/workflows/build_pdf.sh build_pdf.sh
           bash build_pdf.sh
       - name: Gather build artifacts
         run: |
-          mv problems.pdf docs/
+          cp problems.pdf docs/
+          cp tools/README.md docs/_pages/owlfft-README.md
       - name: Publish to GitHub pages
         if: success() && github.ref == 'refs/heads/main'
         uses: crazy-max/ghaction-github-pages@v4

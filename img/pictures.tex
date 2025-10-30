@@ -208,7 +208,7 @@
         \draw [<->] ([yshift=8]A) -- ([yshift=8]B);
         \path (A) -- +(0,2) node [midway,left=2,fill=white] {\SI{4}{m}};
         \path (A) -- (B) node [midway,above,fill=white] {\SI{5}{m}};
-        \path (1.5,2.3) node [above] {\SI{100}{KN}};
+        \path (1.5,2.3) node [above] {\SI{100}{kN}};
     },
     frameDimensions2/.pic = {
         \pic {bracedFrame};
@@ -224,7 +224,7 @@
         \draw [fill=lightgray] (0,2.3) rectangle (3,2.5);
         \pic at (A) {fixed};
         \pic at (B) {fixed};
-        \path (1.5,2.5) node [above] {\SI{150}{KN}};
+        \path (1.5,2.5) node [above] {\SI{150}{kN}};
     },
     %
     % Example 4
@@ -255,32 +255,32 @@
     % Examples 6 and 7
     %
     building/.pic = {
-        \draw [thick,gray,fill=lightgray] (0,0) rectangle (2,4);
-        \draw (-1,0) -- (3,0);
-        \foreach \x in {1,...,3} {
-            \foreach \y in {1,...,5} {
-                \draw [thick,gray,left color=blue!25, shading angle=45] (\x/2-.15, \y/1.5-.1) rectangle +(0.3,0.35);
+        \draw [gray,fill=lightgray] (0,0) rectangle (1.5,5);
+        \foreach \x in {0,.5,1} {
+            \foreach \y in {0,...,6} {
+                \draw [gray,left color=blue!10, shading angle=45] (\x+.05, \y/1.5+.1) rectangle +(0.4,0.6);
             }
         }
+        \draw (-1,0) -- (2.5,0);
+    },
+    buildingPsi/.pic = {
+        \pic {building};
+        \draw [dashed] (1.5,0) coordinate (O) -- (3,5);
+        \draw [dashed] (1.5,5) -- (3,5) coordinate (T);
+        \path (O) -- (T) node [midway,right] {$\psi$};
     },
     buildingHelicopter/.pic = {
-        \node at (0,4) {\pgfuseimage{helicopter}};
-        \pic at (2,0) {building};
-        \draw [dashed] (4,0) -- (5,4);
-        \draw [dashed] (4,4) -- (5,4);
+        \node at (0,4.5) {\pgfuseimage{helicopter}};
+        \pic at (2,0) {buildingPsi};
         },
     buildingWind/.pic = {
-        \pic {building};
-        \foreach \y in {0,...,8} {
-            \draw [->] (-.5-\y/8, \y/2) -- (0, \y/2);
+        \pic {buildingPsi};
+        \foreach \y in {0,...,10} {
+            \draw [->] (-.5-\y/10, \y/2) -- (0, \y/2);
         }
-        \coordinate (W0) at (-.5,0);
-        \coordinate (W1) at (-1.5,4);
-        \draw (W0) -- (W1);
-        \node [above left] at (W0) {\SI{0.3}{KN/m}};
-        \node [left] at (W1) {\SI{1}{KN/m}};
-        \draw [dashed] (2,0) -- (3,4);
-        \draw [dashed] (2,4) -- (3,4);
+        \draw (-.5,0) coordinate (W0) -- (-1.5,5) coordinate (W1);
+        \node [above left] at (W0) {\SI{0.3}{kN/m}};
+        \node [left] at (W1) {\SI{1}{kN/m}};
     },
     %
     % Example 8
@@ -389,38 +389,61 @@
         \draw (B) ++(.5,0.6) node [right] {$k_1=\SI{3e7}{N/m}$};
     },
     %
+    % Pneumatic hammer
+    %
+    concretePlate/.pic = {
+        \def\cubex{5}
+        \def\cubey{4}
+        \def\cubez{.5}
+        \def\fx{1}
+        \def\fy{1}
+        \def\fz{1}
+        \draw [thin,fill=lightgray,semitransparent] (0,0,0) -- ++(-\cubex,0,0) -- ++(0,-\cubez,0) coordinate (a) -- ++(\cubex,0,0) coordinate (b) -- cycle;
+        \draw [thin,fill=lightgray,semitransparent] (0,0,0) -- ++(0,0,-\cubey) -- ++(0,-\cubez,0) coordinate (c) -- ++(0,0,\cubey) -- cycle;
+        \draw [thin,fill=lightgray,semitransparent] (0,0,0) -- ++(-\cubex,0,0) -- ++(0,0,-\cubey) -- ++(\cubex,0,0) -- cycle;
+        \path (a) ++(0,-.6) coordinate (a1);
+        \path (b) ++(.4,-.4) coordinate (b1);
+        \path (c) ++(.4,-.4) coordinate (c1);
+        \draw [<->] (a1) -- (a1 -| b) node [midway,above] {\SI{12}{m}};
+        \draw [<->] (b1) -- (c1) node [midway,above,rotate=45] {\SI{12}{m}};
+        \coordinate (F) at (-\cubex+\fx, \fx, -\cubey+\fy);
+        \draw [thick,-latex] (F) -- ++(0,-\fz, 0);
+        \draw [<->] (F) ++(0,.2,0) -- ++(-\fx,0,0) node [midway,below] {\SI{2}{m}};
+        \draw [<->] (F) ++(0,.2,0) -- ++(0,0,-\fy) node [midway,below,rotate=45] {\SI{2}{m}};
+    },
+    %
     % Example NNN
     %
     singleTrain/.pic = {
         \tikzset{
-            wheel/.style={draw, circle, thick, minimum width=5pt, inner sep=0pt, fill=gray!75},
-            window/.style={draw, rectangle, very thin, left color=blue!50, shading angle=45, minimum width=6pt, minimum height=4.5pt, inner sep=0pt},
+            wheel/.style={draw, circle, thick, minimum width=8pt, inner sep=0pt, fill=gray!75},
+            window/.style={draw, rectangle, very thin, left color=blue!20, shading angle=45, minimum width=7pt, minimum height=5pt, inner sep=0pt},
             wagon/.style={draw, very thin, shading angle=0}
         }
-        \def\l{2}
-        \def\h{.4}
+        \def\l{3}
+        \def\h{.6}
         \path [draw]
             (0,1.2pt) coordinate (trolley) ++(-.5*\l,2pt) node (w1) [wheel] {}
             ++(\l,0) node (w2) [wheel] {};
         \path [wagon]
           [rounded corners=1pt] (w1.west |- trolley) -| (trolley -| .04-\l,0) |- ++(\l,\h) -| ++(\l-.08,-\h) 
           [sharp corners] -| (w2.east) -- (w2.west) |- (trolley) -| (w1.east) -- (w1.west) |- cycle;
-        \foreach \pos in {0,.3,...,\l} {
-            \path (trolley) ++(.9*\pos,.25) node [window] {};
-            \path (trolley) ++(-.9*\pos,.25) node [window] {};
+        \foreach \pos in {0,.4,...,\l} {
+            \path (trolley) ++(.9*\pos,.35) node [window] {};
+            \path (trolley) ++(-.9*\pos,.35) node [window] {};
         }
     },
     fullTrain/.pic = {
         \pic at (0,0) {singleTrain};
-        \def\l{2}
-        \def\h{.5}
+        \def\l{3}
+        \def\h{.7}
         \def\s{.04}
         \begin{scope}
-            \clip (\l,0) rectangle ++(\l,\h) ++(\s,-\h) rectangle ++(\s,\h) ++(\s,-\h) rectangle ++(\s,\h);
+            \clip (\l,-1.2pt) rectangle ++(\l,\h) ++(\s,-\h) rectangle ++(\s,\h) ++(\s,-\h) rectangle ++(\s,\h);
             \pic at (2*\l,0) {singleTrain};
         \end{scope}
         \begin{scope}
-            \clip (-\l,0) rectangle ++(-.1,\h) ++(-\s,-\h) rectangle ++(-\s,\h) ++(-\s,-\h) rectangle ++(-\s,\h);
+            \clip (-\l,-1.2pt) rectangle ++(-.1,\h) ++(-\s,-\h) rectangle ++(-\s,\h) ++(-\s,-\h) rectangle ++(-\s,\h);
             \pic at (-2*\l,0) {singleTrain};
         \end{scope}
     },
@@ -431,13 +454,71 @@
         }
         \def\ya{-0.6pt}
         \def\yb{-1.2pt}
-        \pic {fullTrain};
-        \fill [lightgray] (1.6,0) coordinate (p1) rectangle ++(2.6,-.5);
-        \fill [lightgray] (-.4,0) coordinate (p2) rectangle ++(-1.9,-.5);
+        \def\yc{-.9}
+        \coordinate (annot) at (0, -.9);
+        \pic at (0, 1.2pt) {fullTrain};
+        \fill [lightgray,semitransparent] (-.4,0) coordinate (p1) rectangle ++(-2.7,-.5);
+        \fill [lightgray,semitransparent] (2.6,0) coordinate (p2) rectangle ++(3.4,-.5);
         \draw [ultra thick,offset1] ([yshift=\ya]p1) -- ([yshift=\ya]p2);
+        \path (p1) -- (p2) node [midway] (p3) {};
         \pic at ([yshift=\yb]p1) {triangle};
         \pic at ([yshift=\yb]p2) {triangle};
-        \pic at ([yshift=\yb]$(p1)!.5!(p2)$) {triangle};
+        \pic at ([yshift=\yb]p3) {triangle};
+        \draw [<->] (p1 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
+        \draw [<->] (p2 |- annot) -- (p3 |- annot) node [midway,above] {\SI{6}{m}};
+        \draw [<->] (-1.5, 1) -- ++(3,0) node [midway,above] {\SI{12}{m}};
+    },
+    rampForce/.pic = {
+        \coordinate (O);
+        \coordinate (t0) at (1,0);
+        \coordinate (t1) at (5,0);
+        \coordinate (P) at (0,1.4);
+        \fill [lightgray,semitransparent] (O) -- (t0 |- P) -- (t1 |- P) -- (t1) -- cycle;
+        \draw plot coordinates {(O) (t0 |- P) (t1 |- P)};
+        \draw [->] (O) -- ++(6,0) coordinate (X) node [right] {$x$};
+        \draw [->] (O) -- ++(0,2) coordinate (Y) node [left] {$y$};
+        \draw [dotted] (t0) node [below] {$t_0$} -- (t0 |- P);
+        \draw [dotted] (P) node [left] {$P$} -- (P -| t0);
+    },
+    infLongForce/.pic = {
+        \pic {longBeam};
+        \draw (-1,1) -- (2,1) coordinate (w) node [midway,above] {$w$};
+        \draw [->] (w) ++(.3,0) -- ++(1,0) node [midway,above] {$v$};
+        \foreach \x in {-.4,-.1,...,2} {
+            \draw [-latex] (\x, 1) -- (\x, .1);
+        }
+    },
+    elsaticSpectrum/.pic = {
+        \begin{scope}[xscale=1.5,yscale=3]
+        \fill [lightgray,semitransparent] (0,0) coordinate (O) -- (0,.2) coordinate (s0) -- (.2,.5) coordinate (s1) --
+            (1,.5) coordinate (s2) -- plot [domain=1:2] ({\x}, {.5/\x}) coordinate (s3) -- plot [domain=2:4] ({\x}, {1/\x/\x}) -- (4,0) -- cycle;
+        \draw plot coordinates {(s0) (s1) (s2)} plot [domain=1:2] ({\x}, {.5/\x}) plot [domain=2:4] ({\x}, {1/\x/\x});
+        \draw [->] (O) -- (5,0) node [right] {$T (s)$};
+        \draw [->] (O) -- (0,.8) node [left] {$S_a/g$};
+        \node [left] at (s0) {$0.2$};
+        \draw [dotted] (O |- s1) node [left] {$0.5$} -- (s1);
+        \draw [dotted] (O -| s1) node [below] {$0.15$} -- (s1);
+        \draw [dotted] (O -| s2) node [below] {$0.6$} -- (s2);
+        \draw [dotted] (O -| s3) node [below] {$3.0$} -- (s3);
+        \draw [<-] (s2) ++(.5,-.1) -- ++(.2,.2) node [above right] {$0.3/T$};
+        \draw [<-] (s3) ++(.6,-.05) -- ++(.2,.2) node [above right] {$0.9/T^2$};
+        \end{scope}
+    },
+    inelsaticSpectrum/.pic = {
+        \begin{scope}[xscale=1,yscale=10]
+        \fill [lightgray,semitransparent] (0,0) coordinate (O) -- (0,.2) coordinate (s0) -- (.2,.12) coordinate (s1) --
+            (1,.12) coordinate (s2) -- plot [domain=1:2] ({\x}, {.12/\x}) coordinate (s3) -- plot [domain=2:4] ({\x}, {.24/\x/\x}) -- (4,0) -- cycle;
+        \draw plot coordinates {(s0) (s1) (s2)} plot [domain=1:2] ({\x}, {.12/\x}) plot [domain=2:4] ({\x}, {.24/\x/\x});
+        \draw [->] (O) -- (5,0) node [right] {$T (s)$};
+        \draw [->] (O) -- (0,.3) node [left] {$S_a/g$};
+        \node [left] at (s0) {$0.2$};
+        \draw [dotted] (O |- s1) node [left] {$0.125$} -- (s1);
+        \draw [dotted] (O -| s1) node [below] {$0.15$} -- (s1);
+        \draw [dotted] (O -| s2) node [below] {$0.6$} -- (s2);
+        \draw [dotted] (O -| s3) node [below] {$3.0$} -- (s3);
+        \draw [<-] (s2) ++(.5,-.03) -- ++(.1,.1) node [above right] {$0.125(0.6/T)^{2/3}$};
+        \draw [<-] (s3) ++(.8,-.02) -- ++(.08,.08) node [above right] {$0.125(0.2)^2(3/T)^{5/3}$};
+        \end{scope}
     }
 }
 

@@ -1,9 +1,9 @@
 
 \begin{Exercise}[label={frames_modification}]
-The portal frame structure shown has a weight of \SI{100}{kN}. If the natural period of vibration is 0.9 seconds:
+The portal frame structure shown has a weight of \SI{100}{kN}. If the natural period of vibration is \SI{0.9}{s}:
 \begin{enumerate}[(a)]
     \item determine the lateral stiffness of the structure;
-    \item determine the diameter of the steel cross-braces required to strengthen the structure by reducing the period to 0.3 seconds;
+    \item determine the diameter of the steel cross-braces required to strengthen the structure by reducing the period to \SI{0.3}{s};
     \item determine the period if a further load of \SI{50}{kN} is added to the strengthened structure.
 \end{enumerate}
 
@@ -13,13 +13,13 @@ The portal frame structure shown has a weight of \SI{100}{kN}. If the natural pe
     \pictureslabel{porticoDimensions3}{c}
 \end{center}
 
-\shortAnswer (a) $k = \SI{487}{kN/m}$, (b) $D = \SI{1.4}{cm}$, (c) $T = \SI{0.37}{s}$.
+\shortAnswer (a) $k = \SI{487}{kN/m}$, (b) $D = \SI{1.6}{cm}$, (c) $T = \SI{0.37}{s}$.
 \end{Exercise}
 
 
 
 \begin{Answer}[ref={frames_modification}]
-Given that the natural period of vibration of the frame is $T=0.9$ seconds, the frequency is computed as
+Given that the natural period of vibration of the frame is \SI{0.9}{s}, the frequency is computed as
 $$
 \omega = \frac{2\pi}{T} = \frac{2\pi}{0.9} = \SI{6.98}{rad/s}
 $$
@@ -29,36 +29,36 @@ $$
 k = \omega^2m = \omega^2\frac{P}{g} = 6.98^2\frac{100}{10} = \SI{487}{kN/m}
 $$
 
-The goal of the second step is to determine the diameter of the steel cross-braces required to strengthen the structure by reducing the period to 0.3 seconds. First of all, the new stiffness is obtained following the same procedure,
+The goal of the second step is to determine the diameter of the steel cross-braces required to strengthen the structure by reducing the period to \SI{0.3}{s}. First, the new stiffness is obtained following the same procedure,
 \begin{align*}
 \omega = \frac{2\pi}{T} = \frac{2\pi}{0.3} = \SI{20.94}{rad/s} \\
-k = \omega^2\frac{P}{g} = 20.94^2\frac{100}{10} = \SI{4384}{KN/m}
+k = \omega^2\frac{P}{g} = 20.94^2\frac{100}{10} = \SI{4384}{kN/m}
 \end{align*}
 The bracing system should provide the additional stiffness,
 $$
-k = k_{frame} + k_{bracing} \quad \rightarrow \quad k_{bracing} = 4384 - 487 = \SI{3897}{KN/m}
+k = k_{frame} + k_{bracing} \quad \rightarrow \quad k_{bracing} = 4384 - 487 = \SI{3897}{kN/m}
 $$
 
 We will consider the stiffness of one brace because the one under compression can buckle. 
-Following the solution of example 1 (c), the area can be obtained from
+Following the solution of Exercise \ref{frames_frequency} (c), the area can be obtained from
 \begin{align*}
 k_{brace} &= \frac{EA}{l}\cos^2\theta \quad \rightarrow \quad A = \frac{k_{brace}l}{E\cos^2\theta} \\
 l &= \sqrt{4^2 + 5^2} = \SI{6.4}{m} \\
 \cos\theta &= \frac{5}{6.4} = 0.78 \\
-A &= \frac{3897\cdot 6.4}{2\cdot 10^8\cdot 0.78} = 1.6\cdot 10^{-4} m^2 = \SI{1.6}{cm^2}
+A &\approx 2\cdot 10^{-4} m^2 = \SI{2}{cm^2}
 \end{align*}
 and the diameter is obtained from the area,
 $$
-D = 2\sqrt{\frac{A}{\pi}} = 2\sqrt{\frac{1.6}{\pi}} = \SI{1.4}{cm}
+D = 2\sqrt{\frac{A}{\pi}} = 2\sqrt{\frac{2}{\pi}} \approx \SI{1.6}{cm}
 $$
 
-The last part of the example consists on computing the new period of vibration if a further load of \SI{50}{kN} is added to the strengthened structure. Using the new lateral stiffness, the frequency is
+The last part of the example consists in computing the new period of vibration if a further load of \SI{50}{kN} is added to the strengthened structure. Using the new lateral stiffness, the frequency is
 $$
-\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4384}{15}} = \SI{17.1}{rad/s}
+\omega = \sqrt{\frac{k}{m}} = \sqrt{\frac{4384}{15}} \approx \SI{17.1}{rad/s}
 $$
 and the new period is
 $$
-T = \frac{2\pi}{\omega} = \frac{2\pi}{17.1} = \SI{0.37}{s}
+T = \frac{2\pi}{\omega} = \frac{2\pi}{17.1} \approx \SI{0.37}{s}
 $$
 
 \end{Answer}

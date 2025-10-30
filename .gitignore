@@ -46,3 +46,6 @@
 *.docx
 *.xls
 *.xlsx
+
+# visual studio aux folder
+.vs
