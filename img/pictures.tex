@@ -1,29 +1,20 @@
-\documentclass{standalone}
-
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usetikzlibrary{external}
-\tikzexternalize[
-    %mode=graphics if exists,
-    figure list=true,
-    prefix=pictures/]
 
 % Loading shapes
 % from https://openclipart.org/artist/dominiquechappard
 % and https://openclipart.org/artist/mkhuda
-\pgfdeclareimage[height=1.5cm]{calling}   {shapes/calling}
-\pgfdeclareimage[height=1.5cm]{ballet}    {shapes/ballet}
-\pgfdeclareimage[height=1.5cm]{dancing}   {shapes/dancing}
-\pgfdeclareimage[height=1.5cm]{handwalk}  {shapes/handwalk}
-\pgfdeclareimage[height=1.5cm]{happy}     {shapes/happy}
-\pgfdeclareimage[height=1.5cm]{helicopter}{shapes/helicopter}
-\pgfdeclareimage[height=1.5cm]{hip-hop}   {shapes/hip-hop}
-\pgfdeclareimage[height=1.5cm]{hip-hop-2} {shapes/hip-hop-2}
-\pgfdeclareimage[height=1.5cm]{jumping}   {shapes/jumping}
-\pgfdeclareimage[height=1.5cm]{music-hall}{shapes/music-hall}
-\pgfdeclareimage[height=1.5cm]{saxo}      {shapes/saxo}
-\pgfdeclareimage[height=1.5cm]{stone}     {shapes/stone}
-\pgfdeclareimage[height=1.5cm]{walking}   {shapes/walking}
+\pgfdeclareimage[height=1.5cm]{calling}   {img/shapes/calling}
+\pgfdeclareimage[height=1.5cm]{ballet}    {img/shapes/ballet}
+\pgfdeclareimage[height=1.5cm]{dancing}   {img/shapes/dancing}
+\pgfdeclareimage[height=1.5cm]{handwalk}  {img/shapes/handwalk}
+\pgfdeclareimage[height=1.5cm]{happy}     {img/shapes/happy}
+\pgfdeclareimage[height=1.5cm]{helicopter}{img/shapes/helicopter}
+\pgfdeclareimage[height=1.5cm]{hip-hop}   {img/shapes/hip-hop}
+\pgfdeclareimage[height=1.5cm]{hip-hop-2} {img/shapes/hip-hop-2}
+\pgfdeclareimage[height=1.5cm]{jumping}   {img/shapes/jumping}
+\pgfdeclareimage[height=1.5cm]{music-hall}{img/shapes/music-hall}
+\pgfdeclareimage[height=1.5cm]{saxo}      {img/shapes/saxo}
+\pgfdeclareimage[height=1.5cm]{stone}     {img/shapes/stone}
+\pgfdeclareimage[height=1.5cm]{walking}   {img/shapes/walking}
 
 % Macro for inserting pictures
 \newcommand{\pictures}[1]{
@@ -521,45 +512,3 @@
         \end{scope}
     }
 }
-
-\begin{document}
-
-
-\tikzsetnextfilename{frame}
-\begin{tikzpicture}
-    \pic{frame};
-\end{tikzpicture}
-
-
-\tikzsetnextfilename{frame3Pinned}
-\begin{tikzpicture}
-    \pic{frame3Pinned};
-\end{tikzpicture}
-
-
-\tikzsetnextfilename{frameBracing}
-\begin{tikzpicture}
-    \pic{frame3Pinned};
-\end{tikzpicture}
-
-
-\tikzsetnextfilename{frameSol}
-\begin{tikzpicture}
-    \pic{frame3Pinned};
-\end{tikzpicture}
-
-
-\tikzsetnextfilename{frame3PinnedSol}
-\begin{tikzpicture}
-    \pic{frame3Pinned};
-\end{tikzpicture}
-
-
-\tikzsetnextfilename{frameBracingSol}
-\begin{tikzpicture}
-    \pic{frame3Pinned};
-\end{tikzpicture}
-
-
-\end{document}
-

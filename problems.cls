@@ -139,6 +139,12 @@
 \renewcommand{\theenumi}{\alph{enumi}}
 
 
+% Tikz libraries and speedup compilation
+\usetikzlibrary{calc}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=img/]
+
+
 % Add link to url in citations
 \DeclareFieldFormat{bibhyperref}{\usebibmacro{citelink}{#1}}
 \newbibmacro*{citelink}[1]{%
