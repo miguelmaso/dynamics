@@ -17,18 +17,10 @@
 \pgfdeclareimage[height=1.5cm]{walking}   {img/shapes/walking}
 
 % Macro for inserting pictures
-\newcommand{\pictures}[1]{
+\newcommand{\inserttikzpic}[1]{
     \begin{tikzpicture}
         \pic {#1};
     \end{tikzpicture}
-}
-\newcommand{\pictureslabel}[2]{
-    \begin{tabular}[b]{c}
-        \begin{tikzpicture}
-            \pic {#1};
-        \end{tikzpicture} \\
-        (#2)
-    \end{tabular}
 }
 
 % Predefined shapes

@@ -5,15 +5,9 @@ Consider the frames below. Compute the stiffness and natural frequencies.
 
 \begin{center}
     \begin{tabular}[b]{ccc}
-        \begin{tikzpicture}
-            \pic {frame3Pinned};
-        \end{tikzpicture} &
-        \begin{tikzpicture}
-            \pic {frame};
-        \end{tikzpicture} &
-        \begin{tikzpicture}
-            \pic {frameBracing};
-        \end{tikzpicture} \\
+        \inserttikzpic{frame3Pinned} &
+        \inserttikzpic{frame} &
+        \inserttikzpic{frameBracing} \\
         (a) & (b) & (c)
     \end{tabular}
 \end{center}
