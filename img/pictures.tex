@@ -45,11 +45,6 @@
         \draw [ultra thick] (A) -- +(0,2);
         \draw [ultra thick] (B) -- +(0,2);
     },
-    basicBeam/.pic = {
-        \coordinate (A) at (0,0);
-        \coordinate (B) at (3,0);
-        \draw [ultra thick] (A) -- (B);
-    },
     fixedFrame/.pic = {
         \pic {basicFrame};
         \pic at (A) {fixed};
@@ -148,6 +143,11 @@
     %
     % Example 2
     %
+    basicBeam/.pic = {
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \draw [ultra thick] (A) -- (B);
+    },
     simpleBeam/.pic = {
         \pic {basicBeam};
         \pic at (A) {pinned};
