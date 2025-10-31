@@ -24,6 +24,7 @@ If you are using VS Code with a LaTeX extension, make sure the following options
       "-synctex=1",
       "-interaction=nonstopmode",
       "-file-line-error",
+      "-shell-escape",
       "%DOC%"
     ],
     "env": {}
