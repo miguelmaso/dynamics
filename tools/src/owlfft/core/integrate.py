@@ -2,8 +2,14 @@ import numpy as np
 
 
 def newmark_integrate(t, f, mass=None, friction=None, stiffness=None, frequency=None, damping=None, u0=0.0, v0=0.0, beta=1/4, gamma=1/2):
-    '''
-    Integrate a single degree of freedom system using the Newmark method.
+    r'''
+    Integrate a single degree of freedom linear system using the Newmark method.
+    
+    `m a + c v + k u = F(t)`
+    
+    or
+
+    `a + x v + w2 u = a(t)`
 
     Parameters
     ----------
