@@ -8,6 +8,8 @@
 \RequirePackage[OT1]{fontenc}
 \RequirePackage{mathtools}
 \RequirePackage{amsmath}
+\RequirePackage{wrapfig}
+\RequirePackage{pgfplots}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage{parskip}
@@ -143,6 +145,10 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{external}
 \tikzexternalize[prefix=img/]
+
+
+% PGF compatibility mode to avoid warnings
+\pgfplotsset{compat=1.18}
 
 
 % Add link to url in citations
