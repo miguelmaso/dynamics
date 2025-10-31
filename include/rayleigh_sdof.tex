@@ -3,10 +3,14 @@
 For the structures shown, determine the natural frequency of vibration using the Rayleigh method.
 
 \begin{center}
-    \pictureslabel{simpleBeam}{a}
-    \pictureslabel{nSpanBeam}{b} \\
-    \pictureslabel{cantilever}{c}
-    \pictureslabel{fixedPinnedBeam}{d}
+    \begin{tabular}[b]{cc}
+        \tikz \pic {simpleBeam}; &
+        \tikz \pic {nSpanBeam}; \\
+        (a) & (b) \\
+        \tikz \pic {cantilever}; &
+        \tikz \pic {fixedPinnedBeam}; \\
+        (c) & (d)
+    \end{tabular}
 \end{center}
 
 \shortAnswer (a) $\omega \approx 10.95\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$, (c) $\omega \approx 4.47\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$.
@@ -17,7 +21,7 @@ For the structures shown, determine the natural frequency of vibration using the
 The Rayleigh method is based on assuming the vibration to be given in terms of a pre-determined shape function $\psi$ as $u(x,t) = u_0(t)\psi(x)$. This assumption allows you to find an equivalent mass and stiffness associated with that mode of vibration and thus, the frequency.
 
 \parbox{.7\textwidth}{For the simple beam, a possible shape function would be a parabola satisfying the kinematic boundary conditions, $\psi(0) = \psi(l) = 0$.} \hspace{1em}
-\parbox{.25\textwidth}{\pictures{simpleBeam}}
+\parbox{.25\textwidth}{\tikz \pic {simpleBeam};}
 \begin{align*}
 &\psi(x) = \frac{4}{l^2} x (l-x) \\
 &\psi''(x) = \frac{8}{l^2}
@@ -31,7 +35,7 @@ where the term $4/l^2$ is a scaling parameter and does not modify the solution. 
 The result obtained can be compared against the exact frequency, obtained by the same procedure applied to a fourth order polynomial satisfying both kinematic and dynamic boundary conditions. The analytical result is $\omega = \frac{1}{l^2}\sqrt{\frac{3024EI}{31\rho A}} \approx 9.86\frac{1}{l^2}\sqrt{\frac{EI}{\rho A}}\,\si{rad/s}$.
 
 \parbox{.7\textwidth}{The cantilever can be analysed using a second order polynomial. In that case, the kinematic boundary conditions are $\psi(0) = \psi'(0) = 0$.} \hspace{1em}
-\parbox{.25\textwidth}{\pictures{cantilever}}
+\parbox{.25\textwidth}{\tikz \pic {cantilever};}
 \begin{align*}
 &\psi(x) = \frac{1}{l^2} x^2 \\
 &\psi''(x) = \frac{2}{l^2}.
