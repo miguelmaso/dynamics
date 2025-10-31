@@ -556,13 +556,15 @@
     spring/.style = {thick, decorate, decoration={zigzag, pre length=0.3cm, post length=0.3cm, segment length=8}
     },
     damper/.style = {
-        thick, decorate, decoration={markings, mark connection node=dmp, mark=at position 0.5 with {
-            \node (dmp) [thick, inner sep=0pt, transform shape, minimum width=10pt, minimum height=10pt, draw=none, fill=green!20] {};
-            \draw [thick] (dmp.south east) -- (dmp.south west) -- (dmp.north west) -- (dmp.north east);
-            \draw [thick] (dmp |- dmp.35) -- (dmp |- dmp.-35);
-            \draw [thick] (dmp.center) -- (dmp.east);
+        thick, decorate, decoration={
+            markings, mark connection node=dmp, mark=at position 0.5 with {
+                \node (dmp) [thick, inner sep=0pt, transform shape, minimum width=10pt, minimum height=10pt, draw=none, fill=green!20] {};
+                \draw [thick] (dmp.south east) -- (dmp.south west) -- (dmp.north west) -- (dmp.north east);
+                \draw [thick] (dmp |- dmp.35) -- (dmp |- dmp.-35);
+                \draw [thick] (dmp.center) -- (dmp.east);
+            }
         }
-    }},
+    },
     springmassdamper/.pic = {
         \coordinate (O);
         \coordinate (U) at (0,-.3);
