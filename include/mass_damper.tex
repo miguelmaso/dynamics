@@ -5,19 +5,6 @@ The steady state vibration of a \emph{spring}-\emph{mass}-\emph{damper} system d
 
 \begin{center}
     \tikz \pic {springmassdamper};
-% \begin{tikzpicture}
-%     \coordinate (O);
-%     \coordinate (U) at (0,-.3);
-%     \node [mass] (m) at (3,1) {$m$};
-%     \node [wheel] at (m.220) {};
-%     \node [wheel] at (m.320) {};
-%     \draw [spring] (m.165 -| O) -- (m.165) node [midway,above] {$k$};
-%     \draw [damper] (m.195 -| O) -- (m.195) node [midway,below=3pt] {$\xi$};
-%     \draw [very thick,-latex] (m.north east) -- ++(1,0) node [right] {$F=F_0\sin(\Omega t + \phi)$};
-%     \draw (O) -- (0,2);
-%     \draw (O) -- (6,0);
-%     \draw [|->,thick] (m |- U) -- ++(.8,0) node [right] {$u$};
-% \end{tikzpicture}
 \end{center}
 
 The governing equation of motion for the steady state solution is given by
@@ -50,24 +37,6 @@ A tuned mass damper (TMD) consist on a small \emph{spring}-\emph{mass}-\emph{dam
 
 \begin{center}
     \tikz \pic {springmassdampermass};
-% \begin{tikzpicture}
-%     \coordinate (O);
-%     \coordinate (U) at (0,-.3);
-%     \node [mass] (m) at (3,1) {$m$};
-%     \node [wheel] at (m.220) {};
-%     \node [wheel] at (m.320) {};
-%     \draw [spring] (m.165 -| O) -- (m.165) node [midway,above] {$k$};
-%     \draw [damper] (m.195 -| O) -- (m.195) node [midway,below=3pt] {$\xi$};
-%     \draw [very thick,-latex] (m.north east) -- ++(1,0) node [right] {$F=F_0\sin(\Omega t + \phi)$};
-%     \node [smallmass] (md) at (6,.75) {$m_d$};
-%     \node [wheel] at (md.south) {};
-%     \draw [spring] (md.160 -| m.east) -- (md.160) node [midway,above] {$k_d$};
-%     \draw [damper] (md.200 -| m.east) -- (md.200) node [midway,below=2pt] {$\xi_d$};
-%     \draw (O) -- (0,2);
-%     \draw (O) -- (8,0);
-%     \draw [|->,thick] (m |- U) -- ++(.8,0) node [right] {$u$};
-%     \draw [|->,thick] (md |- U) -- ++(1,0) node [right] {$u+u_d$};
-% \end{tikzpicture}
 \end{center}
 
 Here, the subscript $d$ refers to the tuned mass damper and the following notation is introduced,
