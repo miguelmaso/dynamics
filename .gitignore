@@ -1,9 +1,9 @@
 # Global gitignore for the article repository
 # This settings are the same for all the users
 # For additional cusomization the local gitignore
-# (.git/info/exclude) could be modified
+# (.git/info/exclude) may be modified
 
-# pdf is an output
+# Pdf output
 *.pdf
 
 # recovery files
@@ -34,6 +34,12 @@
 *.synctex*
 *.run.xml
 *.DS_Store
+
+# Tikz auxiliry files
+*.auxlock
+*.figlist
+*.dpth
+*.md5
 
 # files that are not latex
 *.doc
