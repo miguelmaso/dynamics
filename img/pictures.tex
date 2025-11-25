@@ -497,3 +497,103 @@
         \end{scope}
     }
 }
+
+\pgfplotsset{width=7cm}
+\pgfplotsset{colormap={white}{color=(gray!20) color=(white)},
+    colormap/white/.style={colormap name=white}}
+\pgfplotsset{colormap={gray}{color=(gray) color=(gray!20)},
+    colormap/gray/.style={colormap name=gray}}
+\pgfplotsset{empty axes/.style={
+    xtick=\empty,
+    ytick=\empty,
+    ztick=\empty,
+    draw=gray}}
+\pgfplotsset{white style/.style={
+    surf,
+    colormap/gray,
+    mesh/interior colormap name=white,
+    mesh/interior colormap thresh=0.05,
+    samples=25, % 5 for fast rendering, 25 for accurate rendering
+    domain=0:1}}
+
+\tikzset{
+    slab/.pic = {
+        \draw [fill=gray!20] coordinate (O) rectangle (3,2) coordinate (P);
+        \path (O) -- node [midway,below] {$l_x$} (O -| P);
+        \path (O -| P) -- node [midway,right] {$l_y$} (P);
+    },
+    slab1/.pic = {
+        \begin{axis}[empty axes,title={$1^\text{st}$ mode ($n=1$, $m=1$)}]
+            \addplot3 [white style] {sin(180*x) * sin(180*y)};
+        \end{axis}
+    },
+    slab2/.pic = {
+        \begin{axis}[empty axes,title={$2^\text{nd}$ mode ($n=2$, $m=1$)}]
+            \addplot3 [white style] {sin(360*x) * sin(180*y)};
+        \end{axis}
+    },
+    slab3/.pic = {
+        \begin{axis}[empty axes,title={$3^\text{rd}$ mode ($n=1$, $m=2$)}]
+            \addplot3 [white style] {sin(180*x) * sin(360*y)};
+        \end{axis}
+    },
+    slab4/.pic = {
+        \begin{axis}[empty axes,title={$4^\text{th}$ mode ($n=2$, $m=2$)}]
+            \addplot3 [white style] {sin(360*x) * sin(360*y)};
+        \end{axis}
+    }      
+}
+
+\usetikzlibrary{decorations.pathmorphing, decorations.markings}
+
+\tikzset{
+    mass/.style = {fill=gray!50, draw, minimum width=2cm, minimum height=1cm
+    },
+    smallmass/.style = {mass, minimum width=1cm, minimum height=.5cm
+    },
+    wheel/.style = {circle, fill=gray!25, draw, yshift=-0.25cm, minimum size=0.5cm
+    },
+    spring/.style = {thick, decorate, decoration={zigzag, pre length=0.3cm, post length=0.3cm, segment length=8}
+    },
+    damper/.style = {
+        thick, decorate, decoration={
+            markings, mark connection node=dmp, mark=at position 0.5 with {
+                \node (dmp) [thick, inner sep=0pt, transform shape, minimum width=10pt, minimum height=10pt, draw=none, fill=green!20] {};
+                \draw [thick] (dmp.south east) -- (dmp.south west) -- (dmp.north west) -- (dmp.north east);
+                \draw [thick] (dmp |- dmp.35) -- (dmp |- dmp.-35);
+                \draw [thick] (dmp.center) -- (dmp.east);
+            }
+        }
+    },
+    springmassdamper/.pic = {
+        \coordinate (O);
+        \coordinate (U) at (0,-.3);
+        \node [mass] (m) at (3,1) {$m$};
+        \node [wheel] at (m.220) {};
+        \node [wheel] at (m.320) {};
+        \draw [spring] (m.165 -| O) -- (m.165) node [midway,above] {$k$};
+        \draw [damper] (m.195 -| O) -- (m.195) node [midway,below=3pt] {$\xi$};
+        \draw [very thick,-latex] (m.north east) -- ++(1,0) node [right] {$F=F_0\sin(\Omega t + \phi)$};
+        \draw (O) -- (0,2);
+        \draw (O) -- (6,0);
+        \draw [|->,thick] (m |- U) -- ++(.8,0) node [right] {$u$};
+    },
+    springmassdampermass/.pic = {
+        \coordinate (O);
+        \coordinate (U) at (0,-.3);
+        \node [mass] (m) at (3,1) {$m$};
+        \node [wheel] at (m.220) {};
+        \node [wheel] at (m.320) {};
+        \draw [spring] (m.165 -| O) -- (m.165) node [midway,above] {$k$};
+        \draw [damper] (m.195 -| O) -- (m.195) node [midway,below=3pt] {$\xi$};
+        \draw [very thick,-latex] (m.north east) -- ++(1,0) node [right] {$F=F_0\sin(\Omega t + \phi)$};
+        \node [smallmass] (md) at (6,.75) {$m_d$};
+        \node [wheel] at (md.south) {};
+        \draw [spring] (md.160 -| m.east) -- (md.160) node [midway,above] {$k_d$};
+        \draw [damper] (md.200 -| m.east) -- (md.200) node [midway,below=2pt] {$\xi_d$};
+        \draw (O) -- (0,2);
+        \draw (O) -- (8,0);
+        \draw [|->,thick] (m |- U) -- ++(.8,0) node [right] {$u$};
+        \draw [|->,thick] (md |- U) -- ++(1,0) node [right] {$u+u_d$};
+    }
+}

@@ -1,43 +1,8 @@
-\documentclass{article}
 
-\usepackage{../sty/notes}
-\notenum{1}
-
-\usetikzlibrary{decorations.pathmorphing, decorations.markings}
-\tikzstyle{mass}=[fill=gray!50, draw, minimum width=2cm, minimum height=1cm]
-\tikzstyle{smallmass}=[mass, minimum width=1cm, minimum height=.5cm]
-\tikzstyle{wheel}=[circle, fill=gray!25, draw, yshift=-0.25cm, minimum size=0.5cm]
-\tikzstyle{spring}=[thick, decorate, decoration={zigzag, pre length=0.3cm, post length=0.3cm, segment length=8}]
-\tikzstyle{damper}=[thick, decorate, decoration={markings, mark connection node=dmp, mark=at position 0.5 with
-{
-    \node (dmp) [thick, inner sep=0pt, transform shape, minimum width=10pt, minimum height=10pt, draw=none, fill=green!20] {};
-    \draw [thick] (dmp.south east) -- (dmp.south west) -- (dmp.north west) -- (dmp.north east);
-    \draw [thick] (dmp |- dmp.35) -- (dmp |- dmp.-35);
-    \draw [thick] (dmp.center) -- (dmp.east);
-}
-}]
-
-
-\begin{document}
-
-\section*{Dynamic magnification factor}
-
-The steady state vibration of a \emph{spring}-\emph{mass}-\emph{damper} system depends on the external force applied to it, regadless of the initial conditions. Making use of the steady state solution, the full solution of the vibration can be obtained by adding the transient solution, which satisfies the initial conditions.
+A tuned mass damper (TMD) is primarily a single degree-of-freedom system, where a smaller and secondary single degree-of-freedom system is added. For that reason, the detailed analysis of the response begins by understanding by a simple \emph{spring}-\emph{mass}-\emph{damper} system. Furthermore, we are interested in the steady state response, which depends on the external force applied to it, regadless of the initial conditions. Making use of the steady state solution, the full solution of the vibration can be obtained by adding the transient solution, which satisfies the initial conditions.
 
 \begin{center}
-\begin{tikzpicture}
-    \coordinate (O);
-    \coordinate (U) at (0,-.3);
-    \node [mass] (m) at (3,1) {$m$};
-    \node [wheel] at (m.220) {};
-    \node [wheel] at (m.320) {};
-    \draw [spring] (m.165 -| O) -- (m.165) node [midway,above] {$k$};
-    \draw [damper] (m.195 -| O) -- (m.195) node [midway,below=3pt] {$\xi$};
-    \draw [very thick,-latex] (m.north east) -- ++(1,0) node [right] {$F=F_0\sin(\Omega t + \phi)$};
-    \draw (O) -- (0,2);
-    \draw (O) -- (6,0);
-    \draw [|->,thick] (m |- U) -- ++(.8,0) node [right] {$u$};
-\end{tikzpicture}
+    \tikz \pic {springmassdamper};
 \end{center}
 
 The governing equation of motion for the steady state solution is given by
@@ -64,29 +29,10 @@ Finally, the dynamic magnification factor and phase lag are
 \end{align*}
 
 
-\section*{Tuned mass damper}
-
-A tuned mass damper (TMD) consist on a small \emph{spring}-\emph{mass}-\emph{damper} system attached to the main system.
+Then, a secondary and smaller \emph{spring}-\emph{mass}-\emph{damper} system can be attached to the main system in order to build a tuned mass damper. The system can be interpreted as the picture below, where the main components that are involved in the equations are shown.
 
 \begin{center}
-\begin{tikzpicture}
-    \coordinate (O);
-    \coordinate (U) at (0,-.3);
-    \node [mass] (m) at (3,1) {$m$};
-    \node [wheel] at (m.220) {};
-    \node [wheel] at (m.320) {};
-    \draw [spring] (m.165 -| O) -- (m.165) node [midway,above] {$k$};
-    \draw [damper] (m.195 -| O) -- (m.195) node [midway,below=3pt] {$\xi$};
-    \draw [very thick,-latex] (m.north east) -- ++(1,0) node [right] {$F=F_0\sin(\Omega t + \phi)$};
-    \node [smallmass] (md) at (6,.75) {$m_d$};
-    \node [wheel] at (md.south) {};
-    \draw [spring] (md.160 -| m.east) -- (md.160) node [midway,above] {$k_d$};
-    \draw [damper] (md.200 -| m.east) -- (md.200) node [midway,below=2pt] {$\xi_d$};
-    \draw (O) -- (0,2);
-    \draw (O) -- (8,0);
-    \draw [|->,thick] (m |- U) -- ++(.8,0) node [right] {$u$};
-    \draw [|->,thick] (md |- U) -- ++(1,0) node [right] {$u+u_d$};
-\end{tikzpicture}
+    \tikz \pic {springmassdampermass};
 \end{center}
 
 Here, the subscript $d$ refers to the tuned mass damper and the following notation is introduced,
@@ -162,7 +108,7 @@ $$
 
 \begin{figure}
     \centering
-    \includegraphics[width=.8\textwidth]{tmd-frequencies.pdf}
+    \includegraphics[width=.8\textwidth]{img/py/tmd-frequencies.pdf}
     \caption{Plot of dynamic magnification factor $H$ versus forcing frquency $\gamma$ at different tuning frequencies $\eta$. The shadowed region shows dynamic magnification without TMD.}
     \label{H-gamma_eta}
 \end{figure}
@@ -170,9 +116,7 @@ $$
 
 \begin{figure}
     \centering
-    \includegraphics[width=.8\textwidth]{tmd-dampings.pdf}
+    \includegraphics[width=.8\textwidth]{img/py/tmd-dampings.pdf}
     \caption{Plot of dynamic magnification factor $H$ versus forcing frquency $\gamma$ with different tuned dampings $\xi_d$. The shadowed region shows dynamic magnification without TMD.}
     \label{H-gamma_xi}
 \end{figure}
-
-\end{document}
