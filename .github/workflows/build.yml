@@ -22,7 +22,7 @@ jobs:
       image: danteev/texlive:latest
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Build LaTeX
         run: |
           cp .github/workflows/build_pdf.sh build_pdf.sh
