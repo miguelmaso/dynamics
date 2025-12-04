@@ -3,7 +3,7 @@
 A building has a height of \SI{100}{m}, a square base measuring $20\times\SI{20}{m^2}$, an average specific weight of \SI{1500}{N/m^3} and a natural period of vibration of \SI{5}{s}. The top floor is hit by a helicopter with a mass of \SI{10000}{kg} and travelling at \SI{30}{m/s}. Determine the maximum deflection at the top assuming conservation of linear momentum and a vibration shape function that increases linearly with the height.
 
 \begin{center}
-\pictures{buildingHelicopter}
+    \tikz \pic {buildingHelicopter};
 \end{center}
 
 \shortAnswer $u_0 = \SI{8}{cm}$.
@@ -17,7 +17,7 @@ When the building is hit by the helicopter, the impulse or linear momentum is pr
 \dot{u}& = \dot{u}_0\psi \quad ; \quad \psi = \frac{z}{h} \\
 m\dot{u}_0& \begin{multlined}[t] = \int_0^h \rho A\dot{u}dz = \int_0^h \rho A\dot{u}_0\frac{z}{h}dz = \frac{1}{2}\rho A\dot{u}_0h = \\
     \qquad= \frac{1}{2}150\times400\times100\ \dot{u}_0
-        = 3e6\ \dot{u}_0\ \si{kg.m/s}\ .\end{multlined}
+        = \num{3e6}\ \dot{u}_0\ \si{kg.m/s}\ .\end{multlined}
 \end{align*}
 
 The impulse of the helicopter is

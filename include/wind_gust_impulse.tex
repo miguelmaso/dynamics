@@ -3,7 +3,7 @@
 The building in Exercise \ref{helicopter_impulse} is hit by a sharp wind gust that results in the sudden application of horizontal forces distributed along the height of the building, as shown in the picture. Assuming a vibration shape function that increases linearly with the height and neglecting damping, determine the maximum displacement at the top of the building.
 
 \begin{center}
-\pictures{buildingWind}
+    \tikz \pic {buildingWind};
 \end{center}
 
 \shortAnswer $u_0 = \SI{2.5}{cm}.$
@@ -24,9 +24,9 @@ F_0 = \int_0^h p_W\psi dz = \int_0^h \left(0.3 + (1-0.3)\frac{z}{h}\right)\frac{
 = \left(\frac{0.3}{2} + \frac{0.7}{3}\right)100 = \SI{38.3}{kN}\ .
 \end{align*}
 
-The stiffness of the building can be estimated from the equivalent mass and the given period of the building
+Following the Rayleigh method and the linear shape function $\psi$, the modal mass is found to be \SI{2e6}{kg}. The stiffness of the building can be estimated from the equivalent mass and the given period of the building
 $$
-k = \omega^2m = \left(\frac{2\pi}{T}\right)^2m = \left(\frac{2\pi}{5}\right)^2 2\times 10^6 = \SI{3.125e6}{N/m} = \SI{3125}{kN/m}
+k = \omega^2m = \left(\frac{2\pi}{T}\right)^2m = \left(\frac{2\pi}{5}\right)^2 \num{2e6} = \SI{3.125e6}{N/m} = \SI{3125}{kN/m}
 $$
 
 Finally, the maximum displacement is obtained from the equation of motion
