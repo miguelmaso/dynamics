@@ -5,6 +5,7 @@
 
 # Pdf output
 *.pdf
+!img/py/*.pdf
 
 # recovery files
 *~

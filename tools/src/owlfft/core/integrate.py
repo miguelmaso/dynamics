@@ -68,7 +68,7 @@ def newmark_integrate(t, f, mass=None, friction=None, stiffness=None, frequency=
     for i in range(1,n):
         dt = Dt[i]
         v_trial = vn + dt*(1-gamma)*an
-        u_trial = un + dt*vn + 0.5*dt**2*(1-2*beta)*an
+        u_trial = un + dt*vn + dt**2*(0.5-beta)*an
         a[i] = an = (f[i] - c*v_trial - k*u_trial) / (m + gamma*c*dt + beta*k*dt**2)
         v[i] = vn = v_trial + gamma*dt*an
         u[i] = un = u_trial + beta*dt**2*an
