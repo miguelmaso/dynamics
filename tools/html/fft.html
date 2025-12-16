@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWLFFT - Dynamic Fourier Transform</title>
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        body { font-family: sans-serif; margin: 20px; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .controls { 
+            background: #f4f4f4; padding: 15px; border-radius: 8px; 
+            margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;
+        }
+        .control-group { display: flex; flex-direction: column; }
+        label { font-size: 0.85em; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="number"] { padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { 
+            background-color: #007bff; color: white; border: none; padding: 10px; 
+            cursor: pointer; border-radius: 4px; font-weight: bold; margin-top: 10px;
+        }
+        button:hover { background-color: #0056b3; }
+        #loading { color: #d9534f; font-weight: bold; display: none; }
+        
+        /* Plot containers */
+        #plot-time, #plot-freq { width: 100%; height: 400px; margin-bottom: 20px; border: 1px solid #eee; }
+        
+        .info-box {
+            background-color: #e7f3fe; border-left: 6px solid #2196F3;
+            margin-bottom: 15px; padding: 10px; font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Interactive FFT Analyzer</h2>
+    <div class="info-box">
+        <p><strong>Instructions:</strong> Use <strong>Zoom</strong> on the TIME plot to automatically recalculate the FFT for the selected region. Double-click to reset.</p>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Data File</label>
+            <input type="file" id="file_upload" accept=".csv, .txt">
+        </div>
+        <div class="control-group">
+            <label>Delimiter</label>
+            <input type="text" id="delimiter" value="," placeholder=", or \t">
+        </div>
+        <div class="control-group">
+            <label>Time Col.</label>
+            <input type="number" id="time_col" value="0">
+        </div>
+        <div class="control-group">
+            <label>Acceleration Col.</label>
+            <input type="number" id="acc_col" value="1">
+        </div>
+        <div class="control-group">
+            <label>Skip Rows</label>
+            <input type="number" id="skiprows" value="1">
+        </div>
+        <div class="control-group">
+            <label>&nbsp;</label>
+            <button id="btn_calculate">Load / Reset</button>
+        </div>
+    </div>
+    <span id="loading">Processing...</span>
+
+    <div id="plot-time"></div>
+    <div id="plot-freq"></div>
+</div>
+
+<py-config>
+    packages = ["numpy", "pandas"]
+</py-config>
+
+<script type="py">
+import numpy as np
+import io
+import js
+import json
+from pyodide.ffi import create_proxy
+
+class FFTCalculator():
+    delimiter = ','
+    time_col = 0
+    acc_col = 1
+    comments = '#'
+    skiprows = 1 
+
+    def __init__(self):
+        self.is_initialized = False
+        # Keep original full data
+        self._time_full = np.array([])
+        self._acc_full = np.array([])
+        # Working data (trimmed)
+        self.time = np.array([])
+        self.acc = np.array([])
+
+    def ReadDataContent(self, content: str):
+        try:
+            delim = self.delimiter.replace('\\t', '\t')
+            f = io.StringIO(content)
+            
+            t_raw, a_raw = np.loadtxt(
+                f, 
+                usecols=(self.time_col, self.acc_col),
+                delimiter=delim, 
+                unpack=True, 
+                comments=self.comments, 
+                skiprows=self.skiprows
+            )
+            
+            # Normalize time and save FULL
+            t_raw -= t_raw[0]
+            self._time_full = t_raw
+            self._acc_full = a_raw
+            
+            # Initially, trim is full range
+            self.time = self._time_full
+            self.acc = self._acc_full
+            
+            self.is_initialized = True
+            return ''
+        except Exception as e:
+            self.is_initialized = False
+            return str(e)
+
+    def TrimByValue(self, t_min, t_max):
+        """ Filter data based on time values (zoom) """
+        if not self.is_initialized: return
+        
+        # Fast boolean mask
+        mask = (self._time_full >= t_min) & (self._time_full <= t_max)
+        self.time = self._time_full[mask]
+        self.acc = self._acc_full[mask]
+
+    def Calculate(self):
+        if not self.is_initialized: return
+        n = len(self.time)
+        if n < 2: 
+            self.spectrum = np.array([])
+            self.frequencies = np.array([])
+            return
+            
+        dt = (self.time[-1] - self.time[0]) / (n - 1) if n > 1 else 1
+        
+        self.spectrum = 2/n * np.abs(np.fft.rfft(self.acc))
+        self.frequencies = np.fft.rfftfreq(n, dt)
+
+# --- GLOBAL INSTANCE ---
+fft_calc = FFTCalculator()
+last_file_content = None 
+
+# --- JS CONVERSION ---
+def plot_to_js(py_dict):
+    return js.JSON.parse(json.dumps(py_dict))
+
+# --- PLOTTING ---
+def update_freq_plot():
+    """ Only updates the frequency plot (efficient on zoom) """
+    if len(fft_calc.frequencies) == 0: return
+
+    trace_freq = {
+        "x": fft_calc.frequencies.tolist(),
+        "y": fft_calc.spectrum.tolist(),
+        "type": "scatter",
+        "mode": "lines",
+        "name": "Spectrum",
+        "line": {"color": "#d62728"}
+    }
+    layout_freq = {
+        "title": "Fourier Transform (Selected Region)",
+        "xaxis": {"title": "Frequency (Hz)"},
+        "yaxis": {"title": "Magnitude", "fixedrange": True}, # Lock Y zoom
+        "margin": {"t": 40, "b": 40, "l": 50, "r": 20}
+    }
+    js.Plotly.react(
+        js.document.getElementById("plot-freq"), 
+        plot_to_js([trace_freq]), 
+        plot_to_js(layout_freq)
+    )
+
+def plot_all():
+    if not fft_calc.is_initialized: return
+
+    # 1. Time Plot (STATIC, contains full data)
+    trace_time = {
+        "x": fft_calc._time_full.tolist(),
+        "y": fft_calc._acc_full.tolist(),
+        "type": "scatter",
+        "mode": "lines",
+        "name": "Full Signal"
+    }
+    layout_time = {
+        "title": "Time Signal (Zoom here)",
+        "xaxis": {"title": "Time (s)"},
+        "yaxis": {"title": "Amplitude", "fixedrange": True}, # Lock Y zoom
+        "dragmode": "zoom", # Force zoom mode
+        "margin": {"t": 40, "b": 40, "l": 50, "r": 20}
+    }
+
+    js.Plotly.newPlot(
+        js.document.getElementById("plot-time"), 
+        plot_to_js([trace_time]), 
+        plot_to_js(layout_time)
+    )
+
+    # 2. Draw initial frequency
+    update_freq_plot()
+    
+    # 3. CONNECT ZOOM EVENT
+    js.setup_zoom_listener(create_proxy(on_time_zoom))
+    
+    js.document.getElementById("loading").style.display = "none"
+
+# --- EVENT LOGIC ---
+
+def on_time_zoom(event_data_json):
+    """ Called by JS when user zooms """
+    if not fft_calc.is_initialized: return
+    
+    data = json.loads(event_data_json)
+    
+    t_min = 0
+    t_max = fft_calc._time_full[-1]
+    
+    # Check for specific zoom
+    if 'xaxis.range[0]' in data:
+        t_min = data['xaxis.range[0]']
+        t_max = data['xaxis.range[1]']
+    
+    # Check for reset (double click) -> autorange: true
+    elif 'xaxis.autorange' in data and data['xaxis.autorange']:
+        # logic handles reset by using full range default above
+        pass
+        
+    # Ignore unrelated events
+    else:
+        return
+
+    # Recalculate
+    fft_calc.TrimByValue(t_min, t_max)
+    fft_calc.Calculate()
+    update_freq_plot()
+
+async def process_file(event):
+    global last_file_content
+    file_list = event.target.files
+    if not file_list: return
+
+    js.document.getElementById("loading").style.display = "inline"
+    file = file_list.item(0)
+    last_file_content = await file.text()
+    run_calculation()
+
+def run_calculation(*args):
+    global last_file_content
+    if last_file_content is None: return
+    
+    try:
+        fft_calc.delimiter = js.document.getElementById("delimiter").value
+        fft_calc.time_col = int(js.document.getElementById("time_col").value)
+        fft_calc.acc_col = int(js.document.getElementById("acc_col").value)
+        fft_calc.skiprows = int(js.document.getElementById("skiprows").value)
+    except:
+        pass
+
+    err = fft_calc.ReadDataContent(last_file_content)
+    if err:
+        js.alert(f"Error: {err}")
+        return
+
+    fft_calc.Calculate()
+    plot_all()
+
+# Initial Listeners
+file_input = js.document.getElementById("file_upload")
+file_proxy = create_proxy(process_file)
+file_input.addEventListener("change", file_proxy)
+
+btn_calc = js.document.getElementById("btn_calculate")
+btn_proxy = create_proxy(run_calculation)
+btn_calc.addEventListener("click", btn_proxy)
+
+</script>
+
+<script>
+    function setup_zoom_listener(python_callback) {
+        var plotElement = document.getElementById('plot-time');
+        
+        plotElement.removeAllListeners('plotly_relayout');
+        
+        plotElement.on('plotly_relayout', function(eventdata){
+            python_callback(JSON.stringify(eventdata));
+        });
+    }
+</script>
+
+</body>
+</html>
