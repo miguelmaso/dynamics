@@ -5,6 +5,8 @@
 
 # Pdf output
 *.pdf
+
+# re-include figures generated with Python
 !img/py/*.pdf
 
 # recovery files

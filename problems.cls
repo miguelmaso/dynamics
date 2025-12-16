@@ -144,7 +144,7 @@
 % Tikz libraries and speedup compilation
 \usetikzlibrary{calc}
 \usetikzlibrary{external}
-\tikzexternalize[prefix=img/]
+\tikzexternalize[prefix=img/figures/]
 
 
 % PGF compatibility mode to avoid warnings
