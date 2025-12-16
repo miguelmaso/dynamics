@@ -1,0 +1,33 @@
+title: Dynamics
+description: A collection of examples of structural dynamics
+author: "Miguel Masó"
+
+theme: minima
+
+base_url: /dynamics
+repository: miguelmaso/dynamics
+
+# Minima social links
+github_username: miguelmaso
+linkedin_username: miguel-maso
+
+# Minima: show excerpts in the frontpage
+show_excerpts: false
+
+minima:
+  date_format: "%Y-%m-%d"
+
+# Minima: custom header links
+header_pages:
+  - _pages/frontpage.md
+  - _pages/notebooks.md
+  - _pages/tools.md
+  - _pages/about.md
+
+include:
+  - _pages
+
+exclude: 
+  - .gitignore
+  - LICENSE
+  - README.md
