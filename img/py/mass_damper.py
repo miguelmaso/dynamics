@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-v0_8-dark-palette')
@@ -51,7 +52,7 @@ ax.text(0.1, 8.5, r'$\rho$=5%'+'\n'+r'$\xi_d$=10%', bbox=dict(facecolor='lightgr
 ax.set(xlim=(0, 2), xticks=np.arange(.5, 2, .5), xlabel='$\gamma=\Omega/\omega$',
        ylim=(0, 10), yticks=np.arange(1, 10), ylabel='$H$')
 ax.grid(True)
-if savefig: plt.savefig('tmd-frequencies.pdf')
+if savefig: plt.savefig(os.path.dirname(__file__) + '/tmd-frequencies.pdf')
 
 
 # Damping sentitivity
@@ -79,5 +80,5 @@ ax.text(0.1, 8.5, r'$\rho$=5%'+'\n'+'$\eta$='+f'{eta_opt:.2f}', bbox=dict(faceco
 ax.set(xlim=(0, 2), xticks=np.arange(.5, 2, .5), xlabel='$\gamma=\Omega/\omega$',
        ylim=(0, 10), yticks=np.arange(1, 10), ylabel='$H$')
 ax.grid(True)
-if savefig: plt.savefig('tmd-dampings.pdf')
+if savefig: plt.savefig(os.path.dirname(__file__) + '/tmd-dampings.pdf')
 if showfig: plt.show()

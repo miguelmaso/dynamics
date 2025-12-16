@@ -1,0 +1,4 @@
+# This folder is a placeholder for externalized figures (TikZ). Ignore every file in this folder
+*
+# Except this one
+!.gitignore
