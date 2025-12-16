@@ -13,10 +13,75 @@ A perfectly regular three storey building has a total weight of \SI{800}{kN} per
     \tikz \pic {inelsaticSpectrum};
 \end{center}
 
-\shortAnswer ...
+\shortAnswer (a) $T=\SI{0.86}{s}$; (b) $V_b=\SI{240}{kN}$; (c) $T_1=\SI{40}{kN}$, $T_2=\SI{80}{kN}$, $T_3=\SI{120}{kN}$; (d) $u_\text{top}=\SI{0.11}{m}$
 \end{Exercise}
 
 
-% \begin{Answer}[ref=three_storey_regular]
+\begin{Answer}[ref=three_storey_regular]
 
-% \end{Answer}
+Before approximating the main period of vibration assuming a linearly increasing shape function, the mass matrix and stiffness matrix should be built. Loads shall be converted into mass and the units must be consistent, e.g. tones and kilo Newton.
+$$
+\mathbf{M} = \begin{bmatrix}
+    80 & 0  & 0 \\
+    0  & 80 & 0 \\
+    0  & 0  & 80
+\end{bmatrix} \si{t}
+\quad ; \quad
+\mathbf{K} = \begin{bmatrix*}[r]
+    4 & -2 & 0 \\
+    -2 & 4 & -2 \\
+    0 & -2 & 2
+\end{bmatrix*} \times \SI{e4}{kN/m}
+$$
+
+When assuming only a linearly increasing shape function, the Ritz-Rayleigh vectors will reduce to a single vector:
+$$
+  \Psi = \frac{z}{h_1} \quad ; \quad \mathbf{R} = \begin{bmatrix}
+    1 \\ 2 \\ 3
+  \end{bmatrix},
+$$
+\begin{align*}
+  &\hat{\mathbf{M}} = \mathbf{R}^T\mathbf{M}\mathbf{R} =
+  \begin{bmatrix} 1 & 2 & 3 \end{bmatrix}
+  \begin{bmatrix} 80 & 0 & 0 \\ 0 & 80 & 0 \\ 0 & 0 & 80 \end{bmatrix}
+  \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} = \SI{1120}{t}
+  \\
+  &\hat{\mathbf{K}} = \mathbf{R}^T\mathbf{K}\mathbf{R} =
+  \begin{bmatrix} 1 & 2 & 3 \end{bmatrix}
+  \begin{bmatrix*}[r] 4 & -2 & 0 \\ -2 & 4 & -2 \\ 0 & -2 & 2 \end{bmatrix*}
+  \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} \SI{e4}{kN} = \SI{6e4}{kN}.
+\end{align*}
+
+Finally, the main period of vibration is computed as if the building were a single-degree of freedom system,
+$$
+\omega=\sqrt{\frac{\hat{\mathbf{K}}}{\hat{\mathbf{M}}}} = \SI{7.3}{rad/s} \quad , \quad
+T = \SI{0.86}{s}.
+$$
+
+According to the inelastic spectrum proposed for the current building, the peak acceleration to be considered is
+$$
+  S_a = 0.125 \left(\frac{0.6}{0.86}\right)^{2/3}g = \SI{1}{m/s^2}
+$$
+and the base shear is then a simple multiplication of the peak acceleration and the total mass of the building,
+$$
+  V_b = m \cdot S_a = (3\cdot80)\cdot1 = \SI{240}{kN}.
+$$
+
+With the base shear and the main period provided by the modal analysis (reduced by the Ritz-Rayleigh method), the simplified base shear model provides an expression that allows to compute the equivalent static forces at the center of each story:
+$$
+  T_i = \frac{m_i h_i}{\sum m_i h_i} V_b,
+$$
+\begin{align*}
+  &T_1 = \frac{80 \cdot 3}{80\cdot3+80\cdot6+80\cdot9}240 = \frac{3}{18}240 = \SI{40}{kN}, \\[5pt]
+  &T_1 = \frac{80 \cdot 6}{80\cdot3+80\cdot6+80\cdot9}240 = \frac{6}{18}240 = \SI{80}{kN}, \\[5pt]
+  &T_1 = \frac{80 \cdot 9}{80\cdot3+80\cdot6+80\cdot9}240 = \frac{9}{18}240 = \SI{120}{kN}.
+\end{align*}
+It should be noted that the cummulative equivalent static forces equals to the base shear.
+
+Plastic dissipation allows to consider the inelastic spectrum with reduced forces. At the same time, plastic dissipation is equivalent of large strain rates. For that reason, the reduction of forces related to the inelastic spectrum is accompanied with a behavioural factor amplifying displacements. Then, the total displacement at the top is the cummulative inter-story drifts amplified by the behavioural factor,
+$$
+  u_\text{top} = q \left(\frac{T_1+T_2+T_3}{k_1} + \frac{T_2+T_3}{k_2} + \frac{T_3}{k_3}\right) =
+  4 \left(\frac{240 + 200 + 120}{20000}\right) = \SI{0.11}{m}.
+$$
+
+\end{Answer}
