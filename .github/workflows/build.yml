@@ -33,7 +33,7 @@ jobs:
           cp tools/README.md docs/_pages/owlfft-README.md
       - name: Publish to GitHub pages
         if: success() && github.ref == 'refs/heads/main'
-        uses: crazy-max/ghaction-github-pages@v4
+        uses: crazy-max/ghaction-github-pages@v5
         with:
           target_branch: gh-pages
           build_dir: docs/
