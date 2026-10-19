@@ -29,6 +29,8 @@
         /* Plot containers */
         #plot-time, #plot-freq { width: 100%; height: 400px; margin-bottom: 20px; border: 1px solid #eee; }
         
+        .footnote { font-size: 0.8em; color: #666; margin-top: -10px; }
+
         .info-box {
             background-color: #e7f3fe; border-left: 6px solid #2196F3;
             margin-bottom: 15px; padding: 10px; font-size: 0.9em;
@@ -73,6 +75,7 @@
 
     <div id="plot-time"></div>
     <div id="plot-freq"></div>
+    <p class="footnote">Note: the mean of the selected time window has been removed before computing the spectrum.</p>
 </div>
 
 <py-config>
@@ -150,7 +153,10 @@ class FFTCalculator():
             
         dt = (self.time[-1] - self.time[0]) / (n - 1) if n > 1 else 1
         
-        self.spectrum = 2/n * np.abs(np.fft.rfft(self.acc))
+        # The mean of the selected window is always removed (offset, gravity, drift)
+        # so that it does not appear as a peak at 0 Hz.
+        acc = self.acc - np.mean(self.acc)
+        self.spectrum = 2/n * np.abs(np.fft.rfft(acc))
         self.frequencies = np.fft.rfftfreq(n, dt)
 
 # --- GLOBAL INSTANCE ---
