@@ -9,3 +9,4 @@ The current scripts are an interactive extension from selected problems of the c
 - [Integration](integration.ipynb): Forced vibrations problems
 - [Response spectra](response_spectra.ipynb): Earthquake problems
 - [Modal decomposition](eigenvalues.ipynb): Problem 19
+- [Laboratory 1 draft](lab_1_draft.ipynb): Laboratory 1, frequency and damping identification from a free-vibration record (starting point for the report)
