@@ -6,62 +6,66 @@ The portal frame in Exercise \ref{frames_modification} (a) is subject to a sinus
     \tikz \pic {frameForced};
 \end{center}
 
-\shortAnswer (a) $u_0 = \SI{0.05}{cm}$, $\ddot{u}_0 = \SI{0.025}{m/s^2}$, (b) $u_0 = \SI{41}{cm}$, $\ddot{u}_0 = \SI{20}{m/s^2}$ and (c) $u_0 = \SI{4.2}{cm}$, $\ddot{u}_0 = \SI{0.066}{m/s^2}$.
+\shortAnswer (a) $u_{max} = \SI{0.05}{cm}$, $\ddot{u}_{max} = \SI{2}{m/s^2}$, (b) $u_{max} = \SI{40}{cm}$, $\ddot{u}_{max} = \SI{20}{m/s^2}$ and (c) $u_{max} = \SI{4.1}{cm}$, $\ddot{u}_{max} = \SI{0.066}{m/s^2}$.
 \end{Exercise}
 
 
 
 \begin{Answer}[ref={frame_ground_acceleration}]
-The maximum displacements and accelerations of a vibrating structure under sinusoidal excitation are obtained from the stationary or homogeneous solution to the differential equation,
+The maximum displacements and accelerations of a vibrating structure under sinusoidal excitation are obtained from the stationary or homogeneous solution to the differential equation, whose analytical solution is
 \begin{align*}
-m\ddot{u} + ku = F_0\sin(\Omega t + \phi) \\
-u(t) = \frac{F_0}{k}H\sin(\Omega t + \phi - \Delta\phi)
+u(t) = \frac{F_0}{k}H\sin(\Omega t + \phi - \Delta\phi)\,,
 \end{align*}
 
-where $H$ is known as the magnification factor and is equal to
+where the quotient $F_0/k$ is known as the static displacement $u_{0}$ and $H$ is the magnification factor and equal to
 $$
 H = \frac{1}{\sqrt{(1-\gamma^2)^2 + 4\xi^2\gamma^2}} \quad ; \quad
-\gamma = \frac{\Omega}{\omega} = \frac{T_{struct}}{T_{force}}\ .
+\gamma = \frac{\Omega}{\omega} = \frac{T_{struct}}{T_{force}}\,.
+$$
+Analogously, by taking second derivatives of the homogeneous solution and rearranging terms, an acceleration magnification factor $H_a$ can be obtained as
+$$
+H_a = \frac{\gamma^2}{\sqrt{(1-\gamma^2)^2 + 4\xi^2\gamma^2}} \,.
 $$
 
-From the solution to Exercise \ref{frames_modification} (a) we know that the period is $T=\SI{0.9}{s}$, the frequency is $\omega = 2\pi/T \approx \SI{7}{rad/s}$ and the lateral stiffness is $k=\SI{487}{kN/m}$. The damping ratio is $\xi=\SI{5}{\%}$.
+From the solution to Exercise \ref{frames_modification} (a) we know that the period is $T=\SI{0.9}{s}$ and the lateral stiffness is $k=\SI{487}{kN/m}$. The damping ratio is considered to be $\xi=\SI{5}{\%}$.
 
-The amplitude $F_0$ of the external force is computed from the amplitude of the ground acceleration and the moving mass of the structure
-$$
-F_0 = ma_{0} = \frac{Pa_0}{g} = \frac{100\cdot2}{10} = \SI{20}{kN}\ .
-$$
-
-Finally, the maximum displacements will depend on the period $\Omega$ of the external force,
+The equivalent external force $F_0$ and the equivalent static displacement $u_{0}$ are values that depend on the amplitude of the ground acceleration and the modal mass of the structure,
 \begin{align*}
-&u_0 = \frac{F_0}{k}H = \frac{20}{487}H = 0.041H\,\si{m} = 4.1H\,\si{cm} \\
-&\ddot{u}_0 = \frac{F_0}{m}\gamma^2H = \Omega^2u_0\ .
+F_{0} &= m\,a_{g} = \frac{100}{10}\cdot2 = \SI{20}{kN} \,, \\
+u_{0} &= \frac{F_0}{k} = \frac{20}{487} \approx \SI{0.04}{m} = \SI{4}{cm} \,.
 \end{align*}
 
 
 When the period of the ground acceleration is $T_g=\SI{0.1}{s}$, the maximum displacements and accelerations are
 \begin{align*}
-&\gamma = \frac{0.9}{0.1} = 9 \quad ; \quad
-H = \frac{1}{\sqrt{(1-9^2)^2 + 4\cdot 0.05^2\cdot 9^2}} = \frac{1}{\sqrt{80^2 + \cdots}} = 0.0125 \\
-&u_0 = 4.1\cdot 0.0125 = \SI{0.05}{cm} \\
-&\ddot{u}_0 = \left(\frac{2\pi}{0.1}\right)^2 \cdot 0.00064 = \SI{2.5}{cm/s^2} = \SI{0.025}{m/s^2}\ .
+&\gamma = \frac{0.9}{0.1} = 9 \quad ; \quad \begin{aligned}[t]
+    H &= \frac{1}{\sqrt{(1-9^2)^2 + 4\cdot 0.05^2\cdot 9^2}} = \frac{1}{\sqrt{80^2 + \cdots}} = 0.0125 \,, \\
+    H_a &= \frac{\gamma^2}{\sqrt{(1-9^2)^2 + 4\cdot 0.05^2\cdot 9^2}} = \frac{81}{\sqrt{80^2+\dots}} = 1.01 \,,
+\end{aligned} \\
+&u_{max} = 4 \cdot 0.0125 \approx \SI{0.05}{cm} \,, \\
+&\ddot{u}_{max} = 2 \cdot 1.01 \approx \SI{2}{m/s^2} \,.
 \end{align*}
-This situation is \emph{mass-dominated}, and is also known as \emph{vibration isolation}.
+This situation is \emph{mass-dominated} and is also known as \emph{vibration isolation}.
 
 When the period of the ground acceleration is $T_g=\SI{0.9}{s}$, the maximum values are
 \begin{align*}
-&\gamma = \frac{0.9}{0.9} = 1 \quad ; \quad
-H = \frac{1}{\sqrt{(1-1^2)^2 + 4\cdot 0.05^2\cdot 1^2}} = \frac{1}{\sqrt{0 + 4\cdot 0.05^2}} = 10 \\
-&u_0 = 4.1\cdot 10 = \SI{41}{cm} \\
-&\ddot{u}_0 = \left(\frac{2\pi}{0.9}\right)^2 \cdot 41 = \SI{2000}{cm/s^2} = \SI{20}{m/s^2}\ .
+&\gamma = \frac{0.9}{0.9} = 1 \quad ; \quad \begin{aligned}[t]
+    H &= \frac{1}{\sqrt{(1-1^2)^2 + 4\cdot 0.05^2\cdot 1^2}} = \frac{1}{\sqrt{0 + 4\cdot 0.05^2}} = 10 \,, \\
+    H_a &= H = 10 \,,
+\end{aligned} \\
+&u_{max} = 4 \cdot 10 \approx \SI{40}{cm} \,, \\
+&\ddot{u}_{max} = 2 \cdot 10 \approx \SI{20}{m/s^2} \,.
 \end{align*}
 The \emph{resonance} situation is \emph{damping-dominated}.
 
 For a period $T_g=\SI{5}{s}$, the maximum values are
 \begin{align*}
-&\gamma = \frac{0.9}{5} = 0.18 \quad ; \quad
-H = \frac{1}{\sqrt{(1-0.18^2)^2 + 4\cdot 0.05^2\cdot 0.18^2}} = 1.033 \\
-&u_0 = 4.1\cdot 1.033 = \SI{4.2}{cm} \\
-&\ddot{u}_0 = \left(\frac{2\pi}{5}\right)^2 \cdot 4.2 = \SI{6.6}{cm/s^2} = \SI{0.066}{m/s^2}\ ,
+&\gamma = \frac{0.9}{5} = 0.18 \quad ; \quad \begin{aligned}[t]
+    H &= \frac{1}{\sqrt{(1-0.18^2)^2 + 4\cdot 0.05^2\cdot 0.18^2}} = 1.033 \\
+    H_a &= \frac{0.18^2}{\sqrt{(1-0.18^2)^2 + 4\cdot 0.05^2\cdot 0.18^2}} = 0.033
+\end{aligned} \\
+&u_{max} = 4 \cdot 1.033 \approx \SI{4.1}{cm} \,, \\
+&\ddot{u}_{max} = 2 \cdot 0.033 \approx \SI{0.066}{m/s^2} \,.
 \end{align*}
 which is a practically \emph{static} or \emph{stiffness dominated} situation.
 
